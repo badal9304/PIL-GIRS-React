@@ -13,42 +13,17 @@ export function ChargeMasterLayoutDView({ v }: { v: any }) {
   return (
     <Page
       header={
-        <div
-          className="ghead"
-          style={{
-            minHeight: '56px',
-            flex: 'none',
-            display: 'flex',
-            flexWrap: 'wrap',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            gap: '8px 24px',
-            padding: '8px 20px',
-            background: 'var(--surface)',
-            borderBottom: '1px solid var(--line)',
-            boxSizing: 'border-box',
-          }}
-        >
-          <div style={{ minWidth: '0' }}>
-            <h1 style={{ margin: '0', fontSize: '17px', fontWeight: '600', lineHeight: '22px' }}>{tx('Charge Master')}</h1>
-            <p style={{ margin: '0', fontSize: '12px', lineHeight: '16px', color: 'var(--muted)' }}>
+        <div className="ghead py-2 px-5 min-h-14 flex-none flex flex-wrap items-center justify-between gap-y-2 gap-x-6 bg-surface border-b border-b-line box-border">
+          <div className="min-w-0">
+            <h1 className="m-0 text-[17px] font-semibold leading-[22px]">{tx('Charge Master')}</h1>
+            <p className="m-0 text-[12px] leading-[16px] text-muted">
               {tx('Charge codes, categories, applicability, tax mapping and LMS charge-code alignment')}
             </p>
           </div>
-          <div
-            className="gright"
-            style={{
-              display: 'flex',
-              flexWrap: 'wrap',
-              alignItems: 'center',
-              justifyContent: 'flex-end',
-              gap: '10px',
-              marginInlineStart: 'auto',
-            }}
-          >
-            <nav aria-label={t('Layout options')} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <span style={{ fontSize: '12px', color: 'var(--muted)' }}>{tx('Layout')}</span>
-              <div style={{ display: 'flex', gap: '2px', padding: '2px', borderRadius: '6px', background: 'var(--neutral)' }}>
+          <div className="gright gap-2.5 flex flex-wrap items-center justify-end ms-auto">
+            <nav className="gap-2 flex items-center" aria-label={t('Layout options')}>
+              <span className="text-[12px] text-muted">{tx('Layout')}</span>
+              <div className="p-0.5 gap-0.5 flex rounded-[6px] bg-neutral">
                 <AppLink className="lay rec" href="charge-master-c.html" title={t('Recommended \u00b7 present to client first')}>
                   <span className="recst" aria-hidden="true">
                     {tx('★')}
@@ -68,9 +43,7 @@ export function ChargeMasterLayoutDView({ v }: { v: any }) {
                 </AppLink>
               </div>
             </nav>
-            <span className="chip" style={{ background: 'var(--warnbg)', color: 'var(--warn)', height: '32px', borderRadius: '6px' }}>
-              {tx('Sample values')}
-            </span>
+            <span className="chip bg-warnbg text-warn h-8 rounded-[6px]">{tx('Sample values')}</span>
             <button className="btn btn-primary" onClick={clk(v.kit?.create)}>
               <svg
                 width="16"
@@ -86,17 +59,18 @@ export function ChargeMasterLayoutDView({ v }: { v: any }) {
               </svg>
               {tx('New charge')}
             </button>
-            <div style={{ position: 'relative' }}>
+            <div className="relative">
               <label htmlFor="gexp" className="sr">
                 {tx('Export')}
               </label>
-              <select id="gexp" className="select" value="" style={{ width: '112px' }} onChange={v.shell?.exp}>
+              <select id="gexp" className="select w-28" value="" onChange={v.shell?.exp}>
                 <option value="">{tx('Export')}</option>
                 <option value="xlsx">{tx('Excel')}</option>
                 <option value="csv">{tx('CSV')}</option>
                 <option value="pdf">{tx('PDF')}</option>
               </select>
               <svg
+                className="absolute end-2.5 top-1/2 -mt-2 pointer-events-none text-muted"
                 width="16"
                 height="16"
                 viewBox="0 0 24 24"
@@ -106,14 +80,6 @@ export function ChargeMasterLayoutDView({ v }: { v: any }) {
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 aria-hidden="true"
-                style={{
-                  position: 'absolute',
-                  insetInlineEnd: '10px',
-                  top: '50%',
-                  marginTop: '-8px',
-                  pointerEvents: 'none',
-                  color: 'var(--muted)',
-                }}
               >
                 <path d="M6 9l6 6 6-6" />
               </svg>
@@ -123,33 +89,21 @@ export function ChargeMasterLayoutDView({ v }: { v: any }) {
       }
       overlays={<MasterKitOverlays v={v} />}
     >
-      <div className="r-wrap" style={{ flex: '1 1 auto', minHeight: '0', display: 'flex', gap: '16px', alignItems: 'stretch' }}>
-        <section
-          className="card r-col"
-          style={{ flex: '0 0 340px', minWidth: '0', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}
-        >
-          <div style={{ padding: '14px', display: 'flex', flexDirection: 'column', gap: '10px', borderBottom: '1px solid var(--line)' }}>
+      <div className="r-wrap gap-4 flex-auto min-h-0 flex items-stretch">
+        <section className="card r-col flex-[0_0_340px] min-w-0 overflow-hidden flex flex-col">
+          <div className="p-3.5 gap-2.5 flex flex-col border-b border-b-line">
             <input
-              className="input"
-              style={{ width: '100%' }}
+              className="input w-full"
               placeholder={t('Search charge code, name or LMS code')}
               value={s(v.q)}
               aria-label={t('Search')}
               onChange={v.onQ}
             />
-            <div className="r-wrap" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '8px' }}>
+            <div className="r-wrap gap-2 flex items-center justify-between">
               <div
+                className="p-0.5 gap-0.5 flex rounded-[6px] bg-neutral min-w-0 overflow-hidden"
                 role="radiogroup"
                 aria-label={t('Status')}
-                style={{
-                  display: 'flex',
-                  gap: '2px',
-                  padding: '2px',
-                  borderRadius: '6px',
-                  background: 'var(--neutral)',
-                  minWidth: '0',
-                  overflow: 'hidden',
-                }}
               >
                 {(v.segs || []).map((g: any, $index: number) => (
                   <Fragment key={$index}>
@@ -167,35 +121,29 @@ export function ChargeMasterLayoutDView({ v }: { v: any }) {
               </div>
             </div>
           </div>
-          <div
-            className="r-wrap"
-            style={{ padding: '10px 14px 4px', display: 'flex', justifyContent: 'space-between', fontSize: '12px', color: 'var(--muted)' }}
-          >
+          <div className="r-wrap pt-2.5 pb-1 px-3.5 flex justify-between text-[12px] text-muted">
             <span>{tx(s(v.gCount))}</span>
             <span>{tx(s(v.countText))}</span>
           </div>
-          <nav aria-label={t(s(v.gLabel))} style={{ flex: '1 1 auto', overflow: 'auto', padding: '0 6px 12px' }}>
+          <nav className="pt-0 pb-3 px-1.5 flex-auto overflow-auto" aria-label={t(s(v.gLabel))}>
             {(v.groups || []).map((g: any, $index: number) => (
               <Fragment key={$index}>
                 <div>
                   <button className="gbtn" aria-expanded={a(g?.ax)} onClick={clk(g?.tg)}>
                     <svg
+                      className="flex-none [transition:transform_.15s]"
                       width="14"
                       height="14"
                       viewBox="0 0 24 24"
                       fill="none"
                       stroke="currentColor"
                       strokeWidth="2"
-                      style={sx(`flex: none; transform: rotate(${s(g?.rot)}); transition: transform .15s`)}
+                      style={sx(`transform: rotate(${s(g?.rot)})`)}
                     >
                       <path d="M9 6l6 6-6 6" />
                     </svg>
-                    <span style={{ flex: '1 1 auto', minWidth: '0', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                      {tx(s(g?.name))}
-                    </span>
-                    <span className="mono" style={{ fontSize: '12px', fontWeight: '500', color: 'var(--muted)' }}>
-                      {tx(s(g?.n))}
-                    </span>
+                    <span className="flex-auto min-w-0 whitespace-nowrap overflow-hidden text-ellipsis">{tx(s(g?.name))}</span>
+                    <span className="mono text-[12px] font-medium text-muted">{tx(s(g?.n))}</span>
                   </button>
                   {g?.open ? (
                     <>
@@ -203,30 +151,13 @@ export function ChargeMasterLayoutDView({ v }: { v: any }) {
                         <Fragment key={$index}>
                           {' '}
                           <button className="cbtn" aria-current={a(x?.on)} style={sx(s(x?.sel))} onClick={clk(x?.pick)}>
-                            <span style={{ flex: '1 1 auto', minWidth: '0', display: 'flex', flexDirection: 'column' }}>
-                              <span
-                                className="mono"
-                                style={{ fontWeight: '500', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}
-                              >
-                                {tx(s(x?.code))}
-                              </span>
-                              <span
-                                style={{
-                                  fontSize: '12px',
-                                  color: 'var(--muted)',
-                                  fontWeight: '400',
-                                  whiteSpace: 'nowrap',
-                                  overflow: 'hidden',
-                                  textOverflow: 'ellipsis',
-                                }}
-                              >
+                            <span className="flex-auto min-w-0 flex flex-col">
+                              <span className="mono font-medium whitespace-nowrap overflow-hidden text-ellipsis">{tx(s(x?.code))}</span>
+                              <span className="text-[12px] text-muted font-normal whitespace-nowrap overflow-hidden text-ellipsis">
                                 {tx(s(x?.title))}
                               </span>
                             </span>{' '}
-                            <span
-                              title={t(s(x?.st))}
-                              style={sx(`flex: none; width: 8px; height: 8px; border-radius: 50%; background: ${s(x?.dot)}`)}
-                            />
+                            <span className="flex-none w-2 h-2 rounded-full" title={t(s(x?.st))} style={sx(`background: ${s(x?.dot)}`)} />
                           </button>{' '}
                         </Fragment>
                       ))}
@@ -237,40 +168,19 @@ export function ChargeMasterLayoutDView({ v }: { v: any }) {
             ))}
             {v.empty ? (
               <>
-                <div style={{ padding: '32px 16px', textAlign: 'center', color: 'var(--muted)' }}>{tx('No records match')}</div>
+                <div className="py-8 px-4 text-center text-muted">{tx('No records match')}</div>
               </>
             ) : null}
           </nav>
         </section>
-        <section
-          className="card"
-          aria-label={t('Overview')}
-          style={{ flex: '1 1 auto', minWidth: '0', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}
-        >
-          <div className="r-wrap" style={{ padding: '18px 24px 16px', display: 'flex', alignItems: 'center', gap: '16px' }}>
-            <span
-              className="mono"
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                minWidth: '52px',
-                height: '52px',
-                padding: '0 12px',
-                boxSizing: 'border-box',
-                borderRadius: '12px',
-                background: 'var(--tint)',
-                color: 'var(--accent2)',
-                fontSize: '14px',
-                fontWeight: '600',
-                flex: 'none',
-              }}
-            >
+        <section className="card flex-auto min-w-0 overflow-hidden flex flex-col" aria-label={t('Overview')}>
+          <div className="r-wrap pt-4.5 pb-4 px-6 gap-4 flex items-center">
+            <span className="mono py-0 px-3 inline-flex items-center justify-center min-w-13 h-13 box-border rounded-[12px] bg-tint text-accent2 text-[14px] font-semibold flex-none">
               {tx(s(v.h?.code))}
             </span>
-            <div style={{ flex: '1 1 auto', minWidth: '0', display: 'flex', flexDirection: 'column', gap: '4px' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
-                <h2 style={{ margin: '0', fontSize: '20px', fontWeight: '600', lineHeight: '28px' }}>{tx(s(v.h?.title))}</h2>
+            <div className="gap-1 flex-auto min-w-0 flex flex-col">
+              <div className="gap-2 flex items-center flex-wrap">
+                <h2 className="m-0 text-[20px] font-semibold leading-[28px]">{tx(s(v.h?.title))}</h2>
                 <span className="chip" style={sx(s(v.h?.chip))}>
                   {tx(s(v.h?.st))}
                 </span>
@@ -282,23 +192,21 @@ export function ChargeMasterLayoutDView({ v }: { v: any }) {
                   </Fragment>
                 ))}
               </div>
-              <div style={{ fontSize: '13px', color: 'var(--muted)' }}>{tx(s(v.h?.sub))}</div>
+              <div className="text-[13px] text-muted">{tx(s(v.h?.sub))}</div>
             </div>
-            <span style={{ display: 'flex', alignItems: 'center', gap: '6px', flex: 'none' }}>
+            <span className="gap-1.5 flex items-center flex-none">
               <button className="btn btn-sm btn-icon" disabled={b(v.noPrev)} aria-label={t('Previous record')} onClick={clk(v.prev)}>
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <path d="M15 6l-6 6 6 6" />
                 </svg>
               </button>
-              <span className="mono" style={{ minWidth: '60px', textAlign: 'center', fontSize: '12px', color: 'var(--muted)' }}>
-                {tx(s(v.pos))}
-              </span>
+              <span className="mono min-w-15 text-center text-[12px] text-muted">{tx(s(v.pos))}</span>
               <button className="btn btn-sm btn-icon" disabled={b(v.noNext)} aria-label={t('Next record')} onClick={clk(v.next)}>
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <path d="M9 6l6 6-6 6" />
                 </svg>
               </button>
-              <span className="kbar" style={{ marginInlineStart: '4px' }} role="group" aria-label={t('Record actions')}>
+              <span className="kbar ms-1" role="group" aria-label={t('Record actions')}>
                 {v.kit?.canEdit ? (
                   <>
                     <button className="btn btn-sm btn-primary" onClick={clk(v.kit?.edit)}>
@@ -463,20 +371,8 @@ export function ChargeMasterLayoutDView({ v }: { v: any }) {
           {v.h?.hasAlert ? (
             <>
               <div
+                className="py-0 px-3.5 mt-0 mb-3.5 mx-6 gap-2.5 flex items-center min-h-10 rounded-[8px] bg-badbg border border-badbd text-bad font-medium"
                 role="status"
-                style={{
-                  margin: '0 24px 14px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '10px',
-                  minHeight: '40px',
-                  padding: '0 14px',
-                  borderRadius: '8px',
-                  background: 'var(--badbg)',
-                  border: '1px solid var(--badbd)',
-                  color: 'var(--bad)',
-                  fontWeight: '500',
-                }}
               >
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <circle cx="12" cy="12" r="9" />
@@ -498,10 +394,10 @@ export function ChargeMasterLayoutDView({ v }: { v: any }) {
               </Fragment>
             ))}
           </div>
-          <div style={{ flex: '1 1 auto', overflow: 'auto', padding: '16px 24px 24px' }}>
-            <div style={sx(`display: grid; grid-template-columns: ${s(v.railCols)}; gap: 16px; align-items: start`)}>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', minWidth: '0' }}>
-                <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '-2px' }}>
+          <div className="pt-4 pb-6 px-6 flex-auto overflow-auto">
+            <div className="gap-4 grid items-start" style={sx(`grid-template-columns: ${s(v.railCols)}`)}>
+              <div className="gap-3 flex flex-col min-w-0">
+                <div className="flex justify-end -mb-0.5">
                   <button className="lnk" onClick={clk(v.allT)}>
                     {tx(s(v.allL))}
                   </button>
@@ -509,9 +405,10 @@ export function ChargeMasterLayoutDView({ v }: { v: any }) {
                 {(v.secs || []).map((x: any, $index: number) => (
                   <Fragment key={$index}>
                     <div className="ac">
-                      <h3 style={{ margin: '0' }}>
+                      <h3 className="m-0">
                         <button className="ach" aria-expanded={a(x?.ax)} onClick={clk(x?.tg)}>
                           <svg
+                            className="flex-none [transition:transform_.15s]"
                             width="16"
                             height="16"
                             viewBox="0 0 24 24"
@@ -521,7 +418,7 @@ export function ChargeMasterLayoutDView({ v }: { v: any }) {
                             strokeLinecap="round"
                             strokeLinejoin="round"
                             aria-hidden="true"
-                            style={sx(`flex: none; transform: rotate(${s(x?.rot)}); transition: transform .15s`)}
+                            style={sx(`transform: rotate(${s(x?.rot)})`)}
                           >
                             <path d="M9 6l6 6-6 6" />
                           </svg>{' '}
@@ -597,26 +494,17 @@ export function ChargeMasterLayoutDView({ v }: { v: any }) {
                                 </table>
                                 {x?.empty ? (
                                   <>
-                                    <div style={{ padding: '14px 20px', color: 'var(--muted4)', fontSize: '13px' }}>{tx('None')}</div>
+                                    <div className="py-3.5 px-5 text-muted4 text-[13px]">{tx('None')}</div>
                                   </>
                                 ) : null}
                               </>
                             ) : null}
                             {x?.isTl ? (
                               <>
-                                <div style={{ padding: '16px 20px' }}>
+                                <div className="py-4 px-5">
                                   {x?.hasNote ? (
                                     <>
-                                      <div
-                                        style={{
-                                          marginBottom: '14px',
-                                          padding: '10px 12px',
-                                          borderRadius: '8px',
-                                          background: 'var(--hover2)',
-                                          fontSize: '12px',
-                                          color: 'var(--muted)',
-                                        }}
-                                      >
+                                      <div className="py-2.5 px-3 mb-3.5 rounded-[8px] bg-hover2 text-[12px] text-muted">
                                         {tx(s(x?.note))}
                                       </div>
                                     </>
@@ -624,10 +512,12 @@ export function ChargeMasterLayoutDView({ v }: { v: any }) {
                                   {(x?.tl || []).map((i: any, $index: number) => (
                                     <Fragment key={$index}>
                                       <div className={a(i?.cls)}>
-                                        <div style={{ display: 'flex', gap: '12px', alignItems: 'baseline', flexWrap: 'wrap' }}>
-                                          <span style={sx(`font-size: 13px; font-weight: 500; color: ${s(i?.fg)}`)}>{tx(s(i?.a))}</span>
-                                          <span style={{ fontSize: '13px' }}>{tx(s(i?.b))}</span>
-                                          <span style={{ fontSize: '12px', color: 'var(--muted)' }}>{tx(s(i?.c))}</span>
+                                        <div className="gap-3 flex items-baseline flex-wrap">
+                                          <span className="text-[13px] font-medium" style={sx(`color: ${s(i?.fg)}`)}>
+                                            {tx(s(i?.a))}
+                                          </span>
+                                          <span className="text-[13px]">{tx(s(i?.b))}</span>
+                                          <span className="text-[12px] text-muted">{tx(s(i?.c))}</span>
                                         </div>
                                       </div>
                                     </Fragment>
@@ -644,34 +534,25 @@ export function ChargeMasterLayoutDView({ v }: { v: any }) {
               </div>
               {v.h?.hasRail ? (
                 <>
-                  <aside className="sc" style={{ position: 'sticky', top: '0' }} aria-label={t(s(v.h?.railTitle))}>
+                  <aside className="sc sticky top-0" aria-label={t(s(v.h?.railTitle))}>
                     <h3>
                       <span className="dot" />
                       {tx(s(v.h?.railTitle))}
                     </h3>
-                    <div style={{ padding: '16px' }}>
+                    <div className="p-4">
                       {v.h?.hasNote ? (
                         <>
-                          <div
-                            style={{
-                              marginBottom: '14px',
-                              padding: '10px 12px',
-                              borderRadius: '8px',
-                              background: 'var(--hover2)',
-                              fontSize: '12px',
-                              color: 'var(--muted)',
-                            }}
-                          >
-                            {tx(s(v.h?.railNote))}
-                          </div>
+                          <div className="py-2.5 px-3 mb-3.5 rounded-[8px] bg-hover2 text-[12px] text-muted">{tx(s(v.h?.railNote))}</div>
                         </>
                       ) : null}
                       {(v.h?.rail || []).map((i: any, $index: number) => (
                         <Fragment key={$index}>
                           <div className={a(i?.cls)}>
-                            <div style={sx(`font-size: 13px; font-weight: 500; color: ${s(i?.fg)}`)}>{tx(s(i?.a))}</div>
-                            <div style={{ fontSize: '13px', marginTop: '1px' }}>{tx(s(i?.b))}</div>
-                            <div style={{ fontSize: '12px', color: 'var(--muted)', marginTop: '1px' }}>{tx(s(i?.c))}</div>
+                            <div className="text-[13px] font-medium" style={sx(`color: ${s(i?.fg)}`)}>
+                              {tx(s(i?.a))}
+                            </div>
+                            <div className="text-[13px] mt-px">{tx(s(i?.b))}</div>
+                            <div className="text-[12px] text-muted mt-px">{tx(s(i?.c))}</div>
                           </div>
                         </Fragment>
                       ))}

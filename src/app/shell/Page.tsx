@@ -16,23 +16,11 @@ export function Page({ header, overlays, children }: PageProps) {
   const { overlayRoot } = useShell();
   return (
     <>
-      <div style={{ position: 'sticky', top: 0, zIndex: 20, flex: 'none' }}>
+      <div className="sticky top-0 z-20 flex-none">
         <TopBar />
         {header}
       </div>
-      <main
-        className="gmain"
-        style={{
-          flex: '1 0 auto',
-          padding: '16px 20px 20px',
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '16px',
-          boxSizing: 'border-box',
-        }}
-      >
-        {children}
-      </main>
+      <main className="gmain flex-[1_0_auto] pt-4 px-5 pb-5 flex flex-col gap-4 box-border">{children}</main>
       {overlays && overlayRoot ? createPortal(overlays, overlayRoot) : null}
     </>
   );
@@ -47,41 +35,12 @@ interface HeaderProps {
 /** Standard screen header row. */
 export function PageHeader({ title, subtitle, actions }: HeaderProps) {
   return (
-    <div
-      className="ghead"
-      style={{
-        minHeight: '56px',
-        flex: 'none',
-        display: 'flex',
-        flexWrap: 'wrap',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        gap: '8px 24px',
-        padding: '8px 20px',
-        background: 'var(--surface)',
-        borderBottom: '1px solid var(--line)',
-        boxSizing: 'border-box',
-      }}
-    >
-      <div style={{ minWidth: 0 }}>
-        <h1 style={{ margin: 0, fontSize: '17px', fontWeight: 600, lineHeight: '22px' }}>{title}</h1>
-        {subtitle ? <p style={{ margin: 0, fontSize: '12px', lineHeight: '16px', color: 'var(--muted)' }}>{subtitle}</p> : null}
+    <div className="ghead min-h-14 flex-none flex flex-wrap items-center justify-between gap-y-2 gap-x-6 py-2 px-5 bg-surface border-b border-b-line box-border">
+      <div className="min-w-0">
+        <h1 className="m-0 text-[17px] font-semibold leading-[22px]">{title}</h1>
+        {subtitle ? <p className="m-0 text-[12px] leading-[16px] text-muted">{subtitle}</p> : null}
       </div>
-      {actions ? (
-        <div
-          className="gright"
-          style={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            alignItems: 'center',
-            justifyContent: 'flex-end',
-            gap: '10px',
-            marginInlineStart: 'auto',
-          }}
-        >
-          {actions}
-        </div>
-      ) : null}
+      {actions ? <div className="gright flex flex-wrap items-center justify-end gap-2.5 ms-auto">{actions}</div> : null}
     </div>
   );
 }

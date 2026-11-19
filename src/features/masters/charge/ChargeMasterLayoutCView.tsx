@@ -13,42 +13,17 @@ export function ChargeMasterLayoutCView({ v }: { v: any }) {
   return (
     <Page
       header={
-        <div
-          className="ghead"
-          style={{
-            minHeight: '56px',
-            flex: 'none',
-            display: 'flex',
-            flexWrap: 'wrap',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            gap: '8px 24px',
-            padding: '8px 20px',
-            background: 'var(--surface)',
-            borderBottom: '1px solid var(--line)',
-            boxSizing: 'border-box',
-          }}
-        >
-          <div style={{ minWidth: '0' }}>
-            <h1 style={{ margin: '0', fontSize: '17px', fontWeight: '600', lineHeight: '22px' }}>{tx('Charge Master')}</h1>
-            <p style={{ margin: '0', fontSize: '12px', lineHeight: '16px', color: 'var(--muted)' }}>
+        <div className="ghead py-2 px-5 min-h-14 flex-none flex flex-wrap items-center justify-between gap-y-2 gap-x-6 bg-surface border-b border-b-line box-border">
+          <div className="min-w-0">
+            <h1 className="m-0 text-[17px] font-semibold leading-[22px]">{tx('Charge Master')}</h1>
+            <p className="m-0 text-[12px] leading-[16px] text-muted">
               {tx('Charge codes, categories, applicability, tax mapping and LMS charge-code alignment')}
             </p>
           </div>
-          <div
-            className="gright"
-            style={{
-              display: 'flex',
-              flexWrap: 'wrap',
-              alignItems: 'center',
-              justifyContent: 'flex-end',
-              gap: '10px',
-              marginInlineStart: 'auto',
-            }}
-          >
-            <nav aria-label={t('Layout options')} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <span style={{ fontSize: '12px', color: 'var(--muted)' }}>{tx('Layout')}</span>
-              <div style={{ display: 'flex', gap: '2px', padding: '2px', borderRadius: '6px', background: 'var(--neutral)' }}>
+          <div className="gright gap-2.5 flex flex-wrap items-center justify-end ms-auto">
+            <nav className="gap-2 flex items-center" aria-label={t('Layout options')}>
+              <span className="text-[12px] text-muted">{tx('Layout')}</span>
+              <div className="p-0.5 gap-0.5 flex rounded-[6px] bg-neutral">
                 <AppLink
                   className="lay rec"
                   href="charge-master-c.html"
@@ -68,9 +43,7 @@ export function ChargeMasterLayoutCView({ v }: { v: any }) {
                 </AppLink>
               </div>
             </nav>
-            <span className="chip" style={{ background: 'var(--warnbg)', color: 'var(--warn)', height: '32px', borderRadius: '6px' }}>
-              {tx('Sample values')}
-            </span>
+            <span className="chip bg-warnbg text-warn h-8 rounded-[6px]">{tx('Sample values')}</span>
             <button className="btn btn-primary" onClick={clk(v.kit?.create)}>
               <svg
                 width="16"
@@ -86,17 +59,18 @@ export function ChargeMasterLayoutCView({ v }: { v: any }) {
               </svg>
               {tx('New charge')}
             </button>
-            <div style={{ position: 'relative' }}>
+            <div className="relative">
               <label htmlFor="gexp" className="sr">
                 {tx('Export')}
               </label>
-              <select id="gexp" className="select" value="" style={{ width: '112px' }} onChange={v.shell?.exp}>
+              <select id="gexp" className="select w-28" value="" onChange={v.shell?.exp}>
                 <option value="">{tx('Export')}</option>
                 <option value="xlsx">{tx('Excel')}</option>
                 <option value="csv">{tx('CSV')}</option>
                 <option value="pdf">{tx('PDF')}</option>
               </select>
               <svg
+                className="absolute end-2.5 top-1/2 -mt-2 pointer-events-none text-muted"
                 width="16"
                 height="16"
                 viewBox="0 0 24 24"
@@ -106,14 +80,6 @@ export function ChargeMasterLayoutCView({ v }: { v: any }) {
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 aria-hidden="true"
-                style={{
-                  position: 'absolute',
-                  insetInlineEnd: '10px',
-                  top: '50%',
-                  marginTop: '-8px',
-                  pointerEvents: 'none',
-                  color: 'var(--muted)',
-                }}
               >
                 <path d="M6 9l6 6 6-6" />
               </svg>
@@ -123,33 +89,25 @@ export function ChargeMasterLayoutCView({ v }: { v: any }) {
       }
       overlays={<MasterKitOverlays v={v} />}
     >
-      <div className="r-wrap" style={{ flex: '1 1 auto', minHeight: '0', display: 'flex', gap: '16px', alignItems: 'stretch' }}>
-        <section
-          className="card r-col"
-          style={{ flex: '0 0 380px', minWidth: '0', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}
-        >
-          <div style={{ padding: '16px', display: 'flex', flexDirection: 'column', gap: '12px', borderBottom: '1px solid var(--line)' }}>
+      <div className="r-wrap gap-4 flex-auto min-h-0 flex items-stretch">
+        <section className="card r-col flex-[0_0_380px] min-w-0 overflow-hidden flex flex-col">
+          <div className="p-4 gap-3 flex flex-col border-b border-b-line">
             <input
-              className="input"
-              style={{ width: '100%' }}
+              className="input w-full"
               placeholder={t('Search charge code, name or LMS code')}
               value={s(v.q)}
               aria-label={t('Search charges')}
               onChange={v.onQ}
             />
-            <div className="r-wrap" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-              <div
-                role="radiogroup"
-                aria-label={t('Active status')}
-                style={{ display: 'flex', gap: '2px', padding: '2px', borderRadius: '6px', background: 'var(--neutral)' }}
-              >
+            <div className="r-wrap flex items-center justify-between">
+              <div className="p-0.5 gap-0.5 flex rounded-[6px] bg-neutral" role="radiogroup" aria-label={t('Active status')}>
                 {(v.segs || []).map((g: any, $index: number) => (
                   <Fragment key={$index}>
                     <button
-                      className="seg"
+                      className="seg h-7"
                       role="radio"
                       aria-checked={a(g?.on)}
-                      style={sx(`height: 28px; background: ${s(g?.bg)}; color: ${s(g?.fg)}; box-shadow: ${s(g?.sh)}`)}
+                      style={sx(`background: ${s(g?.bg)}; color: ${s(g?.fg)}; box-shadow: ${s(g?.sh)}`)}
                       onClick={clk(g?.pick)}
                     >
                       {tx(s(g?.label))}
@@ -157,46 +115,37 @@ export function ChargeMasterLayoutCView({ v }: { v: any }) {
                   </Fragment>
                 ))}
               </div>
-              <span style={{ fontSize: '12px', color: 'var(--muted)' }}>{tx(s(v.countText))}</span>
+              <span className="text-[12px] text-muted">{tx(s(v.countText))}</span>
             </div>
           </div>
-          <div role="listbox" aria-label={t('Charges')} style={{ flex: '1 1 auto', overflow: 'auto' }}>
-            <div style={{ padding: '12px 16px 4px', fontSize: '12px', color: 'var(--muted)' }}>
-              {tx(`${s(v.catCount)} charge categories`)}
-            </div>
-            <div style={{ padding: '0 8px 12px' }}>
+          <div className="flex-auto overflow-auto" role="listbox" aria-label={t('Charges')}>
+            <div className="pt-3 pb-1 px-4 text-[12px] text-muted">{tx(`${s(v.catCount)} charge categories`)}</div>
+            <div className="pt-0 pb-3 px-2">
               {(v.groups || []).map((g: any, $index: number) => (
                 <Fragment key={$index}>
                   <div>
                     <button className="gbtn" aria-expanded={a(g?.ax)} onClick={clk(g?.tg)}>
                       <svg
+                        className="flex-none [transition:transform_.15s]"
                         width="14"
                         height="14"
                         viewBox="0 0 24 24"
                         fill="none"
                         stroke="currentColor"
                         strokeWidth="2"
-                        style={sx(`flex: none; transform: rotate(${s(g?.rot)}); transition: transform .15s`)}
+                        style={sx(`transform: rotate(${s(g?.rot)})`)}
                       >
                         <path d="M9 6l6 6-6 6" />
                       </svg>
-                      <span style={{ flex: '1 1 auto' }}>{tx(s(g?.name))}</span>
+                      <span className="flex-auto">{tx(s(g?.name))}</span>
                       {g?.hasOff ? (
                         <>
-                          <span
-                            title={t('Contains inactive charges')}
-                            style={{ fontSize: '12px', color: 'var(--muted)', fontWeight: '500' }}
-                          >
+                          <span className="text-[12px] text-muted font-medium" title={t('Contains inactive charges')}>
                             {tx(s(g?.offTxt))}
                           </span>
                         </>
                       ) : null}
-                      <span
-                        className="mono"
-                        style={{ fontSize: '12px', fontWeight: '500', color: 'var(--muted)', minWidth: '16px', textAlign: 'end' }}
-                      >
-                        {tx(s(g?.n))}
-                      </span>
+                      <span className="mono text-[12px] font-medium text-muted min-w-4 text-end">{tx(s(g?.n))}</span>
                     </button>
                     {g?.open ? (
                       <>
@@ -204,22 +153,16 @@ export function ChargeMasterLayoutCView({ v }: { v: any }) {
                           <Fragment key={$index}>
                             {' '}
                             <button className="cbtn" role="option" aria-selected={a(r?.on)} style={sx(s(r?.sel))} onClick={clk(r?.pick)}>
-                              <span className="mono r-col" style={{ flex: '0 0 52px' }}>
-                                {tx(s(r?.code))}
-                              </span>{' '}
+                              <span className="mono r-col flex-[0_0_52px]">{tx(s(r?.code))}</span>{' '}
                               <span
-                                style={sx(
-                                  `flex: 1 1 auto; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: ${s(r?.fg)}`,
-                                )}
+                                className="flex-auto min-w-0 whitespace-nowrap overflow-hidden text-ellipsis"
+                                style={sx(`color: ${s(r?.fg)}`)}
                               >
                                 {tx(s(r?.name))}
                               </span>
                               {r?.off ? (
                                 <>
-                                  <span
-                                    title={t('Inactive')}
-                                    style={{ flex: 'none', width: '8px', height: '8px', borderRadius: '50%', background: 'var(--muted4)' }}
-                                  />
+                                  <span className="flex-none w-2 h-2 rounded-full bg-muted4" title={t('Inactive')} />
                                 </>
                               ) : null}
                             </button>{' '}
@@ -233,43 +176,27 @@ export function ChargeMasterLayoutCView({ v }: { v: any }) {
             </div>
             {v.empty ? (
               <>
-                <div style={{ padding: '32px 16px', textAlign: 'center', color: 'var(--muted)' }}>
-                  {tx('No charge matches your search')}
-                </div>
+                <div className="py-8 px-4 text-center text-muted">{tx('No charge matches your search')}</div>
               </>
             ) : null}
           </div>
         </section>
-        <section className="card" style={{ flex: '1 1 auto', minWidth: '0', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
-          <div className="r-wrap" style={{ padding: '24px 28px 20px', display: 'flex', alignItems: 'center', gap: '16px' }}>
+        <section className="card flex-auto min-w-0 overflow-hidden flex flex-col">
+          <div className="r-wrap pt-6 pb-5 px-7 gap-4 flex items-center">
             <div
-              className="mono"
+              className="mono py-0 px-2.5 min-w-14 h-14 rounded-[12px] bg-tint text-accent2 flex items-center justify-center text-[15px] font-semibold box-border"
               aria-hidden="true"
-              style={{
-                minWidth: '56px',
-                height: '56px',
-                padding: '0 10px',
-                borderRadius: '12px',
-                background: 'var(--tint)',
-                color: 'var(--accent2)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                fontSize: '15px',
-                fontWeight: '600',
-                boxSizing: 'border-box',
-              }}
             >
               {tx(s(v.c?.code))}
             </div>
-            <div style={{ flex: '1 1 auto', minWidth: '0', display: 'flex', flexDirection: 'column', gap: '4px' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                <h2 style={{ margin: '0', fontSize: '22px', fontWeight: '600', lineHeight: '28px' }}>{tx(s(v.c?.name))}</h2>
+            <div className="gap-1 flex-auto min-w-0 flex flex-col">
+              <div className="gap-2.5 flex items-center">
+                <h2 className="m-0 text-[22px] font-semibold leading-[28px]">{tx(s(v.c?.name))}</h2>
                 <span className="chip" style={sx(s(v.c?.stChip))}>
                   {tx(s(v.c?.st))}
                 </span>
               </div>
-              <div style={{ fontSize: '13px', color: 'var(--muted)' }}>{tx(`${s(v.c?.cat)} · Effective ${s(v.c?.eff)}`)}</div>
+              <div className="text-[13px] text-muted">{tx(`${s(v.c?.cat)} · Effective ${s(v.c?.eff)}`)}</div>
             </div>
             <span className="kbar" role="group" aria-label={t('Record actions')}>
               {v.kit?.canEdit ? (
@@ -432,7 +359,7 @@ export function ChargeMasterLayoutCView({ v }: { v: any }) {
               ) : null}
             </span>
           </div>
-          <div style={{ display: 'flex', padding: '0 28px 20px' }}>
+          <div className="pt-0 pb-5 px-7 flex">
             <div className="fact">
               <span className="l">{tx('Origin / Destination')}</span>
               <span className="v">{tx(s(v.c?.app))}</span>
@@ -456,12 +383,7 @@ export function ChargeMasterLayoutCView({ v }: { v: any }) {
               </span>
             </div>
           </div>
-          <div
-            className="r-wrap"
-            role="tablist"
-            aria-label={t('Charge sections')}
-            style={{ display: 'flex', gap: '28px', padding: '0 28px', borderBottom: '1px solid var(--line)' }}
-          >
+          <div className="r-wrap py-0 px-7 gap-7 flex border-b border-b-line" role="tablist" aria-label={t('Charge sections')}>
             {(v.tabs || []).map((t: any, $index: number) => (
               <Fragment key={$index}>
                 {' '}
@@ -473,17 +395,15 @@ export function ChargeMasterLayoutCView({ v }: { v: any }) {
                   onClick={clk(t?.pick)}
                 >
                   {tx(s(t?.label))}
-                  <span className="mono" style={{ fontSize: '12px', color: 'var(--muted)' }}>
-                    {tx(s(t?.count))}
-                  </span>
+                  <span className="mono text-[12px] text-muted">{tx(s(t?.count))}</span>
                 </button>{' '}
               </Fragment>
             ))}
           </div>
-          <div role="tabpanel" style={{ flex: '1 1 auto', overflow: 'auto', padding: '24px 28px' }}>
+          <div className="py-6 px-7 flex-auto overflow-auto" role="tabpanel">
             {(v.panel || []).map((x: any, $index: number) => (
               <Fragment key={$index}>
-                <div style={{ maxWidth: '760px', marginBottom: '28px' }}>
+                <div className="max-w-190 mb-7">
                   <h3 className="sech">{tx(s(x?.title))}</h3>
                   {x?.isKv ? (
                     <>
@@ -506,11 +426,9 @@ export function ChargeMasterLayoutCView({ v }: { v: any }) {
                       {(x?.items || []).map((i: any, $index: number) => (
                         <Fragment key={$index}>
                           <div className="mini">
-                            <span style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
+                            <span className="gap-0.5 flex flex-col">
                               <span className="ph">{tx(s(i?.a))}</span>
-                              <span style={{ fontSize: '12px' }} className="ph">
-                                {tx(s(i?.b))}
-                              </span>
+                              <span className="ph text-[12px]">{tx(s(i?.b))}</span>
                             </span>
                           </div>
                         </Fragment>
@@ -522,8 +440,8 @@ export function ChargeMasterLayoutCView({ v }: { v: any }) {
                       {(x?.items || []).map((i: any, $index: number) => (
                         <Fragment key={$index}>
                           <div className="tl">
-                            <div style={{ fontWeight: '500' }}>{tx(s(i?.a))}</div>
-                            <div style={{ fontSize: '12px', color: 'var(--muted)' }}>{tx(`${s(i?.b)} · ${s(i?.c)}`)}</div>
+                            <div className="font-medium">{tx(s(i?.a))}</div>
+                            <div className="text-[12px] text-muted">{tx(`${s(i?.b)} · ${s(i?.c)}`)}</div>
                           </div>
                         </Fragment>
                       ))}

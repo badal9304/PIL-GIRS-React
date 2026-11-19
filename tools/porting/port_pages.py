@@ -9,6 +9,10 @@ import sys
 
 sys.path.insert(0, os.path.dirname(__file__))
 import tpl2jsx  # noqa: E402
+import css2tw  # noqa: E402
+
+# GIRS colour tokens available as Tailwind colours (see src/styles/tailwind.css)
+css2tw.load_tokens(re.findall(r'--color-([a-z0-9]+):', open(os.path.join(os.path.dirname(__file__), '..', '..', 'src', 'styles', 'tailwind.css')).read()))
 
 SRC = sys.argv[1] if len(sys.argv) > 1 else '../PIL---GIRS'
 ROOT = os.path.join(os.path.dirname(__file__), '..', '..', 'src')

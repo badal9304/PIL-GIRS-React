@@ -1,6 +1,6 @@
 # GIRS (PIL) — React front end
 
-React + TypeScript front end for GIRS, PIL's invoicing and receivables system. It is built from the approved HTML prototype ([PIL---GIRS](https://github.com/badal9304/PIL---GIRS)) and matches it pixel for pixel.
+React 19 + TypeScript + Tailwind CSS v4 front end for GIRS, PIL's invoicing and receivables system. It is built from the approved HTML prototype ([PIL---GIRS](https://github.com/badal9304/PIL---GIRS)) and matches it pixel for pixel.
 
 **Screens built**
 
@@ -57,7 +57,7 @@ src/
   i18n/                   translator, provider, locale dictionaries (zh, ar, es)
   lib/                    view-model base, view helpers, storage, app bridge, legacy document renderer
   styles/                 base tokens + shell (light and dark), app styles
-tools/porting/            one-off scripts used to port the prototype (kept for reference)
+tools/porting/            scripts used to port the prototype (markup → TSX, CSS → Tailwind); kept for reference
 ```
 
 ### How a screen is built
@@ -67,11 +67,15 @@ Each built screen has four parts:
 - **Page** (`InvoiceListPage.tsx`): the route component. It mounts the view-model with `useScreen` and renders the view.
 - **View-model** (`InvoiceListModel.ts`): a plain TypeScript class that holds the screen state (filters, selection, dialogs) and computes the values to render in `renderVals()`. It does not depend on React, so the business rules stay testable and easy to move to an API later.
 - **View** (`InvoiceListView.tsx`): the TSX markup. It is a pure function of the view-model values and renders inside `<Page header overlays>`.
-- **Styles** (`InvoiceList.css`): screen styles, scoped under the screen's root class (for example `.pg-invoices`) so screens never affect each other. Shared tokens and shell styles are in `src/styles/base.css`.
+- **Styles**: layout and spacing are Tailwind utility classes in the TSX. Stateful component styles (tables, chips, drawers, menus) are Tailwind component classes built with `@apply` in the screen's stylesheet (`InvoiceList.css`), scoped with `:where(.pg-invoices)`. `:where()` adds no specificity, so screens never affect each other and the cascade is unchanged. Shared primitives (`.btn`, `.input`, `.select`, `.chip`, `.card`, `.mi` …) are in `src/styles/base.css`. Values computed at runtime by a view-model (positions, status colours) stay as inline styles.
 
-### Design tokens and theming
+### Tailwind CSS, design tokens and theming
 
-Colours are CSS custom properties (`--ink`, `--surface`, `--accent`, `--ok`, `--warn`, `--bad` …), defined for light mode on `:root, .theme` and for dark mode on `.theme[data-theme=dark]`. They follow IBM Carbon with PIL colours. The theme is set on the app root by `AppShell`.
+- `src/styles/tailwind.css` is the Tailwind entry: theme and utilities, plus the GIRS colours registered as Tailwind colours. Tailwind's Preflight reset is not used; `base.css` sets the element defaults the design was built on.
+- Colours are CSS custom properties (`--ink`, `--surface`, `--accent`, `--ok`, `--warn`, `--bad` …), defined for light mode on `:root, .theme` and for dark mode on `.theme[data-theme=dark]`. They follow IBM Carbon with PIL colours.
+- Each token is a Tailwind colour, so `bg-surface`, `text-muted`, `border-line`, `bg-okbg text-ok` switch with the theme automatically. For dark-only tweaks there is a `dark:` variant (`dark:shadow-[…]`), driven by `data-theme="dark"` on the app root.
+- Layer order: `theme, base, components, utilities`. Utilities always win over component classes, so a utility on an element overrides the component's default.
+- `cx()` (`src/lib/cx.ts`) joins conditional class names. `.unstyled` resets a native button before it is styled with utilities.
 
 ### Translation
 
@@ -88,3 +92,4 @@ All data is sample data generated in the browser, and user changes are kept in `
 - View-models and data modules were ported from the prototype and start with `// @ts-nocheck`. Add types screen by screen as the screens are reworked. The shell, providers, i18n, search and hooks are fully typed (`strict` mode).
 - `src/lib/legacy/girsDocs.js` renders the invoice and receipt documents and their PDFs (with QR code), and `girsCtx.js` hands context between screens. Both are kept as plain JS modules from the prototype.
 - Master screens keep only layouts C and D. Layouts A and B were dropped.
+- Some rules stay as plain CSS inside `@layer components` because they have no exact utility equivalent (CSS variables, `!important`, vendor prefixes, `content` strings).

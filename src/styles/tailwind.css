@@ -1,0 +1,64 @@
+/* Tailwind CSS v4 entry: theme tokens + utilities (Preflight is not used; the GIRS base styles set element defaults). */
+@layer theme, base, components, utilities;
+@import 'tailwindcss/theme.css' layer(theme);
+@import 'tailwindcss/utilities.css' layer(utilities);
+
+/* dark: applies inside the app root (or a panel) with data-theme="dark" */
+@custom-variant dark (&:where([data-theme='dark'], [data-theme='dark'] *));
+
+/* GIRS design tokens as Tailwind colours. Each points at a CSS variable defined for light mode on :root / .theme
+   and for dark mode on .theme[data-theme='dark'], so classes such as bg-surface, text-muted or border-line
+   follow the theme automatically. */
+@theme inline {
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-muted2: var(--muted2);
+  --color-muted3: var(--muted3);
+  --color-muted4: var(--muted4);
+  --color-line: var(--line);
+  --color-line2: var(--line2);
+  --color-bd: var(--bd);
+  --color-bdh: var(--bdh);
+  --color-line3: var(--line3);
+  --color-bg: var(--bg);
+  --color-sub: var(--sub);
+  --color-hover: var(--hover);
+  --color-hover2: var(--hover2);
+  --color-hover3: var(--hover3);
+  --color-neutral: var(--neutral);
+  --color-canvas: var(--canvas);
+  --color-accent: var(--accent);
+  --color-accent2: var(--accent2);
+  --color-tint: var(--tint);
+  --color-tintbd: var(--tintbd);
+  --color-tint2: var(--tint2);
+  --color-ok: var(--ok);
+  --color-okbg: var(--okbg);
+  --color-ok2: var(--ok2);
+  --color-okdot: var(--okdot);
+  --color-okbar: var(--okbar);
+  --color-okbd: var(--okbd);
+  --color-okrow: var(--okrow);
+  --color-warn: var(--warn);
+  --color-warnbg: var(--warnbg);
+  --color-warn2: var(--warn2);
+  --color-warnbar: var(--warnbar);
+  --color-warnbd: var(--warnbd);
+  --color-bad: var(--bad);
+  --color-badbg: var(--badbg);
+  --color-badbar: var(--badbar);
+  --color-bad2: var(--bad2);
+  --color-badbd: var(--badbd);
+  --color-badrow: var(--badrow);
+  --color-aibg: var(--aibg);
+  --color-ai: var(--ai);
+  --color-surface: var(--surface);
+  --color-brand: var(--brand);
+  --color-onaccent: var(--onaccent);
+  --color-accenth: var(--accenth);
+  --color-selbg: var(--selbg);
+  --color-selfg: var(--selfg);
+  --color-selbd: var(--selbd);
+  --font-sans: 'IBM Plex Sans', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+}

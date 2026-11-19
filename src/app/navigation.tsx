@@ -34,7 +34,7 @@ export const NAV: NavGroup[] = [
     id: 'g0',
     label: 'Operations',
     icon: (
-      <svg className="ng-ic" {...ic}>
+      <svg className="size-5.5" {...ic}>
         <rect x="3" y="3" width="7.5" height="7.5" rx="1.5" />
         <rect x="13.5" y="3" width="7.5" height="7.5" rx="1.5" />
         <rect x="3" y="13.5" width="7.5" height="7.5" rx="1.5" />
@@ -58,7 +58,7 @@ export const NAV: NavGroup[] = [
     id: 'g1',
     label: 'Invoicing',
     icon: (
-      <svg className="ng-ic" {...ic}>
+      <svg className="size-5.5" {...ic}>
         <path d="M5 3h9l5 5v13H5z" />
         <path d="M14 3v5h5M8.5 12.5h7M8.5 16.5h7" />
       </svg>
@@ -101,7 +101,7 @@ export const NAV: NavGroup[] = [
     id: 'g2',
     label: 'Receivables',
     icon: (
-      <svg className="ng-ic" {...ic}>
+      <svg className="size-5.5" {...ic}>
         <rect x="3" y="5" width="18" height="14" rx="2" />
         <circle cx="12" cy="12" r="3" />
         <path d="M6.5 9v6M17.5 9v6" />
@@ -119,7 +119,7 @@ export const NAV: NavGroup[] = [
     id: 'g3',
     label: 'Control',
     icon: (
-      <svg className="ng-ic" {...ic}>
+      <svg className="size-5.5" {...ic}>
         <path d="M12 3l8 3v6c0 4.5-3.4 8.2-8 9-4.6-.8-8-4.5-8-9V6z" />
         <path d="M8.5 12l2.5 2.5 4.5-4.5" />
       </svg>
@@ -136,7 +136,7 @@ export const NAV: NavGroup[] = [
     id: 'g4',
     label: 'System Master',
     icon: (
-      <svg className="ng-ic" {...ic}>
+      <svg className="size-5.5" {...ic}>
         <path d="M3 6h10M17 6h4M3 12h4M11 12h10M3 18h12M19 18h2" />
         <circle cx="15" cy="6" r="2" />
         <circle cx="9" cy="12" r="2" />
@@ -171,7 +171,7 @@ export const NAV: NavGroup[] = [
     id: 'g5',
     label: 'Industry Master',
     icon: (
-      <svg className="ng-ic" {...ic}>
+      <svg className="size-5.5" {...ic}>
         <circle cx="12" cy="12" r="9" />
         <path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z" />
       </svg>

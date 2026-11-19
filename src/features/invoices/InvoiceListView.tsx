@@ -12,53 +12,27 @@ export function InvoiceListView({ v }: { v: any }) {
   return (
     <Page
       header={
-        <div
-          className="ghead"
-          style={{
-            minHeight: '56px',
-            flex: 'none',
-            display: 'flex',
-            flexWrap: 'wrap',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            gap: '8px 24px',
-            padding: '8px 20px',
-            background: 'var(--surface)',
-            borderBottom: '1px solid var(--line)',
-            boxSizing: 'border-box',
-          }}
-        >
-          <div style={{ minWidth: '0' }}>
-            <h1 style={{ margin: '0', fontSize: '17px', fontWeight: '600', lineHeight: '22px' }}>{tx('Invoice List')}</h1>
-            <p style={{ margin: '0', fontSize: '12px', lineHeight: '16px', color: 'var(--muted)' }}>
+        <div className="ghead py-2 px-5 min-h-14 flex-none flex flex-wrap items-center justify-between gap-y-2 gap-x-6 bg-surface border-b border-b-line box-border">
+          <div className="min-w-0">
+            <h1 className="m-0 text-[17px] font-semibold leading-[22px]">{tx('Invoice List')}</h1>
+            <p className="m-0 text-[12px] leading-[16px] text-muted">
               {tx('Rule-driven invoicing automation using LMS booking, B/L and container data')}
             </p>
           </div>
-          <div
-            className="gright"
-            style={{
-              display: 'flex',
-              flexWrap: 'wrap',
-              alignItems: 'center',
-              justifyContent: 'flex-end',
-              gap: '10px',
-              marginInlineStart: 'auto',
-            }}
-          >
-            <span className="chip" style={{ background: 'var(--warnbg)', color: 'var(--warn)', height: '32px', borderRadius: '6px' }}>
-              {tx('Sample values')}
-            </span>
-            <div style={{ position: 'relative' }}>
+          <div className="gright gap-2.5 flex flex-wrap items-center justify-end ms-auto">
+            <span className="chip bg-warnbg text-warn h-8 rounded-[6px]">{tx('Sample values')}</span>
+            <div className="relative">
               <label htmlFor="gexp" className="sr">
                 {tx('Export')}
               </label>
-              <select id="gexp" className="select" value="" style={{ width: '112px' }} onChange={v.shell?.exp}>
+              <select id="gexp" className="select w-28" value="" onChange={v.shell?.exp}>
                 <option value="">{tx('Export')}</option>
                 <option value="xlsx">{tx('Excel')}</option>
                 <option value="csv">{tx('CSV')}</option>
                 <option value="pdf">{tx('PDF')}</option>
               </select>
               <svg
+                className="absolute end-2.5 top-1/2 -mt-2 pointer-events-none text-muted"
                 width="16"
                 height="16"
                 viewBox="0 0 24 24"
@@ -68,19 +42,11 @@ export function InvoiceListView({ v }: { v: any }) {
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 aria-hidden="true"
-                style={{
-                  position: 'absolute',
-                  insetInlineEnd: '10px',
-                  top: '50%',
-                  marginTop: '-8px',
-                  pointerEvents: 'none',
-                  color: 'var(--muted)',
-                }}
               >
                 <path d="M6 9l6 6 6-6" />
               </svg>
             </div>
-            <AppLink href="credit-notes.html" className="btn" style={{ textDecoration: 'none' }}>
+            <AppLink href="credit-notes.html" className="btn no-underline">
               {tx('Raise credit note')}
             </AppLink>
             <button className="btn btn-primary" onClick={clk(v.manual)}>
@@ -116,8 +82,7 @@ export function InvoiceListView({ v }: { v: any }) {
         <>
           <div className="ftb">
             <input
-              className="input r-w ph-trunc"
-              style={{ width: '260px', flex: 'none' }}
+              className="input r-w ph-trunc w-65 flex-none"
               placeholder={t('Search any value in the table')}
               title={t(
                 'Search any value in the table: invoice no., status, e-Invoice, GFS status, customer, invoice type, B/L, vessel/voyage, amount, currency, due date',
@@ -188,14 +153,15 @@ export function InvoiceListView({ v }: { v: any }) {
               ))}
               {v.filtered ? (
                 <>
-                  <button className="lnk" style={{ whiteSpace: 'nowrap', height: '32px' }} onClick={clk(v.clearF)}>
+                  <button className="lnk whitespace-nowrap h-8" onClick={clk(v.clearF)}>
                     {tx('Clear all')}
                   </button>
                 </>
               ) : null}
             </div>
-            <div style={{ position: 'relative', flex: 'none' }}>
+            <div className="relative flex-none">
               <svg
+                className="absolute start-2.5 top-1/2 -mt-2 pointer-events-none text-muted"
                 width="16"
                 height="16"
                 viewBox="0 0 24 24"
@@ -205,20 +171,11 @@ export function InvoiceListView({ v }: { v: any }) {
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 aria-hidden="true"
-                style={{
-                  position: 'absolute',
-                  insetInlineStart: '10px',
-                  top: '50%',
-                  marginTop: '-8px',
-                  pointerEvents: 'none',
-                  color: 'var(--muted)',
-                }}
               >
                 <path d="M7 4v16M4 17l3 3 3-3M17 20V4M14 7l3-3 3 3" />
               </svg>
               <select
-                className="select r-w"
-                style={{ width: '180px', paddingInlineStart: '34px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}
+                className="select r-w w-45 ps-8.5 whitespace-nowrap overflow-hidden text-ellipsis"
                 aria-label={t('Sort')}
                 title={t('Sort')}
                 value={s(v.sortSel?.val)}
@@ -231,6 +188,7 @@ export function InvoiceListView({ v }: { v: any }) {
                 ))}
               </select>
               <svg
+                className="absolute end-2.5 top-1/2 -mt-2 pointer-events-none text-muted"
                 width="16"
                 height="16"
                 viewBox="0 0 24 24"
@@ -240,19 +198,11 @@ export function InvoiceListView({ v }: { v: any }) {
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 aria-hidden="true"
-                style={{
-                  position: 'absolute',
-                  insetInlineEnd: '10px',
-                  top: '50%',
-                  marginTop: '-8px',
-                  pointerEvents: 'none',
-                  color: 'var(--muted)',
-                }}
               >
                 <path d="M6 9l6 6 6-6" />
               </svg>
             </div>
-            <div className="fq" style={{ flex: 'none' }}>
+            <div className="fq flex-none">
               <button
                 className="btn cols-b"
                 aria-haspopup="dialog"
@@ -330,7 +280,7 @@ export function InvoiceListView({ v }: { v: any }) {
                       <>
                         <label className="msel-o">
                           <input type="checkbox" checked={b(v.colsAll)} onChange={v.colsAllFlip} />
-                          <span style={{ fontWeight: '600' }}>{tx('Select all')}</span>
+                          <span className="font-semibold">{tx('Select all')}</span>
                         </label>
                       </>
                     ) : null}
@@ -345,9 +295,7 @@ export function InvoiceListView({ v }: { v: any }) {
                       ))}
                       {v.colsNone ? (
                         <>
-                          <div className="mu" style={{ padding: '16px', fontSize: '13px', textAlign: 'center' }}>
-                            {tx('No columns match')}
-                          </div>
+                          <div className="mu p-4 text-[13px] text-center">{tx('No columns match')}</div>
                         </>
                       ) : null}
                     </div>
@@ -381,15 +329,15 @@ export function InvoiceListView({ v }: { v: any }) {
                 <button className="btn btn-sm" onClick={clk(v.bulkMail)}>
                   {tx('e-Mail / Post')}
                 </button>{' '}
-                <button className="btn btn-sm" style={{ marginInlineStart: 'auto' }} onClick={clk(v.clearSel)}>
+                <button className="btn btn-sm ms-auto" onClick={clk(v.clearSel)}>
                   {tx('Clear selection')}
                 </button>
               </div>
             </>
           ) : null}
-          <section className="card" style={{ flex: '1 1 auto', minHeight: '0', overflow: 'auto' }}>
+          <section className="card flex-auto min-h-0 overflow-auto">
             <table className="lst">
-              <thead style={{ position: 'sticky', top: '0', zIndex: '2' }}>
+              <thead className="sticky top-0 z-2">
                 <tr>
                   <th className="c-sel">
                     <input
@@ -506,9 +454,7 @@ export function InvoiceListView({ v }: { v: any }) {
                       <th>{tx('Audit ID')}</th>
                     </>
                   ) : null}
-                  <th className="c-act" style={{ width: '72px' }}>
-                    {tx('Action')}
-                  </th>
+                  <th className="c-act w-18">{tx('Action')}</th>
                 </tr>
               </thead>
               <tbody>
@@ -620,9 +566,7 @@ export function InvoiceListView({ v }: { v: any }) {
                       ) : null}
                       {v.cv?.amt ? (
                         <>
-                          <td className="mono num" style={{ fontWeight: '600' }}>
-                            {tx(s(i?.amtMain))}
-                          </td>
+                          <td className="mono num font-semibold">{tx(s(i?.amtMain))}</td>
                         </>
                       ) : null}
                       {v.cv?.cur ? (
@@ -666,9 +610,7 @@ export function InvoiceListView({ v }: { v: any }) {
                             ) : null}
                             {i?.hasJson ? (
                               <>
-                                <span className="mu" style={{ padding: '0 6px' }}>
-                                  {tx('·')}
-                                </span>
+                                <span className="mu py-0 px-1.5">{tx('·')}</span>
                                 <button className="lnk" onClick={clk(i?.json)}>
                                   {tx('JSON')}
                                 </button>
@@ -709,24 +651,16 @@ export function InvoiceListView({ v }: { v: any }) {
             </table>
             {v.invEmpty ? (
               <>
-                <div style={{ padding: '40px', textAlign: 'center', color: 'var(--muted)' }}>{tx('No invoices match these filters')}</div>
+                <div className="p-10 text-center text-muted">{tx('No invoices match these filters')}</div>
               </>
             ) : null}
           </section>
           <div className="pager" role="navigation" aria-label={t('Pages')}>
             <span>{tx(s(v.pInv?.text))}</span>
-            <span style={{ marginInlineStart: 'auto', display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
-              <span className="mu" style={{ fontSize: '12px' }}>
-                {tx('Rows per page')}
-              </span>
-              <div style={{ position: 'relative' }}>
-                <select
-                  className="select select-sm"
-                  style={{ width: '76px' }}
-                  aria-label={t('Rows per page')}
-                  value={s(v.pInv?.size)}
-                  onChange={v.pInv?.onSize}
-                >
+            <span className="gap-1.5 ms-auto inline-flex items-center">
+              <span className="mu text-[12px]">{tx('Rows per page')}</span>
+              <div className="relative">
+                <select className="select select-sm w-19" aria-label={t('Rows per page')} value={s(v.pInv?.size)} onChange={v.pInv?.onSize}>
                   {(v.pInv?.sizes || []).map((z: any, $index: number) => (
                     <Fragment key={$index}>
                       <option value={a(z)}>{tx(s(z))}</option>
@@ -734,6 +668,7 @@ export function InvoiceListView({ v }: { v: any }) {
                   ))}
                 </select>
                 <svg
+                  className="absolute end-2.5 top-1/2 -mt-2 pointer-events-none text-muted"
                   width="16"
                   height="16"
                   viewBox="0 0 24 24"
@@ -743,14 +678,6 @@ export function InvoiceListView({ v }: { v: any }) {
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   aria-hidden="true"
-                  style={{
-                    position: 'absolute',
-                    insetInlineEnd: '10px',
-                    top: '50%',
-                    marginTop: '-8px',
-                    pointerEvents: 'none',
-                    color: 'var(--muted)',
-                  }}
                 >
                   <path d="M6 9l6 6 6-6" />
                 </svg>
@@ -761,9 +688,7 @@ export function InvoiceListView({ v }: { v: any }) {
               <button className="btn btn-sm pbtn" aria-label={t('Previous page')} disabled={b(v.pInv?.prevDis)} onClick={clk(v.pInv?.prev)}>
                 {tx('‹')}
               </button>
-              <span className="mono" style={{ fontSize: '13px', minWidth: '64px', textAlign: 'center' }}>
-                {tx(s(v.pInv?.pos))}
-              </span>
+              <span className="mono text-[13px] min-w-16 text-center">{tx(s(v.pInv?.pos))}</span>
               <button className="btn btn-sm pbtn" aria-label={t('Next page')} disabled={b(v.pInv?.nextDis)} onClick={clk(v.pInv?.next)}>
                 {tx('›')}
               </button>
@@ -778,15 +703,15 @@ export function InvoiceListView({ v }: { v: any }) {
         <>
           {v.readyListOn ? (
             <>
-              <div style={{ display: 'flex', alignItems: 'flex-end', gap: '12px' }}>
+              <div className="gap-3 flex items-end">
                 <label className="flab">
                   {tx('Period')}
-                  <input className="input r-w" type="date" value={s(v.period)} style={{ width: '180px' }} onChange={v.onPeriod} />
+                  <input className="input r-w w-45" type="date" value={s(v.period)} onChange={v.onPeriod} />
                 </label>
                 <label className="flab">
                   {tx('Port')}
-                  <div style={{ position: 'relative' }}>
-                    <select className="select r-w" value={s(v.rPort)} style={{ width: '200px' }} onChange={v.onPort}>
+                  <div className="relative">
+                    <select className="select r-w w-50" value={s(v.rPort)} onChange={v.onPort}>
                       <option value="">{tx('All ports')}</option>
                       {(v.ports || []).map((o: any, $index: number) => (
                         <Fragment key={$index}>
@@ -795,6 +720,7 @@ export function InvoiceListView({ v }: { v: any }) {
                       ))}
                     </select>
                     <svg
+                      className="absolute end-2.5 top-1/2 -mt-2 pointer-events-none text-muted"
                       width="16"
                       height="16"
                       viewBox="0 0 24 24"
@@ -804,14 +730,6 @@ export function InvoiceListView({ v }: { v: any }) {
                       strokeLinecap="round"
                       strokeLinejoin="round"
                       aria-hidden="true"
-                      style={{
-                        position: 'absolute',
-                        insetInlineEnd: '10px',
-                        top: '50%',
-                        marginTop: '-8px',
-                        pointerEvents: 'none',
-                        color: 'var(--muted)',
-                      }}
                     >
                       <path d="M6 9l6 6 6-6" />
                     </svg>
@@ -819,8 +737,8 @@ export function InvoiceListView({ v }: { v: any }) {
                 </label>
                 <label className="flab">
                   {tx('Process')}
-                  <div style={{ position: 'relative' }}>
-                    <select className="select r-w" value={s(v.rProc)} style={{ width: '200px' }} onChange={v.onProc}>
+                  <div className="relative">
+                    <select className="select r-w w-50" value={s(v.rProc)} onChange={v.onProc}>
                       <option value="">{tx('All')}</option>
                       {(v.procs || []).map((o: any, $index: number) => (
                         <Fragment key={$index}>
@@ -829,6 +747,7 @@ export function InvoiceListView({ v }: { v: any }) {
                       ))}
                     </select>
                     <svg
+                      className="absolute end-2.5 top-1/2 -mt-2 pointer-events-none text-muted"
                       width="16"
                       height="16"
                       viewBox="0 0 24 24"
@@ -838,14 +757,6 @@ export function InvoiceListView({ v }: { v: any }) {
                       strokeLinecap="round"
                       strokeLinejoin="round"
                       aria-hidden="true"
-                      style={{
-                        position: 'absolute',
-                        insetInlineEnd: '10px',
-                        top: '50%',
-                        marginTop: '-8px',
-                        pointerEvents: 'none',
-                        color: 'var(--muted)',
-                      }}
                     >
                       <path d="M6 9l6 6 6-6" />
                     </svg>
@@ -853,30 +764,21 @@ export function InvoiceListView({ v }: { v: any }) {
                 </label>
                 {v.rFiltered ? (
                   <>
-                    <button className="lnk" style={{ height: '36px' }} onClick={clk(v.resetR)}>
+                    <button className="lnk h-9" onClick={clk(v.resetR)}>
                       {tx('Reset filters')}
                     </button>
                   </>
                 ) : null}
-                <span
-                  style={{
-                    marginInlineStart: 'auto',
-                    fontSize: '13px',
-                    color: 'var(--muted)',
-                    height: '36px',
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                  }}
-                >
+                <span className="ms-auto text-[13px] text-muted h-9 inline-flex items-center">
                   {tx('Country and entity follow the selection in the top bar')}
                 </span>
               </div>
-              <div className="r-wrap" style={{ display: 'flex', gap: '16px' }}>
+              <div className="r-wrap gap-4 flex">
                 {(v.kpis || []).map((k: any, $index: number) => (
                   <Fragment key={$index}>
                     <button className="kpi" aria-pressed={a(k?.on)} onClick={clk(k?.pick)}>
                       <span className="kl">
-                        <i style={sx(`width: 8px; height: 8px; border-radius: 50%; background: ${s(k?.color)}`)} />
+                        <i className="w-2 h-2 rounded-full" style={sx(`background: ${s(k?.color)}`)} />
                         {tx(s(k?.label))}
                       </span>
                       <span className="kv mono">{tx(s(k?.n))}</span>
@@ -884,9 +786,9 @@ export function InvoiceListView({ v }: { v: any }) {
                   </Fragment>
                 ))}
               </div>
-              <section className="card" style={{ flex: '1 1 auto', minHeight: '0', overflow: 'auto' }}>
+              <section className="card flex-auto min-h-0 overflow-auto">
                 <table className="lst">
-                  <thead style={{ position: 'sticky', top: '0', zIndex: '2' }}>
+                  <thead className="sticky top-0 z-2">
                     <tr>
                       <th className="c-sel">
                         <input
@@ -904,7 +806,7 @@ export function InvoiceListView({ v }: { v: any }) {
                       <th>{tx('Process')}</th>
                       <th className="num">{tx('Amount')}</th>
                       <th>{tx('Status')}</th>
-                      <th style={{ width: '48px' }}>
+                      <th className="w-12">
                         <span className="sr">{tx('Details')}</span>
                       </th>
                     </tr>
@@ -931,25 +833,19 @@ export function InvoiceListView({ v }: { v: any }) {
                           </td>
                           <td className="mono">{tx(s(r?.bkg))}</td>
                           <td>
-                            {tx(s(r?.name))}{' '}
-                            <span className="mono mu" style={{ fontSize: '12px' }}>
-                              {tx(s(r?.cust))}
-                            </span>
+                            {tx(s(r?.name))} <span className="mono mu text-[12px]">{tx(s(r?.cust))}</span>
                           </td>
                           <td>{tx(s(r?.port))}</td>
                           <td>{tx(s(r?.type))}</td>
-                          <td className="mono num" style={{ fontWeight: '600' }}>
-                            {tx(`${s(r?.amt)} ${s(r?.cur)}`)}
-                          </td>
+                          <td className="mono num font-semibold">{tx(`${s(r?.amt)} ${s(r?.cur)}`)}</td>
                           <td>
                             <span className="pill" style={sx(s(r?.pill))}>
                               {tx(s(r?.status))}
                             </span>
                           </td>
-                          <td style={{ textAlign: 'center' }}>
+                          <td className="text-center">
                             <button
-                              className="ex"
-                              style={{ margin: '0' }}
+                              className="ex m-0"
                               aria-expanded={a(r?.open)}
                               aria-label={t(`Validation of ${s(r?.bl)}`)}
                               onClick={clk(r?.expand)}
@@ -975,7 +871,7 @@ export function InvoiceListView({ v }: { v: any }) {
                             <tr className="xrow">
                               <td colSpan={9}>
                                 <div className="xbox">
-                                  <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', flex: '1 1 auto', minWidth: '0' }}>
+                                  <div className="gap-3 flex flex-col flex-auto min-w-0">
                                     {r?.hasMsg ? (
                                       <>
                                         <div className={`banner ${s(r?.bcls)}`}>{tx(`${s(r?.status)}: ${s(r?.msg)}`)}</div>
@@ -984,7 +880,7 @@ export function InvoiceListView({ v }: { v: any }) {
                                     <div className="chk">
                                       {(r?.checks || []).map((c: any, $index: number) => (
                                         <Fragment key={$index}>
-                                          <span style={{ fontWeight: '500' }}>{tx(s(c?.k))}</span>
+                                          <span className="font-medium">{tx(s(c?.k))}</span>
                                           <span style={sx(`color: ${s(c?.color)}`)}>
                                             {c?.ok ? (
                                               <>
@@ -1047,7 +943,7 @@ export function InvoiceListView({ v }: { v: any }) {
                                       ))}
                                     </div>
                                   </div>
-                                  <button className="btn btn-primary" style={{ flex: 'none' }} onClick={clk(r?.review)}>
+                                  <button className="btn btn-primary flex-none" onClick={clk(r?.review)}>
                                     {tx('Open details')}
                                   </button>
                                 </div>
@@ -1061,20 +957,17 @@ export function InvoiceListView({ v }: { v: any }) {
                 </table>
                 {v.readyEmpty ? (
                   <>
-                    <div style={{ padding: '40px', textAlign: 'center', color: 'var(--muted)' }}>{tx(s(v.readyEmptyText))}</div>
+                    <div className="p-10 text-center text-muted">{tx(s(v.readyEmptyText))}</div>
                   </>
                 ) : null}
               </section>
               <div className="pager" role="navigation" aria-label={t('Pages')}>
                 <span>{tx(s(v.pRdy?.text))}</span>
-                <span style={{ marginInlineStart: 'auto', display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
-                  <span className="mu" style={{ fontSize: '12px' }}>
-                    {tx('Rows per page')}
-                  </span>
-                  <div style={{ position: 'relative' }}>
+                <span className="gap-1.5 ms-auto inline-flex items-center">
+                  <span className="mu text-[12px]">{tx('Rows per page')}</span>
+                  <div className="relative">
                     <select
-                      className="select select-sm"
-                      style={{ width: '76px' }}
+                      className="select select-sm w-19"
                       aria-label={t('Rows per page')}
                       value={s(v.pRdy?.size)}
                       onChange={v.pRdy?.onSize}
@@ -1086,6 +979,7 @@ export function InvoiceListView({ v }: { v: any }) {
                       ))}
                     </select>
                     <svg
+                      className="absolute end-2.5 top-1/2 -mt-2 pointer-events-none text-muted"
                       width="16"
                       height="16"
                       viewBox="0 0 24 24"
@@ -1095,14 +989,6 @@ export function InvoiceListView({ v }: { v: any }) {
                       strokeLinecap="round"
                       strokeLinejoin="round"
                       aria-hidden="true"
-                      style={{
-                        position: 'absolute',
-                        insetInlineEnd: '10px',
-                        top: '50%',
-                        marginTop: '-8px',
-                        pointerEvents: 'none',
-                        color: 'var(--muted)',
-                      }}
                     >
                       <path d="M6 9l6 6 6-6" />
                     </svg>
@@ -1123,9 +1009,7 @@ export function InvoiceListView({ v }: { v: any }) {
                   >
                     {tx('‹')}
                   </button>
-                  <span className="mono" style={{ fontSize: '13px', minWidth: '64px', textAlign: 'center' }}>
-                    {tx(s(v.pRdy?.pos))}
-                  </span>
+                  <span className="mono text-[13px] min-w-16 text-center">{tx(s(v.pRdy?.pos))}</span>
                   <button className="btn btn-sm pbtn" aria-label={t('Next page')} disabled={b(v.pRdy?.nextDis)} onClick={clk(v.pRdy?.next)}>
                     {tx('›')}
                   </button>
@@ -1134,7 +1018,7 @@ export function InvoiceListView({ v }: { v: any }) {
                   </button>
                 </span>
               </div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+              <div className="gap-3 flex items-center">
                 <button className="btn" disabled={b(v.noRSel)} onClick={clk(v.reviewSel)}>
                   {tx('Review selected')}
                   {v.hasRSel ? <> {tx(`(${s(v.rSelN)})`)}</> : null}
@@ -1143,13 +1027,13 @@ export function InvoiceListView({ v }: { v: any }) {
                   {tx('Generate')}
                   {v.hasRSel ? <> {tx(`(${s(v.rSelN)})`)}</> : null}
                 </button>
-                <span style={{ fontSize: '13px', color: 'var(--muted)' }}>{tx(s(v.genHint))}</span>
+                <span className="text-[13px] text-muted">{tx(s(v.genHint))}</span>
               </div>
             </>
           ) : null}
           {v.inReview ? (
             <>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+              <div className="gap-3 flex items-center">
                 <button className="btn btn-sm" onClick={clk(v.backToList)}>
                   <svg
                     width="16"
@@ -1166,10 +1050,8 @@ export function InvoiceListView({ v }: { v: any }) {
                   </svg>
                   {tx('Back to Ready to invoice')}
                 </button>
-                <span style={{ fontSize: '13px', color: 'var(--muted)' }}>
-                  {tx('Final validation and preview before invoice creation')}
-                </span>
-                <span style={{ marginInlineStart: 'auto', display: 'inline-flex', alignItems: 'center', gap: '10px' }}>
+                <span className="text-[13px] text-muted">{tx('Final validation and preview before invoice creation')}</span>
+                <span className="gap-2.5 ms-auto inline-flex items-center">
                   <button className="lnk" onClick={clk(v.viewRoe)}>
                     {tx('View ROE')}
                   </button>
@@ -1182,13 +1064,11 @@ export function InvoiceListView({ v }: { v: any }) {
                 </span>
                 {v.rvMany ? (
                   <>
-                    <span style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
+                    <span className="gap-2 inline-flex items-center">
                       <button className="btn btn-sm" disabled={b(v.rvFirst)} onClick={clk(v.rvPrev)}>
                         {tx('Previous')}
                       </button>
-                      <span className="mono" style={{ fontSize: '13px' }}>
-                        {tx(s(v.rvPos))}
-                      </span>
+                      <span className="mono text-[13px]">{tx(s(v.rvPos))}</span>
                       <button className="btn btn-sm" disabled={b(v.rvLast)} onClick={clk(v.rvNext)}>
                         {tx('Next')}
                       </button>
@@ -1196,7 +1076,7 @@ export function InvoiceListView({ v }: { v: any }) {
                   </>
                 ) : null}
               </div>
-              <div style={{ flex: '1 1 auto', minHeight: '0', overflow: 'auto' }}>
+              <div className="flex-auto min-h-0 overflow-auto">
                 <section className="card ri" aria-label={t('Ready to invoice')}>
                   <div className="ri-hd">
                     <h1>
@@ -1252,11 +1132,10 @@ export function InvoiceListView({ v }: { v: any }) {
                       <label className="k" htmlFor="ri-cust">
                         {tx('To')}
                       </label>
-                      <div className="ri-cb" style={{ marginTop: '6px', maxWidth: '360px' }}>
+                      <div className="ri-cb mt-1.5 max-w-90">
                         <input
                           id="ri-cust"
-                          className={`input ${s(v.rv?.custCls)}`}
-                          style={{ width: '100%', fontWeight: '600' }}
+                          className={`input ${s(v.rv?.custCls)} w-full font-semibold`}
                           role="combobox"
                           aria-autocomplete="list"
                           aria-expanded={a(v.rv?.cuA)}
@@ -1293,9 +1172,7 @@ export function InvoiceListView({ v }: { v: any }) {
                           </>
                         ) : null}
                       </div>
-                      <div className="l" style={{ marginTop: '6px' }}>
-                        {tx(s(v.rv?.addr))}
-                      </div>
+                      <div className="l mt-1.5">{tx(s(v.rv?.addr))}</div>
                     </div>
                     <div>
                       <div className="k">{tx('Customer & payment')}</div>
@@ -1344,8 +1221,7 @@ export function InvoiceListView({ v }: { v: any }) {
                                   <>
                                     <div className="ri-cb">
                                       <input
-                                        className={`input ri-in ${s(l?.hErr)}`}
-                                        style={{ width: '100%' }}
+                                        className={`input ri-in ${s(l?.hErr)} w-full`}
                                         role="combobox"
                                         aria-autocomplete="list"
                                         aria-expanded={a(l?.sugA)}
@@ -1390,8 +1266,7 @@ export function InvoiceListView({ v }: { v: any }) {
                                 {l?.edit ? (
                                   <>
                                     <input
-                                      className={`input ri-in num ${s(l?.qErr)}`}
-                                      style={{ width: '72px' }}
+                                      className={`input ri-in num ${s(l?.qErr)} w-18`}
                                       value={s(l?.qty)}
                                       aria-label={t('Quantity')}
                                       inputMode="decimal"
@@ -1404,10 +1279,9 @@ export function InvoiceListView({ v }: { v: any }) {
                               <td>
                                 {l?.edit ? (
                                   <>
-                                    <div style={{ position: 'relative', width: '96px' }}>
+                                    <div className="relative w-24">
                                       <select
-                                        className={`select ri-in ${s(l?.uErr)}`}
-                                        style={{ width: '100%' }}
+                                        className={`select ri-in ${s(l?.uErr)} w-full`}
                                         value={s(l?.uom)}
                                         aria-label={t('UOM')}
                                         onChange={l?.onUom}
@@ -1420,6 +1294,7 @@ export function InvoiceListView({ v }: { v: any }) {
                                         ))}
                                       </select>
                                       <svg
+                                        className="absolute end-2.5 top-1/2 -mt-2 pointer-events-none text-muted"
                                         width="16"
                                         height="16"
                                         viewBox="0 0 24 24"
@@ -1429,14 +1304,6 @@ export function InvoiceListView({ v }: { v: any }) {
                                         strokeLinecap="round"
                                         strokeLinejoin="round"
                                         aria-hidden="true"
-                                        style={{
-                                          position: 'absolute',
-                                          insetInlineEnd: '10px',
-                                          top: '50%',
-                                          marginTop: '-8px',
-                                          pointerEvents: 'none',
-                                          color: 'var(--muted)',
-                                        }}
                                       >
                                         <path d="M6 9l6 6 6-6" />
                                       </svg>
@@ -1449,8 +1316,7 @@ export function InvoiceListView({ v }: { v: any }) {
                                 {l?.edit ? (
                                   <>
                                     <input
-                                      className={`input ri-in num ${s(l?.pErr)}`}
-                                      style={{ width: '104px' }}
+                                      className={`input ri-in num ${s(l?.pErr)} w-26`}
                                       value={s(l?.unit)}
                                       aria-label={t('Unit Price')}
                                       inputMode="decimal"
@@ -1463,10 +1329,9 @@ export function InvoiceListView({ v }: { v: any }) {
                               <td>
                                 {l?.edit ? (
                                   <>
-                                    <div style={{ position: 'relative', width: '96px' }}>
+                                    <div className="relative w-24">
                                       <select
-                                        className={`select ri-in ${s(l?.cErr)}`}
-                                        style={{ width: '100%' }}
+                                        className={`select ri-in ${s(l?.cErr)} w-full`}
                                         value={s(l?.cur)}
                                         aria-label={t('Currency')}
                                         onChange={l?.onCur}
@@ -1479,6 +1344,7 @@ export function InvoiceListView({ v }: { v: any }) {
                                         ))}
                                       </select>
                                       <svg
+                                        className="absolute end-2.5 top-1/2 -mt-2 pointer-events-none text-muted"
                                         width="16"
                                         height="16"
                                         viewBox="0 0 24 24"
@@ -1488,14 +1354,6 @@ export function InvoiceListView({ v }: { v: any }) {
                                         strokeLinecap="round"
                                         strokeLinejoin="round"
                                         aria-hidden="true"
-                                        style={{
-                                          position: 'absolute',
-                                          insetInlineEnd: '10px',
-                                          top: '50%',
-                                          marginTop: '-8px',
-                                          pointerEvents: 'none',
-                                          color: 'var(--muted)',
-                                        }}
                                       >
                                         <path d="M6 9l6 6 6-6" />
                                       </svg>
@@ -1541,7 +1399,7 @@ export function InvoiceListView({ v }: { v: any }) {
                       </tbody>
                     </table>
                   </div>
-                  <div style={{ marginTop: '12px' }}>
+                  <div className="mt-3">
                     <button className="btn btn-sm" onClick={clk(v.rv?.addCharge)}>
                       <svg
                         width="16"
@@ -1584,15 +1442,14 @@ export function InvoiceListView({ v }: { v: any }) {
                   <div className="ri-words">{tx(s(v.rv?.words))}</div>
                 </section>
               </div>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', paddingTop: '4px' }}>
-                <label style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', fontSize: '13px' }}>
+              <div className="gap-3 flex flex-col pt-1">
+                <label className="gap-2.5 inline-flex items-center text-[13px]">
                   <input type="checkbox" className="cbx" checked={b(v.decl)} disabled={b(v.rv?.hasErr)} onChange={v.toggleDecl} />
                   <span>
-                    <b style={{ color: 'var(--accent2)' }}>{tx('Declaration:')}</b>{' '}
-                    {tx('I confirm the customer, charges, currency and tax details.')}
+                    <b className="text-accent2">{tx('Declaration:')}</b> {tx('I confirm the customer, charges, currency and tax details.')}
                   </span>
                 </label>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                <div className="gap-3 flex items-center">
                   <button className="btn" onClick={clk(v.rvCancel)}>
                     {tx('Cancel')}
                   </button>
@@ -1605,7 +1462,7 @@ export function InvoiceListView({ v }: { v: any }) {
                   <button className="btn btn-primary" disabled={b(v.rvGenDis)} onClick={clk(v.rvGenerate)}>
                     {tx('Generate invoice')}
                   </button>
-                  <span style={{ fontSize: '13px', color: 'var(--muted)' }}>{tx(s(v.rvHint))}</span>
+                  <span className="text-[13px] text-muted">{tx(s(v.rvHint))}</span>
                 </div>
               </div>
             </>
@@ -1643,7 +1500,7 @@ export function InvoiceListView({ v }: { v: any }) {
           <div className={`dlg ${s(v.dlgCls)}`} role="dialog" aria-modal="true" aria-label={t(s(v.dlgTitle))}>
             {v.dConf ? (
               <>
-                <div className="db conf" style={{ padding: '32px 40px 8px' }}>
+                <div className="db conf pt-8 pb-2 px-10">
                   <div className="ic">
                     <svg
                       width="28"
@@ -1661,15 +1518,15 @@ export function InvoiceListView({ v }: { v: any }) {
                       <path d="M9 11h6M9 15h6" />
                     </svg>
                   </div>
-                  <h2 style={{ margin: '4px 0 0', fontSize: '22px', lineHeight: '28px' }}>{tx(s(v.dlgTitle))}</h2>
-                  <p style={{ margin: '0', color: 'var(--muted)', fontSize: '14px' }}>
+                  <h2 className="mt-1 mb-0 mx-0 text-[22px] leading-[28px]">{tx(s(v.dlgTitle))}</h2>
+                  <p className="m-0 text-muted text-[14px]">
                     {tx(s(v.confText))}
                     <br />
                     {tx('No approval workflow applies to invoice generation.')}
                   </p>
-                  <div style={{ alignSelf: 'stretch', height: '1px', background: 'var(--line2)', margin: '8px 0' }} />
-                  <div style={{ alignSelf: 'stretch', textAlign: 'start', display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                    <span style={{ color: 'var(--muted)', fontSize: '14px' }}>{tx('Where applicable:')}</span>
+                  <div className="my-2 mx-0 self-stretch h-px bg-line2" />
+                  <div className="gap-2 self-stretch text-start flex flex-col">
+                    <span className="text-muted text-[14px]">{tx('Where applicable:')}</span>
                     <ul>
                       <li>{tx('The invoice will be submitted for e-invoice processing.')}</li>
                       <li>{tx('The invoice will be sent to configured customer channels.')}</li>
@@ -1677,7 +1534,7 @@ export function InvoiceListView({ v }: { v: any }) {
                     </ul>
                   </div>
                 </div>
-                <div className="df" style={{ justifyContent: 'center', background: 'var(--surface)', border: '0', paddingBottom: '28px' }}>
+                <div className="df justify-center bg-surface border-0 pb-7">
                   <button className="btn" onClick={clk(v.closeDlg)}>
                     {tx('Back')}
                   </button>
@@ -1729,10 +1586,7 @@ export function InvoiceListView({ v }: { v: any }) {
                             <Fragment key={$index}>
                               <tr>
                                 <td className="mono">
-                                  {tx(s(l?.chg))}{' '}
-                                  <span className="mu" style={{ fontFamily: 'inherit' }}>
-                                    {tx(`· ${s(l?.name)}`)}
-                                  </span>
+                                  {tx(s(l?.chg))} <span className="mu [font-family:inherit]">{tx(`· ${s(l?.name)}`)}</span>
                                 </td>
                                 <td className="mono num">{tx(s(l?.amt))}</td>
                                 <td className="mono">{tx(s(l?.cur))}</td>
@@ -1799,7 +1653,7 @@ export function InvoiceListView({ v }: { v: any }) {
                                   ) : null}
                                   {x?.isSelect ? (
                                     <>
-                                      <div style={{ position: 'relative' }}>
+                                      <div className="relative">
                                         <select className="select" value={s(x?.val)} onChange={x?.on}>
                                           {x?.hasPh ? (
                                             <>
@@ -1813,6 +1667,7 @@ export function InvoiceListView({ v }: { v: any }) {
                                           ))}
                                         </select>
                                         <svg
+                                          className="absolute end-2.5 top-1/2 -mt-2 pointer-events-none text-muted"
                                           width="16"
                                           height="16"
                                           viewBox="0 0 24 24"
@@ -1822,14 +1677,6 @@ export function InvoiceListView({ v }: { v: any }) {
                                           strokeLinecap="round"
                                           strokeLinejoin="round"
                                           aria-hidden="true"
-                                          style={{
-                                            position: 'absolute',
-                                            insetInlineEnd: '10px',
-                                            top: '50%',
-                                            marginTop: '-8px',
-                                            pointerEvents: 'none',
-                                            color: 'var(--muted)',
-                                          }}
                                         >
                                           <path d="M6 9l6 6 6-6" />
                                         </svg>
@@ -1838,12 +1685,7 @@ export function InvoiceListView({ v }: { v: any }) {
                                   ) : null}
                                   {x?.isText ? (
                                     <>
-                                      <textarea
-                                        className="input"
-                                        style={{ height: '72px', paddingTop: '8px', resize: 'vertical' }}
-                                        value={s(x?.val)}
-                                        onChange={x?.on}
-                                      />
+                                      <textarea className="input h-18 pt-2 resize-y" value={s(x?.val)} onChange={x?.on} />
                                     </>
                                   ) : null}
                                   {x?.hasErr ? (
@@ -1864,16 +1706,7 @@ export function InvoiceListView({ v }: { v: any }) {
                       ) : null}
                       {v.gen?.hasTbl ? (
                         <>
-                          <span
-                            className="l"
-                            style={{
-                              fontSize: '12px',
-                              fontWeight: '600',
-                              textTransform: 'uppercase',
-                              letterSpacing: '.05em',
-                              color: 'var(--muted)',
-                            }}
-                          >
+                          <span className="l text-[12px] font-semibold uppercase tracking-[.05em] text-muted">
                             {tx(s(v.gen?.tblTitle))}
                           </span>
                           <table className="at ctab">
@@ -1964,12 +1797,7 @@ export function InvoiceListView({ v }: { v: any }) {
                       </label>{' '}
                       <label className="fld">
                         {tx('Message')} <span className="hint">{tx('Optional')}</span>
-                        <textarea
-                          className="input"
-                          style={{ height: '80px', paddingTop: '8px', resize: 'vertical' }}
-                          value={s(v.f?.msg)}
-                          onChange={v.f?.onMsg}
-                        />
+                        <textarea className="input h-20 pt-2 resize-y" value={s(v.f?.msg)} onChange={v.f?.onMsg} />
                       </label>{' '}
                       <span className="mu">{tx(`Attachments: ${s(v.attach)}`)}</span>{' '}
                     </>
@@ -1991,7 +1819,7 @@ export function InvoiceListView({ v }: { v: any }) {
                         </div>
                         <label className="fld">
                           {tx('Reason Code')}
-                          <div style={{ position: 'relative' }}>
+                          <div className="relative">
                             <select className="select" value={s(v.f?.reason)} onChange={v.f?.onReason}>
                               <option value="">{tx('Select reason')}</option>
                               {(v.reasons || []).map((o: any, $index: number) => (
@@ -2001,6 +1829,7 @@ export function InvoiceListView({ v }: { v: any }) {
                               ))}
                             </select>
                             <svg
+                              className="absolute end-2.5 top-1/2 -mt-2 pointer-events-none text-muted"
                               width="16"
                               height="16"
                               viewBox="0 0 24 24"
@@ -2010,14 +1839,6 @@ export function InvoiceListView({ v }: { v: any }) {
                               strokeLinecap="round"
                               strokeLinejoin="round"
                               aria-hidden="true"
-                              style={{
-                                position: 'absolute',
-                                insetInlineEnd: '10px',
-                                top: '50%',
-                                marginTop: '-8px',
-                                pointerEvents: 'none',
-                                color: 'var(--muted)',
-                              }}
                             >
                               <path d="M6 9l6 6 6-6" />
                             </svg>
@@ -2060,12 +1881,7 @@ export function InvoiceListView({ v }: { v: any }) {
                       <div className="banner b-warn">{tx(s(v.cancelText))}</div>
                       <label className="fld">
                         {tx('Reason')}
-                        <textarea
-                          className="input"
-                          style={{ height: '80px', paddingTop: '8px', resize: 'vertical' }}
-                          value={s(v.f?.why)}
-                          onChange={v.f?.onWhy}
-                        />
+                        <textarea className="input h-20 pt-2 resize-y" value={s(v.f?.why)} onChange={v.f?.onWhy} />
                         {v.f?.whyErr ? (
                           <>
                             <span className="err">{tx('A reason is required')}</span>
@@ -2122,9 +1938,7 @@ export function InvoiceListView({ v }: { v: any }) {
                 {v.dlgDl ? (
                   <>
                     <div className="df">
-                      <span className="mu" style={{ marginInlineEnd: 'auto' }}>
-                        {tx('Download')}
-                      </span>
+                      <span className="mu me-auto">{tx('Download')}</span>
                       <button className="btn btn-sm" onClick={clk(v.dl?.pdf)}>
                         {tx('PDF')}
                       </button>

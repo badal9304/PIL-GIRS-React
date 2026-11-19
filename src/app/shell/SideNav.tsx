@@ -3,12 +3,7 @@ import { NavLink, useLocation } from 'react-router-dom';
 import { NAV, groupOf } from '../navigation';
 import { useSettings } from '../providers/contexts';
 import { useI18n } from '../../i18n/context';
-import { HUBS, ENTITIES } from './context';
-
-interface Props {
-  drawerOpen: boolean;
-  onCloseDrawer: () => void;
-}
+import { cx } from '../../lib/cx';
 
 const chevron = {
   width: 16,
@@ -22,13 +17,15 @@ const chevron = {
   'aria-hidden': true,
 } as const;
 
+const focusRing = 'focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2';
+
 /**
  * Left navigation. Expanded: accordion of sections. Collapsed (64px rail): section icons that open
  * their screens in a flyout beside the rail; the rail only expands from the button at the bottom.
  */
-export function SideNav({ drawerOpen, onCloseDrawer }: Props) {
+export function SideNav() {
   const { t, tx } = useI18n();
-  const { sidebarCollapsed: c, setSidebarCollapsed, hub, setHub, entity, setEntity, theme } = useSettings();
+  const { sidebarCollapsed: c, setSidebarCollapsed, theme } = useSettings();
   const { pathname } = useLocation();
   const activeGroup = groupOf(pathname)?.id || '';
   // expanded menu: the open section (defaults to the section of the open screen)
@@ -53,164 +50,112 @@ export function SideNav({ drawerOpen, onCloseDrawer }: Props) {
     } else setAcc(acc === id ? '' : id);
   };
 
-  const hide = c ? { display: 'none' } : undefined;
   const sbLabel = c ? 'Expand side panel' : 'Collapse side panel';
 
   return (
     <aside
       id="gside"
-      className="gside"
-      data-drawer={drawerOpen ? 'open' : 'closed'}
       aria-label={t('Side panel')}
-      style={{
-        flex: 'none',
-        width: c ? '64px' : '240px',
-        background: 'var(--surface)',
-        borderInlineEnd: '1px solid var(--line)',
-        display: 'flex',
-        flexDirection: 'column',
-        overflow: 'hidden',
-        boxSizing: 'border-box',
-        transition: 'width .18s ease',
-      }}
+      className={cx(
+        'flex-none bg-surface border-e border-e-line flex flex-col overflow-hidden box-border [transition:width_.18s_ease]',
+        c ? 'w-16' : 'w-60',
+      )}
     >
       <div
-        style={{
-          height: '52px',
-          flex: 'none',
-          display: 'flex',
-          alignItems: 'center',
-          gap: '12px',
-          borderBottom: '1px solid var(--line2)',
-          boxSizing: 'border-box',
-          ...(c ? { justifyContent: 'center', padding: 0 } : { padding: '0 20px' }),
-        }}
+        className={cx('h-13 flex-none flex items-center gap-3 border-b border-b-line2 box-border', c ? 'justify-center p-0' : 'py-0 px-5')}
       >
-        <span className="glogo" style={{ display: 'inline-flex', borderRadius: '4px', padding: '2px 4px' }}>
+        <span className="inline-flex rounded-[4px] py-0.5 px-1 bg-white dark:bg-transparent">
           <img
             src={`${import.meta.env.BASE_URL}${theme === 'dark' ? 'pil-logo-dark.png' : 'pil-logo.png'}`}
             alt="PIL"
-            style={{
-              display: 'block',
-              ...(c
-                ? { height: '26px', width: '30px', objectFit: 'cover', objectPosition: 'left center' }
-                : { height: '26px', width: 'auto' }),
-            }}
+            className={cx('block h-6.5', c ? 'w-7.5 object-cover object-left' : 'w-auto')}
           />
         </span>
-        <span style={{ width: '1px', height: '20px', background: 'var(--line)', ...hide }} />
-        <span style={{ fontSize: '15px', fontWeight: 700, letterSpacing: '0.04em', color: 'var(--accent)', ...hide }}>GIRS</span>
-        <button
-          className="btn btn-icon btn-sm gdclose"
-          aria-label={t('Close menu')}
-          style={{ marginInlineStart: 'auto', width: '32px' }}
-          onClick={onCloseDrawer}
-        >
-          <svg {...chevron}>
-            <path d="M6 6l12 12M18 6L6 18" />
-          </svg>
-        </button>
-      </div>
-
-      {/* hub / entity pickers shown inside the mobile drawer */}
-      <div
-        className="gdctx"
-        style={{ flex: 'none', flexDirection: 'column', gap: '10px', padding: '12px 16px', borderBottom: '1px solid var(--line2)' }}
-      >
-        <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) 96px', gap: '8px' }}>
-          <div style={{ position: 'relative' }}>
-            <label htmlFor="dhub" className="sr">
-              {tx('Hub')}
-            </label>
-            <select id="dhub" className="select select-sm" value={hub} style={{ width: '100%' }} onChange={(e) => setHub(e.target.value)}>
-              {HUBS.map(([v, l]) => (
-                <option key={v} value={v}>
-                  {tx(l)}
-                </option>
-              ))}
-            </select>
-          </div>
-          <div style={{ position: 'relative' }}>
-            <label htmlFor="dent" className="sr">
-              {tx('Entity')}
-            </label>
-            <select
-              id="dent"
-              className="select select-sm"
-              value={entity}
-              style={{ width: '100%' }}
-              onChange={(e) => setEntity(e.target.value)}
-            >
-              {ENTITIES.map((v) => (
-                <option key={v} value={v}>
-                  {v}
-                </option>
-              ))}
-            </select>
-          </div>
-        </div>
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '8px' }}>
-          <span
-            className="chip"
-            title={t('Fiscal period')}
-            style={{ background: 'var(--okbg)', color: 'var(--ok)', height: '28px', borderRadius: '6px' }}
-          >
-            <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: 'var(--okdot)' }} />
-            {tx('[Fiscal period] · Open')}
-          </span>
-        </div>
+        {c ? null : (
+          <>
+            <span className="w-px h-5 bg-line" />
+            <span className="text-[15px] font-bold tracking-[0.04em] text-accent">GIRS</span>
+          </>
+        )}
       </div>
 
       <nav
         aria-label={t('Screens')}
         data-c={c ? 'true' : 'false'}
-        style={{
-          flex: '1 1 auto',
-          minHeight: 0,
-          overflowY: 'auto',
-          overflowX: 'hidden',
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '4px',
-          padding: '10px 10px 16px',
-        }}
+        className="flex-auto min-h-0 overflow-y-auto overflow-x-hidden flex flex-col gap-1 pt-2.5 px-2.5 pb-4"
       >
-        {c && fly ? <div className="ng-bd" aria-hidden="true" onClick={() => setFly(null)} /> : null}
+        {fly ? <div className="fixed top-0 right-0 bottom-0 left-16 z-60" aria-hidden="true" onClick={() => setFly(null)} /> : null}
         {NAV.map((g) => {
           const open = c ? fly?.id === g.id : acc === g.id;
+          const on = g.id === activeGroup;
           return (
-            <div key={g.id} style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
+            <div key={g.id} className="flex flex-col gap-0.5">
               <button
-                className={'nav-grp' + (g.id === activeGroup ? ' nav-grp-on' : '')}
                 aria-expanded={open ? 'true' : 'false'}
                 aria-controls={'ng-' + g.id}
                 title={t(g.label)}
-                style={c ? { justifyContent: 'center', padding: 0 } : undefined}
                 onClick={toggleGroup(g.id)}
+                className={cx(
+                  'group/grp unstyled box-border cursor-pointer flex items-center gap-3 w-full rounded-[6px] text-[13px] font-semibold leading-[18px]',
+                  on ? 'text-ink' : 'text-muted2',
+                  c ? 'justify-center p-0 h-11' : 'py-0 pr-2 pl-3 h-9',
+                  // collapsed rail: open section, else the section of the open screen
+                  c && open ? 'bg-hover' : c && on ? 'bg-tint' : 'hover:bg-hover hover:text-ink',
+                  focusRing,
+                )}
               >
-                {g.icon}
-                <span className="ng-l" style={hide}>
-                  {tx(g.label)}
-                </span>
-                <svg className="ng-ch" {...chevron} style={{ transform: `rotate(${open ? '180deg' : '0deg'})`, ...hide }}>
-                  <path d="M6 9l6 6 6-6" />
-                </svg>
+                <span className={cx('flex-none flex group-hover/grp:text-accent', on ? 'text-accent' : 'text-muted')}>{g.icon}</span>
+                {c ? null : (
+                  <>
+                    <span className="flex-auto min-w-0 overflow-hidden text-ellipsis whitespace-nowrap text-start">{tx(g.label)}</span>
+                    <svg
+                      {...chevron}
+                      className={cx(
+                        'flex-none text-muted [transition:transform_.15s]',
+                        open ? '[transform:rotate(180deg)]' : '[transform:rotate(0deg)]',
+                      )}
+                    >
+                      <path d="M6 9l6 6 6-6" />
+                    </svg>
+                  </>
+                )}
               </button>
               {open ? (
                 <div
                   id={'ng-' + g.id}
-                  className={'ng-sub' + (c ? ' ng-fly' : '')}
-                  style={c ? { top: (fly?.top || 0) + 'px', maxHeight: `calc(100vh - ${(fly?.top || 0) + 16}px)` } : undefined}
                   role="group"
                   aria-label={t(g.label)}
+                  className={cx(
+                    'flex flex-col gap-0.5',
+                    c &&
+                      'fixed left-17 z-61 w-70 overflow-auto p-2 bg-surface border border-line rounded-[10px] box-border shadow-[0_12px_32px_rgba(22,26,33,.18)] dark:shadow-[0_16px_40px_rgba(0,0,0,.6)]',
+                  )}
+                  style={c ? { top: (fly?.top || 0) + 'px', maxHeight: `calc(100vh - ${(fly?.top || 0) + 16}px)` } : undefined}
                 >
-                  {c ? <div className="ng-fh">{tx(g.label)}</div> : null}
+                  {c ? (
+                    <div className="py-2 px-3.5 text-[12px] leading-[16px] font-semibold tracking-[0.07em] uppercase text-muted">
+                      {tx(g.label)}
+                    </div>
+                  ) : null}
                   {g.screens.map((sc) => (
                     <NavLink
                       key={sc.id}
                       to={sc.path}
-                      className={({ isActive }) => 'nav-item' + (isActive ? ' nav-on' : '')}
                       title={t(sc.label)}
+                      className={({ isActive }) =>
+                        cx(
+                          'relative flex items-center rounded-[6px] no-underline whitespace-nowrap overflow-hidden text-ellipsis',
+                          c ? 'h-10 px-3.5 text-[14px] leading-[20px]' : 'h-8 ps-10.5 pe-3 text-[13px] leading-[18px]',
+                          isActive
+                            ? cx(
+                                'bg-tint text-accent font-semibold',
+                                !c &&
+                                  "before:content-[''] before:absolute before:start-0 before:top-1.5 before:bottom-1.5 before:w-0.75 before:rounded-[0_2px_2px_0] before:bg-accent",
+                              )
+                            : 'text-muted2 font-normal hover:bg-hover hover:text-ink',
+                          focusRing,
+                        )
+                      }
                     >
                       {tx(sc.label)}
                     </NavLink>
@@ -222,14 +167,17 @@ export function SideNav({ drawerOpen, onCloseDrawer }: Props) {
         })}
       </nav>
 
-      <div className="gsbfoot" style={{ flex: 'none', padding: '8px 10px', borderTop: '1px solid var(--line2)' }}>
+      <div className="flex-none py-2 px-2.5 border-t border-t-line2">
         <button
-          className="sbtoggle"
           aria-expanded={c ? 'false' : 'true'}
           aria-label={t(sbLabel)}
           title={t(sbLabel)}
-          style={c ? { justifyContent: 'center', paddingInline: 0 } : undefined}
           onClick={() => setSidebarCollapsed(!c)}
+          className={cx(
+            'unstyled box-border cursor-pointer w-full flex items-center gap-3 h-11 rounded-[6px] text-muted text-[13px] font-medium whitespace-nowrap overflow-hidden hover:bg-hover hover:text-ink',
+            c ? 'justify-center px-0' : 'px-3',
+            focusRing,
+          )}
         >
           <svg
             width="22"
@@ -246,7 +194,7 @@ export function SideNav({ drawerOpen, onCloseDrawer }: Props) {
             <path d="M9 4v16" />
             <path d={c ? 'M14 9l3 3-3 3' : 'M16 15l-3-3 3-3'} />
           </svg>
-          <span style={hide}>{tx('Collapse side panel')}</span>
+          {c ? null : <span>{tx('Collapse side panel')}</span>}
         </button>
       </div>
     </aside>

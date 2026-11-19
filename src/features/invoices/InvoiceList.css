@@ -1,1548 +1,902 @@
 /* Ported from the GIRS prototype. Screen styles, scoped to .pg-invoices. */
-.pg-invoices .lst {
-  border-collapse: separate;
-  border-spacing: 0;
-  width: max-content;
-  min-width: 100%;
-}
-.pg-invoices .lst th,
-.pg-invoices .lst td {
-  white-space: nowrap;
-}
-.pg-invoices .lst .c-sel {
-  position: sticky;
-  inset-inline-start: 0;
-  z-index: 1;
-  width: 40px;
-  padding-inline: 12px 4px;
-  background: var(--surface);
-}
-.pg-invoices .lst .c-no {
-  position: sticky;
-  inset-inline-start: 40px;
-  z-index: 1;
-  background: var(--surface);
-  box-shadow: inset -1px 0 0 var(--line2);
-}
-.pg-invoices .lst .c-act {
-  position: sticky;
-  inset-inline-end: 0;
-  z-index: 1;
-  width: 48px;
-  text-align: center;
-  background: var(--surface);
-  box-shadow: inset 1px 0 0 var(--line2);
-}
-.pg-invoices .lst thead .c-sel,
-.pg-invoices .lst thead .c-no,
-.pg-invoices .lst thead .c-act {
-  z-index: 3;
-  background: var(--sub);
-}
-.pg-invoices .lst tbody tr.grp:hover td,
-.pg-invoices .lst tbody tr.grp:hover .c-sel,
-.pg-invoices .lst tbody tr.grp:hover .c-no,
-.pg-invoices .lst tbody tr.grp:hover .c-act {
-  background: var(--hover2);
-}
-.pg-invoices .lst tr.on td,
-.pg-invoices .lst tr.on .c-sel,
-.pg-invoices .lst tr.on .c-no,
-.pg-invoices .lst tr.on .c-act {
-  background: var(--tint2);
-}
-.pg-invoices .lst tr.sub td {
-  height: 34px;
-  background: var(--hover3);
-  font-size: 12px;
-  color: var(--muted2);
-}
-.pg-invoices .lst tr.sub .c-sel,
-.pg-invoices .lst tr.sub .c-no,
-.pg-invoices .lst tr.sub .c-act {
-  background: var(--hover3);
-}
-.pg-invoices .lst tr.sub .c-no {
-  padding-inline-start: 44px;
-}
-.pg-invoices .lst .num {
-  text-align: end;
-  font-variant-numeric: tabular-nums;
-}
-.pg-invoices .lst .stack {
-  display: flex;
-  flex-direction: column;
-  line-height: 16px;
-}
-.pg-invoices .mu {
-  color: var(--muted);
-}
-.pg-invoices .ex {
-  all: unset;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 22px;
-  height: 22px;
-  border-radius: 4px;
-  color: var(--muted);
-  margin-inline-end: 6px;
-  vertical-align: middle;
-  transition: transform 0.12s;
-}
-.pg-invoices .ex:hover {
-  background: var(--neutral);
-  color: var(--ink);
-}
-.pg-invoices .ex[aria-expanded='true'] svg {
-  transform: rotate(90deg);
-}
-.pg-invoices .ex:focus-visible,
-.pg-invoices .dots:focus-visible,
-.pg-invoices .lnk:focus-visible,
-.pg-invoices .tabb:focus-visible,
-.pg-invoices .kpi:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 2px;
-}
-.pg-invoices .dots {
-  all: unset;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 30px;
-  height: 30px;
-  border-radius: 6px;
-  color: var(--muted2);
-}
-.pg-invoices .dots:hover,
-.pg-invoices .dots[aria-expanded='true'] {
-  background: var(--neutral);
-}
-.pg-invoices .lnk {
-  all: unset;
-  cursor: pointer;
-  color: var(--accent);
-  font-weight: 500;
-}
-.pg-invoices .lnk:hover {
-  text-decoration: underline;
-}
-.pg-invoices .lnk[disabled] {
-  color: var(--muted);
-  cursor: default;
-  text-decoration: none;
-}
-.pg-invoices .st {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-}
-.pg-invoices .st i {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  display: inline-block;
-}
-.pg-invoices .pill {
-  display: inline-flex;
-  align-items: center;
-  height: 24px;
-  padding: 0 10px;
-  border-radius: 12px;
-  font-size: 12px;
-  font-weight: 600;
-}
-.pg-invoices .cbx {
-  width: 16px;
-  height: 16px;
-  margin: 0;
-  accent-color: var(--accent);
-  cursor: pointer;
-  vertical-align: middle;
-}
-.pg-invoices .cbx:disabled {
-  cursor: not-allowed;
-  opacity: 0.4;
-}
-.pg-invoices .tabs {
-  display: flex;
-  gap: 4px;
-  border-bottom: 1px solid var(--line);
-}
-.pg-invoices .tabb {
-  all: unset;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  height: 40px;
-  padding: 0 14px;
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--muted);
-  border-bottom: 2px solid transparent;
-  margin-bottom: -1px;
-}
-.pg-invoices .tabb[aria-selected='true'] {
-  color: var(--accent);
-  border-bottom-color: var(--accent);
-}
-.pg-invoices .tabb .cnt {
-  font-size: 12px;
-  font-weight: 600;
-  padding: 1px 7px;
-  border-radius: 9px;
-  background: var(--neutral);
-  color: var(--muted2);
-}
-.pg-invoices .tabb[aria-selected='true'] .cnt {
-  background: var(--tint);
-  color: var(--accent2);
-}
-.pg-invoices .kpi {
-  all: unset;
-  box-sizing: border-box;
-  cursor: pointer;
-  flex: 1 1 0;
-  min-width: 0;
-  height: 88px;
-  padding: 14px 20px;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  background: var(--surface);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-.pg-invoices .kpi:hover {
-  border-color: var(--bdh);
-}
-.pg-invoices .kpi[aria-pressed='true'] {
-  border-color: var(--accent);
-  box-shadow: inset 0 0 0 1px var(--accent);
-}
-.pg-invoices .kpi .kl {
-  font-size: 13px;
-  color: var(--muted);
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.pg-invoices .kpi .kv {
-  font-size: 28px;
-  line-height: 32px;
-  font-weight: 600;
-}
-.pg-invoices .flab {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  font-size: 12px;
-  font-weight: 500;
-  color: var(--muted);
-}
-.pg-invoices .bulk {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  height: 44px;
-  padding: 0 12px 0 16px;
-  border-radius: 8px;
-  background: var(--tint);
-  border: 1px solid var(--tintbd);
-  color: var(--accent2);
-  font-size: 13px;
-  font-weight: 500;
-}
-.pg-invoices .chk {
-  display: grid;
-  grid-template-columns: 200px 1fr;
-  row-gap: 8px;
-  font-size: 13px;
-}
-.pg-invoices .chk span {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-}
-.pg-invoices .xrow td {
-  background: var(--hover3);
-  padding: 0;
-}
-.pg-invoices .xbox {
-  padding: 16px 20px 18px 56px;
-  display: flex;
-  gap: 40px;
-  align-items: flex-start;
-}
-.pg-invoices .banner {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  min-height: 40px;
-  padding: 8px 14px;
-  border-radius: 6px;
-  font-size: 13px;
-  font-weight: 500;
-  box-sizing: border-box;
-}
-.pg-invoices .b-warn {
-  background: var(--warnbg);
-  border: 1px solid var(--warnbd);
-  color: var(--warn);
-}
-.pg-invoices .b-block {
-  background: var(--badbg);
-  border: 1px solid var(--badbd);
-  color: var(--bad);
-}
-.pg-invoices .b-ok {
-  background: var(--okbg);
-  border: 1px solid var(--okbd, #b7dec8);
-  color: var(--ok);
-}
-.pg-invoices .b-info {
-  background: var(--tint);
-  border: 1px solid var(--tintbd);
-  color: var(--accent2);
-}
-.pg-invoices .steps {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 14px 20px;
-}
-.pg-invoices .step {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--muted);
-  white-space: nowrap;
-}
-.pg-invoices .step .dot {
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 12px;
-  font-weight: 600;
-  background: var(--neutral);
-  color: var(--muted2);
-}
-.pg-invoices .step.ok {
-  color: var(--ok);
-}
-.pg-invoices .step.ok .dot {
-  background: var(--okbg);
-  color: var(--ok);
-}
-.pg-invoices .step.warn {
-  color: var(--warn);
-}
-.pg-invoices .step.warn .dot {
-  background: var(--warnbg);
-  color: var(--warn);
-}
-.pg-invoices .step.block {
-  color: var(--bad);
-}
-.pg-invoices .step.block .dot {
-  background: var(--badbg);
-  color: var(--bad);
-}
-.pg-invoices .step.cur {
-  color: var(--accent);
-}
-.pg-invoices .step.cur .dot {
-  background: var(--accent);
-  color: var(--onaccent);
-}
-.pg-invoices .sline {
-  flex: 1 1 auto;
-  height: 1px;
-  background: var(--line);
-  min-width: 24px;
-}
-.pg-invoices .kv3 {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 14px 24px;
-}
-.pg-invoices .kv3 div {
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-  min-width: 0;
-}
-.pg-invoices .kv3 .l,
-.pg-invoices .rv .l {
-  font-size: 12px;
-  color: var(--muted);
-}
-.pg-invoices .kv3 .v {
-  font-size: 14px;
-  font-weight: 500;
-}
-.pg-invoices .rv {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  font-size: 13px;
-}
-.pg-invoices .ri {
-  padding: 0 32px 28px;
-  max-width: 1240px;
-  width: 100%;
-  margin: 0 auto;
-  box-sizing: border-box;
-  font-size: 13px;
-  line-height: 19px;
-}
-.pg-invoices .ri .k {
-  font-size: 11px;
-  line-height: 16px;
-  text-transform: uppercase;
-  letter-spacing: 0.07em;
-  color: var(--muted);
-  font-weight: 600;
-  display: block;
-}
-.pg-invoices .ri-hd {
-  text-align: center;
-  padding: 24px 0 18px;
-  border-bottom: 1px solid var(--line2);
-}
-.pg-invoices .ri-hd h1 {
-  margin: 0;
-  font-size: 24px;
-  line-height: 30px;
-  letter-spacing: 0.04em;
-  font-weight: 700;
-}
-.pg-invoices .ri-err {
-  color: var(--bad);
-  letter-spacing: 0;
-}
-.pg-invoices .ri-sub {
-  margin-top: 6px;
-  font-size: 13px;
-}
-.pg-invoices .ri-errs {
-  margin-top: 18px;
-  padding: 10px 14px;
-  border-radius: 6px;
-  background: var(--badbg);
-  border: 1px solid var(--badbd);
-  color: var(--bad);
-  font-size: 13px;
-}
-.pg-invoices .ri-errs ul {
-  margin: 4px 0 0;
-  padding-inline-start: 18px;
-}
-.pg-invoices .ri-errs .mu {
-  color: var(--bad);
-  opacity: 0.8;
-}
-.pg-invoices .ri-strip {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  margin-top: 20px;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-}
-.pg-invoices .ri-strip > div {
-  padding: 12px 16px;
-  border-inline-start: 1px solid var(--line);
-}
-.pg-invoices .ri-strip > div:first-child {
-  border-inline-start: 0;
-}
-.pg-invoices .ri-strip .v {
-  margin-top: 4px;
-  font-weight: 600;
-  font-size: 15px;
-  line-height: 20px;
-}
-.pg-invoices .ri-parties {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 32px;
-  margin-top: 24px;
-}
-.pg-invoices .ri-parties .n {
-  font-weight: 600;
-  font-size: 15px;
-  line-height: 21px;
-  margin-top: 8px;
-}
-.pg-invoices .ri-parties .l {
-  color: var(--muted2);
-}
-.pg-invoices .ri-kv {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 6px 16px;
-  margin-top: 8px;
-}
-.pg-invoices .ri-kv span:nth-child(odd) {
-  color: var(--muted);
-}
-.pg-invoices .ri-ship {
-  margin-top: 24px;
-  padding: 16px 20px;
-  border-radius: 8px;
-  background: var(--sub);
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 14px 32px;
-}
-.pg-invoices .ri-ship .v {
-  margin-top: 2px;
-  font-weight: 500;
-}
-.pg-invoices .ri-tbl {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 24px;
-  font-size: 13px;
-}
-.pg-invoices .ri-tbl th {
-  background: var(--bg);
-  text-align: left;
-  font-weight: 600;
-  font-size: 12px;
-  color: var(--muted2);
-  padding: 10px 8px;
-  border-bottom: 1px solid var(--line);
-  white-space: nowrap;
-}
-.pg-invoices .ri-tbl td {
-  padding: 10px 8px;
-  border-bottom: 1px solid var(--line2);
-  white-space: nowrap;
-  font-variant-numeric: tabular-nums;
-  vertical-align: middle;
-}
-.pg-invoices .ri-tbl td.w {
-  white-space: normal;
-  min-width: 180px;
-  font-weight: 500;
-}
-.pg-invoices .ri-tbl .r {
-  text-align: end;
-}
-.pg-invoices .ri-tbl th:first-child,
-.pg-invoices .ri-tbl td:first-child {
-  padding-inline-start: 12px;
-}
-.pg-invoices .ri-tbl tr.add td {
-  background: var(--tint2);
-}
-.pg-invoices .ri-in {
-  height: 32px;
-}
-.pg-invoices .ri-in.num {
-  text-align: end;
-}
-.pg-invoices .ri-in.bad {
-  border-color: var(--bad) !important;
-  box-shadow: 0 0 0 1px var(--bad);
-}
-.pg-invoices .select.bad {
-  border-color: var(--bad) !important;
-  box-shadow: 0 0 0 1px var(--bad);
-}
-.pg-invoices .ri-x {
-  width: 32px;
-  padding: 0;
-  justify-content: center;
-}
-.pg-invoices .ri-cb {
-  position: relative;
-  min-width: 220px;
-}
-.pg-invoices .ri-sug {
-  position: absolute;
-  z-index: 30;
-  left: 0;
-  right: 0;
-  top: calc(100% + 4px);
-  margin: 0;
-  padding: 4px;
-  list-style: none;
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  box-shadow: 0 10px 28px rgba(22, 26, 33, 0.16);
-  max-height: 280px;
-  overflow: auto;
-}
-.pg-invoices .ri-sug li {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  min-height: 32px;
-  padding: 5px 10px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: 400;
-  white-space: nowrap;
-}
-.pg-invoices .ri-sug li .mono {
-  min-width: 44px;
-  color: var(--muted);
-  font-size: 12px;
-}
-.pg-invoices .ri-sug li:hover,
-.pg-invoices .ri-sug li[aria-selected='true'] {
-  background: var(--hover);
-}
-.pg-invoices .ri-sug li[aria-selected='true'] {
-  box-shadow: inset 0 0 0 2px var(--accent);
-}
-.pg-invoices .ri-sug li.none {
-  color: var(--muted);
-  cursor: default;
-  background: none;
-  box-shadow: none;
-}
-.pg-invoices .ri-bt {
-  display: grid;
-  grid-template-columns: 1fr 360px;
-  gap: 48px;
-  margin-top: 20px;
-  align-items: start;
-}
-.pg-invoices .ri-tot {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-.pg-invoices .ri-tot > div {
-  display: flex;
-  justify-content: space-between;
-  gap: 16px;
-  font-variant-numeric: tabular-nums;
-}
-.pg-invoices .ri-tot > div.g {
-  border-top: 1px solid var(--ink);
-  padding-top: 10px;
-  margin-top: 2px;
-  font-weight: 700;
-  font-size: 16px;
-  line-height: 22px;
-}
-.pg-invoices .ri-words {
-  margin-top: 14px;
-  padding: 10px 14px;
-  border-radius: 6px;
-  background: var(--sub);
-  color: var(--muted2);
-}
-.pg-invoices .sum {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  padding: 14px 16px;
-  border-radius: 8px;
-  background: var(--sub);
-  font-size: 13px;
-}
-.pg-invoices .sum div {
-  display: flex;
-  justify-content: space-between;
-  gap: 16px;
-}
-.pg-invoices .ctab {
-  width: 100%;
-  border-collapse: collapse;
-}
-.pg-invoices .ctab th {
-  font-size: 12px;
-}
-.pg-invoices .ctab td,
-.pg-invoices .ctab th {
-  white-space: nowrap;
-}
-.pg-invoices .ctab tfoot td {
-  font-weight: 600;
-  border-top: 1px solid var(--line);
-  background: var(--sub);
-}
-.pg-invoices .ov {
-  position: fixed;
-  inset: 0;
-  z-index: 70;
-  background: rgba(14, 17, 22, 0.42);
-}
-.pg-invoices .dlg {
-  position: fixed;
-  z-index: 71;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: min(560px, calc(100vw - 48px));
-  max-height: calc(100vh - 64px);
-  display: flex;
-  flex-direction: column;
-  background: var(--surface);
-  border-radius: 12px;
-  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.28);
-  overflow: hidden;
-  color: var(--ink);
-}
-.pg-invoices .dlg.wide {
-  width: min(880px, calc(100vw - 48px));
-}
-.pg-invoices .dh {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 16px;
-  padding: 18px 24px 14px;
-  border-bottom: 1px solid var(--line2);
-}
-.pg-invoices .dh h2 {
-  margin: 0;
-  font-size: 18px;
-  line-height: 24px;
-  font-weight: 600;
-}
-.pg-invoices .dh p {
-  margin: 2px 0 0;
-  font-size: 13px;
-  color: var(--muted);
-}
-.pg-invoices .db {
-  padding: 18px 24px;
-  overflow: auto;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  font-size: 13px;
-}
-.pg-invoices .df {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 10px;
-  padding: 14px 24px;
-  border-top: 1px solid var(--line2);
-  background: var(--sub);
-}
-.pg-invoices .fld {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  font-size: 13px;
-  font-weight: 500;
-}
-.pg-invoices .fld .hint {
-  font-size: 12px;
-  font-weight: 400;
-  color: var(--muted);
-}
-.pg-invoices .fld .err {
-  font-size: 12px;
-  font-weight: 400;
-  color: var(--bad);
-}
-.pg-invoices .g2 {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 14px;
-}
-.pg-invoices .dlg .select {
-  width: 100%;
-}
-.pg-invoices .dlg .seg {
-  display: flex;
-}
-.pg-invoices .dlg .seg button {
-  flex: 1 1 0;
-  text-align: center;
-}
-.pg-invoices .seg {
-  display: inline-flex;
-  gap: 2px;
-  padding: 2px;
-  border-radius: 6px;
-  background: var(--neutral);
-}
-.pg-invoices .seg button {
-  all: unset;
-  cursor: pointer;
-  height: 30px;
-  padding: 0 14px;
-  border-radius: 4px;
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--muted2);
-}
-.pg-invoices .seg button[aria-pressed='true'] {
-  background: var(--surface);
-  color: var(--accent);
-  box-shadow: 0 1px 2px rgba(22, 26, 33, 0.12);
-}
-.pg-invoices .conf {
-  text-align: center;
-  align-items: center;
-}
-.pg-invoices .conf .ic {
-  width: 64px;
-  height: 64px;
-  border-radius: 50%;
-  background: var(--okbg);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.pg-invoices .conf ul {
-  margin: 0;
-  padding-inline-start: 18px;
-  text-align: start;
-  font-weight: 500;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-.pg-invoices .amenu {
-  position: fixed;
-  z-index: 81;
-  width: 264px;
-  padding: 6px;
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  box-shadow: 0 12px 32px rgba(14, 17, 22, 0.16);
-}
-.pg-invoices .amenu .mi {
-  all: unset;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  width: 100%;
-  padding: 7px 10px;
-  border-radius: 6px;
-  font-size: 13px;
-  line-height: 18px;
-  color: var(--ink);
-  cursor: pointer;
-}
-.pg-invoices .amenu .mi:hover:not([disabled]),
-.pg-invoices .amenu .mi:focus-visible {
-  background: var(--hover);
-}
-.pg-invoices .amenu .mi[disabled] {
-  cursor: not-allowed;
-  color: var(--muted);
-}
-.pg-invoices .amenu .mi small {
-  font-size: 11px;
-  line-height: 14px;
-  color: var(--muted);
-}
-.pg-invoices .amenu .mi.d {
-  color: var(--bad);
-}
-.pg-invoices .amenu .mi.d[disabled] {
-  color: var(--badbd);
-}
-.pg-invoices .amenu .sep {
-  height: 1px;
-  margin: 4px 0;
-  background: var(--line2);
-}
-.pg-invoices .msel {
-  position: relative;
-}
-.pg-invoices .msel-b {
-  width: auto;
-  min-width: 112px;
-  max-width: 210px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  text-align: start;
-  cursor: pointer;
-  padding-inline-end: 32px;
-}
-.pg-invoices .msel-t {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  min-width: 0;
-}
-.pg-invoices .msel-n {
-  flex: none;
-  min-width: 20px;
-  height: 20px;
-  padding: 0 6px;
-  border-radius: 10px;
-  background: var(--accent);
-  color: var(--onaccent);
-  font-size: 12px;
-  font-weight: 600;
-  line-height: 20px;
-  text-align: center;
-  box-sizing: border-box;
-}
-.pg-invoices .msel-p {
-  position: absolute;
-  z-index: 81;
-  top: calc(100% + 4px);
-  left: 0;
-  min-width: 240px;
-  max-height: 360px;
-  display: flex;
-  flex-direction: column;
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  box-shadow: 0 8px 24px rgba(22, 26, 33, 0.16);
-  overflow: hidden;
-}
-.pg-invoices .msel-p > .msel-o:first-child {
-  margin-top: 6px;
-}
-.pg-invoices .msel-o {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  min-height: 36px;
-  padding: 0 12px;
-  font-size: 13px;
-  cursor: pointer;
-  flex: none;
-}
-.pg-invoices .msel-o:hover {
-  background: var(--hover2);
-}
-.pg-invoices .msel-o span:nth-of-type(1) {
-  flex: 1 1 auto;
-}
-.pg-invoices .msel-o input {
-  width: 16px;
-  height: 16px;
-  margin: 0;
-  accent-color: var(--accent);
-}
-.pg-invoices .msel-f {
-  display: flex;
-  justify-content: space-between;
-  gap: 8px;
-  padding: 8px 12px;
-  border-top: 1px solid var(--line2);
-  margin-top: 6px;
-  position: sticky;
-  bottom: 0;
-  background: var(--surface);
-}
-.pg-invoices .ph-trunc {
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-}
-.pg-invoices .ph-trunc::placeholder {
-  text-overflow: ellipsis;
-}
-.pg-invoices .ftb {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-}
-.pg-invoices .ftb-p {
-  flex: 1 1 auto;
-  min-width: 0;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 8px;
-}
-.pg-invoices .fq {
-  position: relative;
-}
-.pg-invoices .cols-b {
-  height: 32px;
-  gap: 6px;
-  padding: 0 10px;
-}
-.pg-invoices .cols-b svg {
-  color: var(--muted);
-}
-.pg-invoices .cols-b[aria-expanded='true'] {
-  border-color: var(--accent);
-}
-.pg-invoices .cols-s {
-  position: relative;
-  padding: 4px 12px 8px;
-}
-.pg-invoices .cols-s > svg {
-  position: absolute;
-  inset-inline-start: 22px;
-  top: 50%;
-  margin-top: -10px;
-  color: var(--muted);
-  pointer-events: none;
-}
-.pg-invoices .cols-q {
-  width: 100%;
-  padding-inline: 32px 30px;
-}
-.pg-invoices .cols-x {
-  position: absolute;
-  inset-inline-end: 16px;
-  top: 50%;
-  margin-top: -14px;
-  width: 24px;
-  height: 24px;
-  display: grid;
-  place-items: center;
-  border: 0;
-  background: none;
-  color: var(--muted);
-  cursor: pointer;
-  border-radius: 4px;
-}
-.pg-invoices .cols-x:hover {
-  background: var(--hover2);
-  color: var(--ink);
-}
-.pg-invoices .cols-p {
-  left: auto;
-  inset-inline-end: 0;
-  width: 280px;
-  max-height: 480px;
-}
-.pg-invoices .cols-h {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 12px 16px 6px;
-  font-weight: 600;
-  font-size: 14px;
-}
-.pg-invoices .cols-h .mu {
-  font-weight: 400;
-  font-size: 12px;
-}
-.pg-invoices .cols-l {
-  flex: 1 1 auto;
-  overflow: auto;
-  border-top: 1px solid var(--line2);
-  padding-top: 4px;
-}
-.pg-invoices .cols-p .msel-o input:disabled + span {
-  color: var(--muted);
-}
-.pg-invoices .fq-b {
-  height: 32px;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 0 8px 0 12px;
-  flex: none;
-  border: 1px solid var(--line);
-  border-radius: 16px;
-  background: var(--surface);
-  color: var(--ink);
-  font: 500 13px/18px inherit;
-  font-family: inherit;
-  cursor: pointer;
-  white-space: nowrap;
-}
-.pg-invoices .fq-b:hover {
-  background: var(--hover2);
-}
-.pg-invoices .fq-b svg {
-  color: var(--muted);
-}
-.pg-invoices .fq-b[aria-expanded='true'] {
-  border-color: var(--accent);
-}
-.pg-invoices .fq-t {
-  max-width: 190px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.pg-invoices .fp-w {
-  position: relative;
-}
-.pg-invoices .fp-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-}
-.pg-invoices .fp-p {
-  position: absolute;
-  z-index: 81;
-  top: calc(100% + 6px);
-  left: 0;
-  width: 860px;
-  max-width: calc(100vw - 260px);
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: 10px;
-  box-shadow: 0 12px 32px rgba(22, 26, 33, 0.18);
-}
-.pg-invoices .fp-g {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 16px 20px;
-  padding: 16px 18px;
-  max-height: 420px;
-  overflow: auto;
-}
-.pg-invoices .fp-c {
-  border: 0;
-  margin: 0;
-  padding: 0;
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-.pg-invoices .fp-c legend {
-  padding: 0 0 6px;
-  font-size: 12px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: var(--muted);
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-.pg-invoices .fp-gn {
-  min-width: 18px;
-  height: 18px;
-  padding: 0 5px;
-  border-radius: 9px;
-  background: var(--accent);
-  color: var(--onaccent);
-  font-size: 11px;
-  line-height: 18px;
-  text-align: center;
-  letter-spacing: 0;
-}
-.pg-invoices .fp-o {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  min-height: 30px;
-  padding: 0 6px;
-  margin: 0 -6px;
-  border-radius: 6px;
-  font-size: 13px;
-  cursor: pointer;
-}
-.pg-invoices .fp-o:hover {
-  background: var(--hover2);
-}
-.pg-invoices .fp-o span:nth-of-type(1) {
-  flex: 1 1 auto;
-  min-width: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-.pg-invoices .fp-o input {
-  width: 16px;
-  height: 16px;
-  margin: 0;
-  accent-color: var(--accent);
-}
-.pg-invoices .fp-f {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 10px 18px;
-  border-top: 1px solid var(--line2);
-  background: var(--sub);
-  border-radius: 0 0 10px 10px;
-}
-.pg-invoices .fp-chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  height: 28px;
-  padding: 0 4px 0 10px;
-  border-radius: 14px;
-  background: var(--tint);
-  color: var(--accent2);
-  font-size: 12px;
-  font-weight: 500;
-  white-space: nowrap;
-}
-.pg-invoices .fp-chip button {
-  width: 20px;
-  height: 20px;
-  border: 0;
-  border-radius: 10px;
-  background: transparent;
-  color: inherit;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-}
-.pg-invoices .fp-chip button:hover {
-  background: rgba(0, 113, 183, 0.14);
-}
-.pg-invoices .mback {
-  position: fixed;
-  inset: 0;
-  z-index: 80;
-  background: transparent;
-  border: 0;
-  padding: 0;
-  margin: 0;
-  cursor: default;
-}
-.pg-invoices .dbtn-danger {
-  background: var(--bad);
-  border-color: var(--bad);
-  color: var(--onaccent);
-}
-.pg-invoices .dbtn-danger:hover:not(:disabled) {
-  background: #8a1f23;
-  border-color: #8a1f23;
-  color: var(--onaccent);
-}
-.pg-invoices .btn:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-.pg-invoices .at {
-  width: 100%;
-  border-collapse: collapse;
-}
-.pg-invoices .cfoot {
-  flex: none;
-  border-top: 1px solid var(--line);
-  padding: 4px 12px 6px;
-  background: var(--sub);
-}
-.pg-invoices .cfoot .pager {
-  padding: 0;
-  flex-wrap: wrap;
-  row-gap: 4px;
-}
-.pg-invoices .pager {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  min-height: 44px;
-  padding: 4px 4px 0;
-  font-size: 13px;
-  color: var(--muted2);
-}
-.pg-invoices .card:has(+ .pager) {
-  border-end-start-radius: 0;
-  border-end-end-radius: 0;
-}
-.pg-invoices .card + .pager {
-  margin-top: -17px;
-  min-height: 48px;
-  padding: 6px 8px 6px 16px;
-  box-sizing: border-box;
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-top-color: var(--line2);
-  border-radius: 0 0 8px 8px;
-}
-.pg-invoices .pbtn {
-  min-width: 32px;
-  justify-content: center;
-  font-size: 15px;
-}
-.pg-invoices .seg2 {
-  display: inline-flex;
-  gap: 2px;
-  padding: 2px;
-  border-radius: 6px;
-  background: var(--neutral);
-}
-.pg-invoices .seg2 button {
-  all: unset;
-  cursor: pointer;
-  height: 32px;
-  padding: 0 12px;
-  border-radius: 4px;
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--muted2);
-}
-.pg-invoices .seg2 button[aria-pressed='true'] {
-  background: var(--surface);
-  color: var(--accent);
-  box-shadow: 0 1px 2px rgba(22, 26, 33, 0.12);
-}
-.pg-invoices .seg2 button:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 2px;
-}
-.pg-invoices .chips {
-  display: flex;
-  gap: 6px;
-  flex-wrap: wrap;
-}
-.pg-invoices .chipb {
-  all: unset;
-  box-sizing: border-box;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  height: 34px;
-  padding: 0 12px;
-  border: 1px solid var(--line);
-  border-radius: 17px;
-  background: var(--surface);
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--muted2);
-}
-.pg-invoices .chipb:hover {
-  border-color: var(--bdh);
-}
-.pg-invoices .chipb[aria-pressed='true'] {
-  background: var(--accent);
-  border-color: var(--accent);
-  color: var(--onaccent);
-}
-.pg-invoices .chipb .cnt {
-  font-size: 12px;
-  font-weight: 600;
-  opacity: 0.8;
-}
-.pg-invoices .chipb.w:not([aria-pressed='true']) .cnt {
-  color: var(--bad);
-  opacity: 1;
-}
-.pg-invoices .chipb:focus-visible,
-.pg-invoices .ili:focus-visible,
-.pg-invoices .qitem:focus-visible,
-.pg-invoices .icard:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 2px;
-}
-.pg-invoices .callout {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  padding: 14px 18px;
-  border-radius: 10px;
-  background: var(--tint);
-  border: 1px solid var(--tintbd);
-}
-.pg-invoices .callout .ci {
-  width: 40px;
-  height: 40px;
-  border-radius: 10px;
-  background: var(--surface);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--accent);
-  flex: none;
-}
-.pg-invoices .callout b {
-  display: block;
-  font-size: 15px;
-  color: var(--ink);
-}
-.pg-invoices .callout span {
-  font-size: 13px;
-  color: var(--muted2);
-}
-.pg-invoices .ili {
-  all: unset;
-  box-sizing: border-box;
-  cursor: pointer;
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 4px 16px;
-  width: 100%;
-  padding: 14px 18px;
-  border-bottom: 1px solid var(--line2);
-  border-inline-start: 3px solid transparent;
-}
-.pg-invoices .ili:hover {
-  background: var(--hover2);
-}
-.pg-invoices .ili[aria-current='true'] {
-  background: var(--tint2);
-  border-inline-start-color: var(--accent);
-}
-.pg-invoices .ili .t {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-weight: 600;
-  font-size: 14px;
-}
-.pg-invoices .ili .r {
-  text-align: end;
-  font-weight: 600;
-  font-size: 14px;
-}
-.pg-invoices .ili .m {
-  font-size: 13px;
-  color: var(--muted2);
-}
-.pg-invoices .ili .s {
-  font-size: 12px;
-  color: var(--muted);
-  text-align: end;
-}
-.pg-invoices .dsec {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  padding: 16px 20px;
-  border-top: 1px solid var(--line2);
-}
-.pg-invoices .dsec h3 {
-  margin: 0;
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  color: var(--muted);
-}
-.pg-invoices .kv2 {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px 24px;
-}
-.pg-invoices .kv2 div {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  min-width: 0;
-}
-.pg-invoices .kv2 .l {
-  font-size: 12px;
-  color: var(--muted);
-}
-.pg-invoices .kv2 .v {
-  font-size: 14px;
-  font-weight: 500;
-  overflow-wrap: anywhere;
-}
-.pg-invoices .qitem {
-  all: unset;
-  box-sizing: border-box;
-  cursor: pointer;
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 2px 8px;
-  width: 100%;
-  padding: 10px 12px;
-  border-radius: 8px;
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--ink);
-}
-.pg-invoices .qitem:hover {
-  background: var(--hover);
-}
-.pg-invoices .qitem[aria-current='true'] {
-  background: var(--tint);
-  color: var(--accent2);
-}
-.pg-invoices .qitem .n {
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--muted);
-}
-.pg-invoices .qitem.w .n {
-  color: var(--bad);
-}
-.pg-invoices .qitem small {
-  grid-column: 1 / -1;
-  font-size: 12px;
-  font-weight: 400;
-  color: var(--muted);
-}
-.pg-invoices .qhead {
-  padding: 14px 12px 6px;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--muted);
-}
-.pg-invoices .cgrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
-  gap: 14px;
-  align-content: start;
-}
-.pg-invoices .icard {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  padding: 16px 18px;
-  border: 1px solid var(--line);
-  border-radius: 10px;
-  background: var(--surface);
-  cursor: pointer;
-}
-.pg-invoices .icard:hover {
-  border-color: var(--bdh);
-  box-shadow: 0 2px 8px rgba(14, 17, 22, 0.06);
-}
-.pg-invoices .icard .top {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-}
-.pg-invoices .icard .amt {
-  font-size: 22px;
-  line-height: 28px;
-  font-weight: 600;
-}
-.pg-invoices .icard .meta {
-  font-size: 12px;
-  color: var(--muted);
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px 12px;
-}
-.pg-invoices .icard .foot {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding-top: 10px;
-  border-top: 1px solid var(--line2);
-  margin-top: 2px;
-}
-.pg-invoices .at td,
-.pg-invoices .at th {
-  white-space: normal;
-  vertical-align: top;
-}
-.pg-invoices .lay {
-  white-space: nowrap;
-  display: inline-flex;
-  align-items: center;
-  height: 28px;
-  padding: 0 10px;
-  border-radius: 4px;
-  font-size: 12px;
-  font-weight: 500;
-  color: var(--muted);
-  text-decoration: none;
+@reference '../../styles/tailwind.css';
+
+@layer components {
+  :where(.pg-invoices) .lst {
+    @apply [border-collapse:separate] [border-spacing:0] w-max min-w-full;
+  }
+  :where(.pg-invoices) .lst th,
+  :where(.pg-invoices) .lst td {
+    @apply whitespace-nowrap;
+  }
+  :where(.pg-invoices) .lst .c-sel {
+    @apply sticky start-0 z-1 w-10 ps-3 pe-1 bg-surface;
+  }
+  :where(.pg-invoices) .lst .c-no {
+    @apply sticky start-10 z-1 bg-surface shadow-[inset_-1px_0_0_var(--line2)];
+  }
+  :where(.pg-invoices) .lst .c-act {
+    @apply sticky end-0 z-1 w-12 text-center bg-surface shadow-[inset_1px_0_0_var(--line2)];
+  }
+  :where(.pg-invoices) .lst thead .c-sel,
+  :where(.pg-invoices) .lst thead .c-no,
+  :where(.pg-invoices) .lst thead .c-act {
+    @apply z-3 bg-sub;
+  }
+  :where(.pg-invoices) .lst tbody tr.grp:hover td,
+  :where(.pg-invoices) .lst tbody tr.grp:hover .c-sel,
+  :where(.pg-invoices) .lst tbody tr.grp:hover .c-no,
+  :where(.pg-invoices) .lst tbody tr.grp:hover .c-act {
+    @apply bg-hover2;
+  }
+  :where(.pg-invoices) .lst tr.on td,
+  :where(.pg-invoices) .lst tr.on .c-sel,
+  :where(.pg-invoices) .lst tr.on .c-no,
+  :where(.pg-invoices) .lst tr.on .c-act {
+    @apply bg-tint2;
+  }
+  :where(.pg-invoices) .lst tr.sub td {
+    @apply h-8.5 bg-hover3 text-[12px] text-muted2;
+  }
+  :where(.pg-invoices) .lst tr.sub .c-sel,
+  :where(.pg-invoices) .lst tr.sub .c-no,
+  :where(.pg-invoices) .lst tr.sub .c-act {
+    @apply bg-hover3;
+  }
+  :where(.pg-invoices) .lst tr.sub .c-no {
+    @apply ps-11;
+  }
+  :where(.pg-invoices) .lst .num {
+    @apply text-end tabular-nums;
+  }
+  :where(.pg-invoices) .lst .stack {
+    @apply flex flex-col leading-[16px];
+  }
+  :where(.pg-invoices) .mu {
+    @apply text-muted;
+  }
+  :where(.pg-invoices) .ex {
+    all: unset;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    border-radius: 4px;
+    color: var(--muted);
+    margin-inline-end: 6px;
+    vertical-align: middle;
+    transition: transform 0.12s;
+  }
+  :where(.pg-invoices) .ex:hover {
+    @apply bg-neutral text-ink;
+  }
+  :where(.pg-invoices) .ex[aria-expanded='true'] svg {
+    @apply [transform:rotate(90deg)];
+  }
+  :where(.pg-invoices) .ex:focus-visible,
+  :where(.pg-invoices) .dots:focus-visible,
+  :where(.pg-invoices) .lnk:focus-visible,
+  :where(.pg-invoices) .tabb:focus-visible,
+  :where(.pg-invoices) .kpi:focus-visible {
+    @apply [outline:2px_solid_var(--accent)] [outline-offset:2px];
+  }
+  :where(.pg-invoices) .dots {
+    all: unset;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 6px;
+    color: var(--muted2);
+  }
+  :where(.pg-invoices) .dots:hover,
+  :where(.pg-invoices) .dots[aria-expanded='true'] {
+    @apply bg-neutral;
+  }
+  :where(.pg-invoices) .lnk {
+    all: unset;
+    cursor: pointer;
+    color: var(--accent);
+    font-weight: 500;
+  }
+  :where(.pg-invoices) .lnk:hover {
+    @apply underline;
+  }
+  :where(.pg-invoices) .lnk[disabled] {
+    @apply text-muted cursor-default no-underline;
+  }
+  :where(.pg-invoices) .st {
+    @apply gap-2 inline-flex items-center;
+  }
+  :where(.pg-invoices) .st i {
+    @apply w-2 h-2 rounded-full inline-block;
+  }
+  :where(.pg-invoices) .pill {
+    @apply py-0 px-2.5 inline-flex items-center h-6 rounded-[12px] text-[12px] font-semibold;
+  }
+  :where(.pg-invoices) .cbx {
+    @apply m-0 w-4 h-4 [accent-color:var(--accent)] cursor-pointer align-middle;
+  }
+  :where(.pg-invoices) .cbx:disabled {
+    @apply cursor-not-allowed opacity-40;
+  }
+  :where(.pg-invoices) .tabs {
+    @apply gap-1 flex border-b border-b-line;
+  }
+  :where(.pg-invoices) .tabb {
+    all: unset;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    height: 40px;
+    padding: 0 14px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--muted);
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+  }
+  :where(.pg-invoices) .tabb[aria-selected='true'] {
+    @apply text-accent [border-bottom-color:var(--accent)];
+  }
+  :where(.pg-invoices) .tabb .cnt {
+    @apply py-px px-1.75 text-[12px] font-semibold rounded-[9px] bg-neutral text-muted2;
+  }
+  :where(.pg-invoices) .tabb[aria-selected='true'] .cnt {
+    @apply bg-tint text-accent2;
+  }
+  :where(.pg-invoices) .kpi {
+    all: unset;
+    box-sizing: border-box;
+    cursor: pointer;
+    flex: 1 1 0;
+    min-width: 0;
+    height: 88px;
+    padding: 14px 20px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: var(--surface);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  :where(.pg-invoices) .kpi:hover {
+    @apply border-bdh;
+  }
+  :where(.pg-invoices) .kpi[aria-pressed='true'] {
+    @apply border-accent shadow-[inset_0_0_0_1px_var(--accent)];
+  }
+  :where(.pg-invoices) .kpi .kl {
+    @apply gap-2 text-[13px] text-muted flex items-center;
+  }
+  :where(.pg-invoices) .kpi .kv {
+    @apply text-[28px] leading-[32px] font-semibold;
+  }
+  :where(.pg-invoices) .flab {
+    @apply gap-1 flex flex-col text-[12px] font-medium text-muted;
+  }
+  :where(.pg-invoices) .bulk {
+    @apply py-0 pr-3 pl-4 gap-2.5 flex items-center h-11 rounded-[8px] bg-tint border border-tintbd text-accent2 text-[13px] font-medium;
+  }
+  :where(.pg-invoices) .chk {
+    @apply grid grid-cols-[200px_1fr] gap-y-2 text-[13px];
+  }
+  :where(.pg-invoices) .chk span {
+    @apply gap-2 inline-flex items-center;
+  }
+  :where(.pg-invoices) .xrow td {
+    @apply p-0 bg-hover3;
+  }
+  :where(.pg-invoices) .xbox {
+    @apply pt-4 pb-4.5 pr-5 pl-14 gap-10 flex items-start;
+  }
+  :where(.pg-invoices) .banner {
+    @apply py-2 px-3.5 gap-2.5 flex items-center min-h-10 rounded-[6px] text-[13px] font-medium box-border;
+  }
+  :where(.pg-invoices) .b-warn {
+    @apply bg-warnbg border border-warnbd text-warn;
+  }
+  :where(.pg-invoices) .b-block {
+    @apply bg-badbg border border-badbd text-bad;
+  }
+  :where(.pg-invoices) .b-ok {
+    @apply bg-okbg border border-[var(--okbd,_#B7DEC8)] text-ok;
+  }
+  :where(.pg-invoices) .b-info {
+    @apply bg-tint border border-tintbd text-accent2;
+  }
+  :where(.pg-invoices) .steps {
+    @apply py-3.5 px-5 gap-3 flex items-center;
+  }
+  :where(.pg-invoices) .step {
+    @apply gap-2 inline-flex items-center text-[14px] font-medium text-muted whitespace-nowrap;
+  }
+  :where(.pg-invoices) .step .dot {
+    @apply w-5.5 h-5.5 rounded-full inline-flex items-center justify-center text-[12px] font-semibold bg-neutral text-muted2;
+  }
+  :where(.pg-invoices) .step.ok {
+    @apply text-ok;
+  }
+  :where(.pg-invoices) .step.ok .dot {
+    @apply bg-okbg text-ok;
+  }
+  :where(.pg-invoices) .step.warn {
+    @apply text-warn;
+  }
+  :where(.pg-invoices) .step.warn .dot {
+    @apply bg-warnbg text-warn;
+  }
+  :where(.pg-invoices) .step.block {
+    @apply text-bad;
+  }
+  :where(.pg-invoices) .step.block .dot {
+    @apply bg-badbg text-bad;
+  }
+  :where(.pg-invoices) .step.cur {
+    @apply text-accent;
+  }
+  :where(.pg-invoices) .step.cur .dot {
+    @apply bg-accent text-onaccent;
+  }
+  :where(.pg-invoices) .sline {
+    @apply flex-auto h-px bg-line min-w-6;
+  }
+  :where(.pg-invoices) .kv3 {
+    @apply grid grid-cols-[repeat(3,minmax(0,1fr))] gap-y-3.5 gap-x-6;
+  }
+  :where(.pg-invoices) .kv3 div {
+    @apply gap-0.75 flex flex-col min-w-0;
+  }
+  :where(.pg-invoices) .kv3 .l,
+  :where(.pg-invoices) .rv .l {
+    @apply text-[12px] text-muted;
+  }
+  :where(.pg-invoices) .kv3 .v {
+    @apply text-[14px] font-medium;
+  }
+  :where(.pg-invoices) .rv {
+    @apply gap-1.5 flex flex-col text-[13px];
+  }
+  :where(.pg-invoices) .ri {
+    @apply pt-0 pb-7 px-8 my-0 mx-auto max-w-310 w-full box-border text-[13px] leading-[19px];
+  }
+  :where(.pg-invoices) .ri .k {
+    @apply text-[11px] leading-[16px] uppercase tracking-[.07em] text-muted font-semibold block;
+  }
+  :where(.pg-invoices) .ri-hd {
+    @apply pt-6 pb-4.5 px-0 text-center border-b border-b-line2;
+  }
+  :where(.pg-invoices) .ri-hd h1 {
+    @apply m-0 text-[24px] leading-[30px] tracking-[.04em] font-bold;
+  }
+  :where(.pg-invoices) .ri-err {
+    @apply text-bad tracking-[0];
+  }
+  :where(.pg-invoices) .ri-sub {
+    @apply mt-1.5 text-[13px];
+  }
+  :where(.pg-invoices) .ri-errs {
+    @apply py-2.5 px-3.5 mt-4.5 rounded-[6px] bg-badbg border border-badbd text-bad text-[13px];
+  }
+  :where(.pg-invoices) .ri-errs ul {
+    @apply mt-1 mb-0 mx-0 ps-4.5;
+  }
+  :where(.pg-invoices) .ri-errs .mu {
+    @apply text-bad opacity-80;
+  }
+  :where(.pg-invoices) .ri-strip {
+    @apply grid grid-cols-[repeat(3,1fr)] mt-5 border border-line rounded-[8px];
+  }
+  :where(.pg-invoices) .ri-strip > div {
+    @apply py-3 px-4 border-s border-s-line;
+  }
+  :where(.pg-invoices) .ri-strip > div:first-child {
+    @apply border-s-0;
+  }
+  :where(.pg-invoices) .ri-strip .v {
+    @apply mt-1 font-semibold text-[15px] leading-[20px];
+  }
+  :where(.pg-invoices) .ri-parties {
+    @apply gap-8 grid grid-cols-[1fr_1fr_1fr] mt-6;
+  }
+  :where(.pg-invoices) .ri-parties .n {
+    @apply font-semibold text-[15px] leading-[21px] mt-2;
+  }
+  :where(.pg-invoices) .ri-parties .l {
+    @apply text-muted2;
+  }
+  :where(.pg-invoices) .ri-kv {
+    @apply grid grid-cols-[auto_1fr] gap-y-1.5 gap-x-4 mt-2;
+  }
+  :where(.pg-invoices) .ri-kv span:nth-child(odd) {
+    @apply text-muted;
+  }
+  :where(.pg-invoices) .ri-ship {
+    @apply py-4 px-5 mt-6 rounded-[8px] bg-sub grid grid-cols-[repeat(3,1fr)] gap-y-3.5 gap-x-8;
+  }
+  :where(.pg-invoices) .ri-ship .v {
+    @apply mt-0.5 font-medium;
+  }
+  :where(.pg-invoices) .ri-tbl {
+    @apply w-full [border-collapse:collapse] mt-6 text-[13px];
+  }
+  :where(.pg-invoices) .ri-tbl th {
+    @apply py-2.5 px-2 bg-bg text-left font-semibold text-[12px] text-muted2 border-b border-b-line whitespace-nowrap;
+  }
+  :where(.pg-invoices) .ri-tbl td {
+    @apply py-2.5 px-2 border-b border-b-line2 whitespace-nowrap tabular-nums align-middle;
+  }
+  :where(.pg-invoices) .ri-tbl td.w {
+    @apply whitespace-normal min-w-45 font-medium;
+  }
+  :where(.pg-invoices) .ri-tbl .r {
+    @apply text-end;
+  }
+  :where(.pg-invoices) .ri-tbl th:first-child,
+  :where(.pg-invoices) .ri-tbl td:first-child {
+    @apply ps-3;
+  }
+  :where(.pg-invoices) .ri-tbl tr.add td {
+    @apply bg-tint2;
+  }
+  :where(.pg-invoices) .ri-in {
+    @apply h-8;
+  }
+  :where(.pg-invoices) .ri-in.num {
+    @apply text-end;
+  }
+  :where(.pg-invoices) .ri-in.bad {
+    border-color: var(--bad) !important;
+    box-shadow: 0 0 0 1px var(--bad);
+  }
+  :where(.pg-invoices) .select.bad {
+    border-color: var(--bad) !important;
+    box-shadow: 0 0 0 1px var(--bad);
+  }
+  :where(.pg-invoices) .ri-x {
+    @apply p-0 w-8 justify-center;
+  }
+  :where(.pg-invoices) .ri-cb {
+    @apply relative min-w-55;
+  }
+  :where(.pg-invoices) .ri-sug {
+    @apply p-1 m-0 absolute z-30 left-0 right-0 top-[calc(100%_+_4px)] list-none bg-surface border border-line rounded-[8px] shadow-[0_10px_28px_rgba(22,26,33,.16)] max-h-70 overflow-auto;
+  }
+  :where(.pg-invoices) .ri-sug li {
+    @apply py-1.25 px-2.5 gap-2.5 flex items-center min-h-8 rounded-[6px] cursor-pointer font-normal whitespace-nowrap;
+  }
+  :where(.pg-invoices) .ri-sug li .mono {
+    @apply min-w-11 text-muted text-[12px];
+  }
+  :where(.pg-invoices) .ri-sug li:hover,
+  :where(.pg-invoices) .ri-sug li[aria-selected='true'] {
+    @apply bg-hover;
+  }
+  :where(.pg-invoices) .ri-sug li[aria-selected='true'] {
+    @apply shadow-[inset_0_0_0_2px_var(--accent)];
+  }
+  :where(.pg-invoices) .ri-sug li.none {
+    @apply text-muted cursor-default [background:none] shadow-none;
+  }
+  :where(.pg-invoices) .ri-bt {
+    @apply gap-12 grid grid-cols-[1fr_360px] mt-5 items-start;
+  }
+  :where(.pg-invoices) .ri-tot {
+    @apply gap-2 flex flex-col;
+  }
+  :where(.pg-invoices) .ri-tot > div {
+    @apply gap-4 flex justify-between tabular-nums;
+  }
+  :where(.pg-invoices) .ri-tot > div.g {
+    @apply border-t border-t-ink pt-2.5 mt-0.5 font-bold text-[16px] leading-[22px];
+  }
+  :where(.pg-invoices) .ri-words {
+    @apply py-2.5 px-3.5 mt-3.5 rounded-[6px] bg-sub text-muted2;
+  }
+  :where(.pg-invoices) .sum {
+    @apply py-3.5 px-4 gap-2 flex flex-col rounded-[8px] bg-sub text-[13px];
+  }
+  :where(.pg-invoices) .sum div {
+    @apply gap-4 flex justify-between;
+  }
+  :where(.pg-invoices) .ctab {
+    @apply w-full [border-collapse:collapse];
+  }
+  :where(.pg-invoices) .ctab th {
+    @apply text-[12px];
+  }
+  :where(.pg-invoices) .ctab td,
+  :where(.pg-invoices) .ctab th {
+    @apply whitespace-nowrap;
+  }
+  :where(.pg-invoices) .ctab tfoot td {
+    @apply font-semibold border-t border-t-line bg-sub;
+  }
+  :where(.pg-invoices) .ov {
+    @apply inset-0 fixed z-70 bg-[rgba(14,17,22,.42)];
+  }
+  :where(.pg-invoices) .dlg {
+    @apply fixed z-71 top-1/2 left-1/2 [transform:translate(-50%,-50%)] w-[min(560px,calc(100vw_-_48px))] max-h-[calc(100vh_-_64px)] flex flex-col bg-surface rounded-[12px] shadow-[0_24px_64px_rgba(0,0,0,.28)] overflow-hidden text-ink;
+  }
+  :where(.pg-invoices) .dlg.wide {
+    @apply w-[min(880px,calc(100vw_-_48px))];
+  }
+  :where(.pg-invoices) .dh {
+    @apply pt-4.5 pb-3.5 px-6 gap-4 flex items-start justify-between border-b border-b-line2;
+  }
+  :where(.pg-invoices) .dh h2 {
+    @apply m-0 text-[18px] leading-[24px] font-semibold;
+  }
+  :where(.pg-invoices) .dh p {
+    @apply mt-0.5 mb-0 mx-0 text-[13px] text-muted;
+  }
+  :where(.pg-invoices) .db {
+    @apply py-4.5 px-6 gap-3.5 overflow-auto flex flex-col text-[13px];
+  }
+  :where(.pg-invoices) .df {
+    @apply py-3.5 px-6 gap-2.5 flex items-center justify-end border-t border-t-line2 bg-sub;
+  }
+  :where(.pg-invoices) .fld {
+    @apply gap-1.5 flex flex-col text-[13px] font-medium;
+  }
+  :where(.pg-invoices) .fld .hint {
+    @apply text-[12px] font-normal text-muted;
+  }
+  :where(.pg-invoices) .fld .err {
+    @apply text-[12px] font-normal text-bad;
+  }
+  :where(.pg-invoices) .g2 {
+    @apply gap-3.5 grid grid-cols-[1fr_1fr];
+  }
+  :where(.pg-invoices) .dlg .select {
+    @apply w-full;
+  }
+  :where(.pg-invoices) .dlg .seg {
+    @apply flex;
+  }
+  :where(.pg-invoices) .dlg .seg button {
+    @apply flex-[1_1_0] text-center;
+  }
+  :where(.pg-invoices) .seg {
+    @apply p-0.5 gap-0.5 inline-flex rounded-[6px] bg-neutral;
+  }
+  :where(.pg-invoices) .seg button {
+    all: unset;
+    cursor: pointer;
+    height: 30px;
+    padding: 0 14px;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--muted2);
+  }
+  :where(.pg-invoices) .seg button[aria-pressed='true'] {
+    @apply bg-surface text-accent shadow-[0_1px_2px_rgba(22,26,33,.12)];
+  }
+  :where(.pg-invoices) .conf {
+    @apply text-center items-center;
+  }
+  :where(.pg-invoices) .conf .ic {
+    @apply w-16 h-16 rounded-full bg-okbg flex items-center justify-center;
+  }
+  :where(.pg-invoices) .conf ul {
+    @apply m-0 gap-1 ps-4.5 text-start font-medium flex flex-col;
+  }
+  :where(.pg-invoices) .amenu {
+    @apply p-1.5 fixed z-81 w-66 bg-surface border border-line rounded-[8px] shadow-[0_12px_32px_rgba(14,17,22,.16)];
+  }
+  :where(.pg-invoices) .amenu .mi {
+    all: unset;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    width: 100%;
+    padding: 7px 10px;
+    border-radius: 6px;
+    font-size: 13px;
+    line-height: 18px;
+    color: var(--ink);
+    cursor: pointer;
+  }
+  :where(.pg-invoices) .amenu .mi:hover:not([disabled]),
+  :where(.pg-invoices) .amenu .mi:focus-visible {
+    @apply bg-hover;
+  }
+  :where(.pg-invoices) .amenu .mi[disabled] {
+    @apply cursor-not-allowed text-muted;
+  }
+  :where(.pg-invoices) .amenu .mi small {
+    @apply text-[11px] leading-[14px] text-muted;
+  }
+  :where(.pg-invoices) .amenu .mi.d {
+    @apply text-bad;
+  }
+  :where(.pg-invoices) .amenu .mi.d[disabled] {
+    @apply text-badbd;
+  }
+  :where(.pg-invoices) .amenu .sep {
+    @apply my-1 mx-0 h-px bg-line2;
+  }
+  :where(.pg-invoices) .msel {
+    @apply relative;
+  }
+  :where(.pg-invoices) .msel-b {
+    @apply gap-1.5 w-auto min-w-28 max-w-52.5 flex items-center text-start cursor-pointer pe-8;
+  }
+  :where(.pg-invoices) .msel-t {
+    @apply overflow-hidden text-ellipsis whitespace-nowrap min-w-0;
+  }
+  :where(.pg-invoices) .msel-n {
+    @apply py-0 px-1.5 flex-none min-w-5 h-5 rounded-[10px] bg-accent text-onaccent text-[12px] font-semibold leading-[20px] text-center box-border;
+  }
+  :where(.pg-invoices) .msel-p {
+    @apply absolute z-81 top-[calc(100%_+_4px)] left-0 min-w-60 max-h-90 flex flex-col bg-surface border border-line rounded-[8px] shadow-[0_8px_24px_rgba(22,26,33,.16)] overflow-hidden;
+  }
+  :where(.pg-invoices) .msel-p > .msel-o:first-child {
+    @apply mt-1.5;
+  }
+  :where(.pg-invoices) .msel-o {
+    @apply py-0 px-3 gap-2.5 flex items-center min-h-9 text-[13px] cursor-pointer flex-none;
+  }
+  :where(.pg-invoices) .msel-o:hover {
+    @apply bg-hover2;
+  }
+  :where(.pg-invoices) .msel-o span:nth-of-type(1) {
+    @apply flex-auto;
+  }
+  :where(.pg-invoices) .msel-o input {
+    @apply m-0 w-4 h-4 [accent-color:var(--accent)];
+  }
+  :where(.pg-invoices) .msel-f {
+    @apply py-2 px-3 gap-2 flex justify-between border-t border-t-line2 mt-1.5 sticky bottom-0 bg-surface;
+  }
+  :where(.pg-invoices) .ph-trunc {
+    @apply text-ellipsis whitespace-nowrap overflow-hidden;
+  }
+  :where(.pg-invoices) .ph-trunc::placeholder {
+    @apply text-ellipsis;
+  }
+  :where(.pg-invoices) .ftb {
+    @apply gap-3 flex items-start;
+  }
+  :where(.pg-invoices) .ftb-p {
+    @apply gap-2 flex-auto min-w-0 flex flex-wrap items-center;
+  }
+  :where(.pg-invoices) .fq {
+    @apply relative;
+  }
+  :where(.pg-invoices) .cols-b {
+    @apply py-0 px-2.5 gap-1.5 h-8;
+  }
+  :where(.pg-invoices) .cols-b svg {
+    @apply text-muted;
+  }
+  :where(.pg-invoices) .cols-b[aria-expanded='true'] {
+    @apply border-accent;
+  }
+  :where(.pg-invoices) .cols-s {
+    @apply pt-1 pb-2 px-3 relative;
+  }
+  :where(.pg-invoices) .cols-s > svg {
+    @apply absolute start-5.5 top-1/2 -mt-2.5 text-muted pointer-events-none;
+  }
+  :where(.pg-invoices) .cols-q {
+    @apply w-full ps-8 pe-7.5;
+  }
+  :where(.pg-invoices) .cols-x {
+    @apply absolute end-4 top-1/2 -mt-3.5 w-6 h-6 grid [place-items:center] border-0 [background:none] text-muted cursor-pointer rounded-[4px];
+  }
+  :where(.pg-invoices) .cols-x:hover {
+    @apply bg-hover2 text-ink;
+  }
+  :where(.pg-invoices) .cols-p {
+    @apply left-auto end-0 w-70 max-h-120;
+  }
+  :where(.pg-invoices) .cols-h {
+    @apply pt-3 pb-1.5 px-4 flex justify-between items-center font-semibold text-[14px];
+  }
+  :where(.pg-invoices) .cols-h .mu {
+    @apply font-normal text-[12px];
+  }
+  :where(.pg-invoices) .cols-l {
+    @apply flex-auto overflow-auto border-t border-t-line2 pt-1;
+  }
+  :where(.pg-invoices) .cols-p .msel-o input:disabled + span {
+    @apply text-muted;
+  }
+  :where(.pg-invoices) .fq-b {
+    height: 32px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0 8px 0 12px;
+    flex: none;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    background: var(--surface);
+    color: var(--ink);
+    font: 500 13px/18px inherit;
+    font-family: inherit;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  :where(.pg-invoices) .fq-b:hover {
+    @apply bg-hover2;
+  }
+  :where(.pg-invoices) .fq-b svg {
+    @apply text-muted;
+  }
+  :where(.pg-invoices) .fq-b[aria-expanded='true'] {
+    @apply border-accent;
+  }
+  :where(.pg-invoices) .fq-t {
+    @apply max-w-47.5 overflow-hidden text-ellipsis;
+  }
+  :where(.pg-invoices) .fp-w {
+    @apply relative;
+  }
+  :where(.pg-invoices) .fp-btn {
+    @apply gap-1.5 inline-flex items-center;
+  }
+  :where(.pg-invoices) .fp-p {
+    @apply absolute z-81 top-[calc(100%_+_6px)] left-0 w-215 max-w-[calc(100vw_-_260px)] bg-surface border border-line rounded-[10px] shadow-[0_12px_32px_rgba(22,26,33,.18)];
+  }
+  :where(.pg-invoices) .fp-g {
+    @apply py-4 px-4.5 grid grid-cols-[repeat(4,minmax(0,1fr))] gap-y-4 gap-x-5 max-h-105 overflow-auto;
+  }
+  :where(.pg-invoices) .fp-c {
+    @apply p-0 m-0 gap-0.5 border-0 min-w-0 flex flex-col;
+  }
+  :where(.pg-invoices) .fp-c legend {
+    @apply pt-0 pb-1.5 px-0 gap-1.5 text-[12px] font-semibold uppercase tracking-[.05em] text-muted flex items-center;
+  }
+  :where(.pg-invoices) .fp-gn {
+    @apply py-0 px-1.25 min-w-4.5 h-4.5 rounded-[9px] bg-accent text-onaccent text-[11px] leading-[18px] text-center tracking-[0];
+  }
+  :where(.pg-invoices) .fp-o {
+    @apply py-0 px-1.5 my-0 -mx-1.5 gap-2 flex items-center min-h-7.5 rounded-[6px] text-[13px] cursor-pointer;
+  }
+  :where(.pg-invoices) .fp-o:hover {
+    @apply bg-hover2;
+  }
+  :where(.pg-invoices) .fp-o span:nth-of-type(1) {
+    @apply flex-auto min-w-0 overflow-hidden text-ellipsis whitespace-nowrap;
+  }
+  :where(.pg-invoices) .fp-o input {
+    @apply m-0 w-4 h-4 [accent-color:var(--accent)];
+  }
+  :where(.pg-invoices) .fp-f {
+    @apply py-2.5 px-4.5 gap-2 flex items-center border-t border-t-line2 bg-sub [border-radius:0_0_10px_10px];
+  }
+  :where(.pg-invoices) .fp-chip {
+    @apply py-0 pr-1 pl-2.5 gap-1 inline-flex items-center h-7 rounded-[14px] bg-tint text-accent2 text-[12px] font-medium whitespace-nowrap;
+  }
+  :where(.pg-invoices) .fp-chip button {
+    @apply w-5 h-5 border-0 rounded-[10px] bg-transparent text-inherit inline-flex items-center justify-center cursor-pointer;
+  }
+  :where(.pg-invoices) .fp-chip button:hover {
+    @apply bg-[rgba(0,113,183,.14)];
+  }
+  :where(.pg-invoices) .mback {
+    @apply p-0 m-0 inset-0 fixed z-80 bg-transparent border-0 cursor-default;
+  }
+  :where(.pg-invoices) .dbtn-danger {
+    @apply bg-bad border-bad text-onaccent;
+  }
+  :where(.pg-invoices) .dbtn-danger:hover:not(:disabled) {
+    @apply bg-[#8A1F23] border-[#8A1F23] text-onaccent;
+  }
+  :where(.pg-invoices) .btn:disabled {
+    @apply opacity-50 cursor-not-allowed;
+  }
+  :where(.pg-invoices) .at {
+    @apply w-full [border-collapse:collapse];
+  }
+  :where(.pg-invoices) .cfoot {
+    @apply pt-1 pb-1.5 px-3 flex-none border-t border-t-line bg-sub;
+  }
+  :where(.pg-invoices) .cfoot .pager {
+    @apply p-0 flex-wrap gap-y-1;
+  }
+  :where(.pg-invoices) .pager {
+    @apply pt-1 pb-0 px-1 gap-3 flex items-center min-h-11 text-[13px] text-muted2;
+  }
+  :where(.pg-invoices) .card:has(+ .pager) {
+    @apply [border-end-start-radius:0] [border-end-end-radius:0];
+  }
+  :where(.pg-invoices) .card + .pager {
+    margin-top: -17px;
+    min-height: 48px;
+    padding: 6px 8px 6px 16px;
+    box-sizing: border-box;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-top-color: var(--line2);
+    border-radius: 0 0 8px 8px;
+  }
+  :where(.pg-invoices) .pbtn {
+    @apply min-w-8 justify-center text-[15px];
+  }
+  :where(.pg-invoices) .seg2 {
+    @apply p-0.5 gap-0.5 inline-flex rounded-[6px] bg-neutral;
+  }
+  :where(.pg-invoices) .seg2 button {
+    all: unset;
+    cursor: pointer;
+    height: 32px;
+    padding: 0 12px;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--muted2);
+  }
+  :where(.pg-invoices) .seg2 button[aria-pressed='true'] {
+    @apply bg-surface text-accent shadow-[0_1px_2px_rgba(22,26,33,.12)];
+  }
+  :where(.pg-invoices) .seg2 button:focus-visible {
+    @apply [outline:2px_solid_var(--accent)] [outline-offset:2px];
+  }
+  :where(.pg-invoices) .chips {
+    @apply gap-1.5 flex flex-wrap;
+  }
+  :where(.pg-invoices) .chipb {
+    all: unset;
+    box-sizing: border-box;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    height: 34px;
+    padding: 0 12px;
+    border: 1px solid var(--line);
+    border-radius: 17px;
+    background: var(--surface);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--muted2);
+  }
+  :where(.pg-invoices) .chipb:hover {
+    @apply border-bdh;
+  }
+  :where(.pg-invoices) .chipb[aria-pressed='true'] {
+    @apply bg-accent border-accent text-onaccent;
+  }
+  :where(.pg-invoices) .chipb .cnt {
+    @apply text-[12px] font-semibold opacity-80;
+  }
+  :where(.pg-invoices) .chipb.w:not([aria-pressed='true']) .cnt {
+    @apply text-bad opacity-100;
+  }
+  :where(.pg-invoices) .chipb:focus-visible,
+  :where(.pg-invoices) .ili:focus-visible,
+  :where(.pg-invoices) .qitem:focus-visible,
+  :where(.pg-invoices) .icard:focus-visible {
+    @apply [outline:2px_solid_var(--accent)] [outline-offset:2px];
+  }
+  :where(.pg-invoices) .callout {
+    @apply py-3.5 px-4.5 gap-4 flex items-center rounded-[10px] bg-tint border border-tintbd;
+  }
+  :where(.pg-invoices) .callout .ci {
+    @apply w-10 h-10 rounded-[10px] bg-surface flex items-center justify-center text-accent flex-none;
+  }
+  :where(.pg-invoices) .callout b {
+    @apply block text-[15px] text-ink;
+  }
+  :where(.pg-invoices) .callout span {
+    @apply text-[13px] text-muted2;
+  }
+  :where(.pg-invoices) .ili {
+    all: unset;
+    box-sizing: border-box;
+    cursor: pointer;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 4px 16px;
+    width: 100%;
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--line2);
+    border-inline-start: 3px solid transparent;
+  }
+  :where(.pg-invoices) .ili:hover {
+    @apply bg-hover2;
+  }
+  :where(.pg-invoices) .ili[aria-current='true'] {
+    @apply bg-tint2 [border-inline-start-color:var(--accent)];
+  }
+  :where(.pg-invoices) .ili .t {
+    @apply gap-2.5 flex items-center font-semibold text-[14px];
+  }
+  :where(.pg-invoices) .ili .r {
+    @apply text-end font-semibold text-[14px];
+  }
+  :where(.pg-invoices) .ili .m {
+    @apply text-[13px] text-muted2;
+  }
+  :where(.pg-invoices) .ili .s {
+    @apply text-[12px] text-muted text-end;
+  }
+  :where(.pg-invoices) .dsec {
+    @apply py-4 px-5 gap-2.5 flex flex-col border-t border-t-line2;
+  }
+  :where(.pg-invoices) .dsec h3 {
+    @apply m-0 text-[12px] font-semibold tracking-[.04em] uppercase text-muted;
+  }
+  :where(.pg-invoices) .kv2 {
+    @apply grid grid-cols-[repeat(2,minmax(0,1fr))] gap-y-3 gap-x-6;
+  }
+  :where(.pg-invoices) .kv2 div {
+    @apply gap-0.5 flex flex-col min-w-0;
+  }
+  :where(.pg-invoices) .kv2 .l {
+    @apply text-[12px] text-muted;
+  }
+  :where(.pg-invoices) .kv2 .v {
+    @apply text-[14px] font-medium [overflow-wrap:anywhere];
+  }
+  :where(.pg-invoices) .qitem {
+    all: unset;
+    box-sizing: border-box;
+    cursor: pointer;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 2px 8px;
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ink);
+  }
+  :where(.pg-invoices) .qitem:hover {
+    @apply bg-hover;
+  }
+  :where(.pg-invoices) .qitem[aria-current='true'] {
+    @apply bg-tint text-accent2;
+  }
+  :where(.pg-invoices) .qitem .n {
+    @apply text-[13px] font-semibold text-muted;
+  }
+  :where(.pg-invoices) .qitem.w .n {
+    @apply text-bad;
+  }
+  :where(.pg-invoices) .qitem small {
+    @apply col-[1_/_-1] text-[12px] font-normal text-muted;
+  }
+  :where(.pg-invoices) .qhead {
+    @apply pt-3.5 pb-1.5 px-3 text-[11px] font-semibold tracking-[.06em] uppercase text-muted;
+  }
+  :where(.pg-invoices) .cgrid {
+    @apply gap-3.5 grid grid-cols-[repeat(auto-fill,minmax(330px,1fr))] [align-content:start];
+  }
+  :where(.pg-invoices) .icard {
+    @apply py-4 px-4.5 gap-2.5 flex flex-col border border-line rounded-[10px] bg-surface cursor-pointer;
+  }
+  :where(.pg-invoices) .icard:hover {
+    @apply border-bdh shadow-[0_2px_8px_rgba(14,17,22,.06)];
+  }
+  :where(.pg-invoices) .icard .top {
+    @apply gap-2 flex items-center justify-between;
+  }
+  :where(.pg-invoices) .icard .amt {
+    @apply text-[22px] leading-[28px] font-semibold;
+  }
+  :where(.pg-invoices) .icard .meta {
+    @apply text-[12px] text-muted flex flex-wrap gap-y-1 gap-x-3;
+  }
+  :where(.pg-invoices) .icard .foot {
+    @apply gap-2 flex items-center pt-2.5 border-t border-t-line2 mt-0.5;
+  }
+  :where(.pg-invoices) .at td,
+  :where(.pg-invoices) .at th {
+    @apply whitespace-normal align-top;
+  }
+  :where(.pg-invoices) .lay {
+    @apply py-0 px-2.5 whitespace-nowrap inline-flex items-center h-7 rounded-[4px] text-[12px] font-medium text-muted no-underline;
+  }
 }

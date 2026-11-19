@@ -13,42 +13,17 @@ export function CustomerMasterLayoutCView({ v }: { v: any }) {
   return (
     <Page
       header={
-        <div
-          className="ghead"
-          style={{
-            minHeight: '56px',
-            flex: 'none',
-            display: 'flex',
-            flexWrap: 'wrap',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            gap: '8px 24px',
-            padding: '8px 20px',
-            background: 'var(--surface)',
-            borderBottom: '1px solid var(--line)',
-            boxSizing: 'border-box',
-          }}
-        >
-          <div style={{ minWidth: '0' }}>
-            <h1 style={{ margin: '0', fontSize: '17px', fontWeight: '600', lineHeight: '22px' }}>{tx('Customer Master')}</h1>
-            <p style={{ margin: '0', fontSize: '12px', lineHeight: '16px', color: 'var(--muted)' }}>
+        <div className="ghead py-2 px-5 min-h-14 flex-none flex flex-wrap items-center justify-between gap-y-2 gap-x-6 bg-surface border-b border-b-line box-border">
+          <div className="min-w-0">
+            <h1 className="m-0 text-[17px] font-semibold leading-[22px]">{tx('Customer Master')}</h1>
+            <p className="m-0 text-[12px] leading-[16px] text-muted">
               {tx('CMD set-up · customer codes grouped at parent / legal-entity level · sourced from LMS Customer Master Data')}
             </p>
           </div>
-          <div
-            className="gright"
-            style={{
-              display: 'flex',
-              flexWrap: 'wrap',
-              alignItems: 'center',
-              justifyContent: 'flex-end',
-              gap: '10px',
-              marginInlineStart: 'auto',
-            }}
-          >
-            <nav aria-label={t('Layout options')} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <span style={{ fontSize: '12px', color: 'var(--muted)' }}>{tx('Layout')}</span>
-              <div style={{ display: 'flex', gap: '2px', padding: '2px', borderRadius: '6px', background: 'var(--neutral)' }}>
+          <div className="gright gap-2.5 flex flex-wrap items-center justify-end ms-auto">
+            <nav className="gap-2 flex items-center" aria-label={t('Layout options')}>
+              <span className="text-[12px] text-muted">{tx('Layout')}</span>
+              <div className="p-0.5 gap-0.5 flex rounded-[6px] bg-neutral">
                 <AppLink
                   className="lay rec"
                   href="customer-master-c.html"
@@ -68,9 +43,7 @@ export function CustomerMasterLayoutCView({ v }: { v: any }) {
                 </AppLink>
               </div>
             </nav>
-            <span className="chip" style={{ background: 'var(--warnbg)', color: 'var(--warn)', height: '32px', borderRadius: '6px' }}>
-              {tx('Sample values')}
-            </span>
+            <span className="chip bg-warnbg text-warn h-8 rounded-[6px]">{tx('Sample values')}</span>
             <button className="btn btn-primary" onClick={clk(v.kit?.create)}>
               <svg
                 width="16"
@@ -86,17 +59,18 @@ export function CustomerMasterLayoutCView({ v }: { v: any }) {
               </svg>
               {tx('Create new Customer')}
             </button>
-            <div style={{ position: 'relative' }}>
+            <div className="relative">
               <label htmlFor="gexp" className="sr">
                 {tx('Export')}
               </label>
-              <select id="gexp" className="select" value="" style={{ width: '112px' }} onChange={v.shell?.exp}>
+              <select id="gexp" className="select w-28" value="" onChange={v.shell?.exp}>
                 <option value="">{tx('Export')}</option>
                 <option value="xlsx">{tx('Excel')}</option>
                 <option value="csv">{tx('CSV')}</option>
                 <option value="pdf">{tx('PDF')}</option>
               </select>
               <svg
+                className="absolute end-2.5 top-1/2 -mt-2 pointer-events-none text-muted"
                 width="16"
                 height="16"
                 viewBox="0 0 24 24"
@@ -106,14 +80,6 @@ export function CustomerMasterLayoutCView({ v }: { v: any }) {
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 aria-hidden="true"
-                style={{
-                  position: 'absolute',
-                  insetInlineEnd: '10px',
-                  top: '50%',
-                  marginTop: '-8px',
-                  pointerEvents: 'none',
-                  color: 'var(--muted)',
-                }}
               >
                 <path d="M6 9l6 6 6-6" />
               </svg>
@@ -123,44 +89,37 @@ export function CustomerMasterLayoutCView({ v }: { v: any }) {
       }
       overlays={<MasterKitOverlays v={v} />}
     >
-      <div className="r-wrap" style={{ flex: '1 1 auto', minHeight: '0', display: 'flex', gap: '16px', alignItems: 'stretch' }}>
-        <section
-          className="card r-col"
-          style={{ flex: '0 0 340px', minWidth: '0', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}
-        >
-          <div style={{ padding: '16px', borderBottom: '1px solid var(--line)' }}>
+      <div className="r-wrap gap-4 flex-auto min-h-0 flex items-stretch">
+        <section className="card r-col flex-[0_0_340px] min-w-0 overflow-hidden flex flex-col">
+          <div className="p-4 border-b border-b-line">
             <input
-              className="input"
-              style={{ width: '100%' }}
+              className="input w-full"
               placeholder={t('Search group, code or name')}
               value={s(v.q)}
               aria-label={t('Search customers')}
               onChange={v.onQ}
             />
           </div>
-          <div style={{ padding: '12px 16px 4px', fontSize: '12px', color: 'var(--muted)' }}>
-            {tx(`${s(v.groupCount)} parent customer groups`)}
-          </div>
-          <nav aria-label={t('Customer groups')} style={{ flex: '1 1 auto', overflow: 'auto', padding: '0 8px 12px' }}>
+          <div className="pt-3 pb-1 px-4 text-[12px] text-muted">{tx(`${s(v.groupCount)} parent customer groups`)}</div>
+          <nav className="pt-0 pb-3 px-2 flex-auto overflow-auto" aria-label={t('Customer groups')}>
             {(v.tree || []).map((g: any, $index: number) => (
               <Fragment key={$index}>
                 <div>
                   <button className="gbtn" aria-expanded={a(g?.open)} onClick={clk(g?.toggle)}>
                     <svg
+                      className="[transition:transform_.15s]"
                       width="14"
                       height="14"
                       viewBox="0 0 24 24"
                       fill="none"
                       stroke="currentColor"
                       strokeWidth="2"
-                      style={sx(`transform: rotate(${s(g?.rot)}); transition: transform .15s`)}
+                      style={sx(`transform: rotate(${s(g?.rot)})`)}
                     >
                       <path d="M9 6l6 6-6 6" />
                     </svg>
-                    <span style={{ flex: '1 1 auto' }}>{tx(s(g?.name))}</span>
-                    <span className="mono" style={{ fontSize: '12px', fontWeight: '500', color: 'var(--muted)' }}>
-                      {tx(s(g?.n))}
-                    </span>
+                    <span className="flex-auto">{tx(s(g?.name))}</span>
+                    <span className="mono text-[12px] font-medium text-muted">{tx(s(g?.n))}</span>
                   </button>
                   {g?.isOpen ? (
                     <>
@@ -168,10 +127,8 @@ export function CustomerMasterLayoutCView({ v }: { v: any }) {
                         <Fragment key={$index}>
                           {' '}
                           <button className="cbtn" aria-current={a(k?.cur)} style={sx(s(k?.sel))} onClick={clk(k?.pick)}>
-                            <span className="mono" style={{ flex: '0 0 auto' }}>
-                              {tx(s(k?.code))}
-                            </span>
-                            <span style={{ flex: '1 1 auto', color: 'var(--muted)' }}>{tx(s(k?.ctry))}</span>
+                            <span className="mono flex-[0_0_auto]">{tx(s(k?.code))}</span>
+                            <span className="flex-auto text-muted">{tx(s(k?.ctry))}</span>
                             {k?.flag ? (
                               <>
                                 <span className="sr">{tx(s(k?.st))}</span>
@@ -179,10 +136,7 @@ export function CustomerMasterLayoutCView({ v }: { v: any }) {
                             ) : null}
                             {k?.flag ? (
                               <>
-                                <span
-                                  style={{ width: '8px', height: '8px', borderRadius: '50%', background: 'var(--badbar)' }}
-                                  title={t(s(k?.st))}
-                                />
+                                <span className="w-2 h-2 rounded-full bg-badbar" title={t(s(k?.st))} />
                               </>
                             ) : null}
                           </button>{' '}
@@ -195,84 +149,64 @@ export function CustomerMasterLayoutCView({ v }: { v: any }) {
             ))}
           </nav>
         </section>
-        <div style={{ flex: '1 1 auto', minWidth: '0', display: 'flex', flexDirection: 'column', gap: '16px' }}>
-          <section
-            className="card"
-            style={{ padding: '20px 24px', display: 'flex', alignItems: 'center', gap: '40px', background: 'var(--hover2)' }}
-          >
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '2px', minWidth: '0' }}>
-              <span style={{ fontSize: '12px', color: 'var(--muted)' }}>{tx('Parent customer group')}</span>
-              <span style={{ fontSize: '16px', fontWeight: '600' }}>{tx(s(v.grp?.name))}</span>
+        <div className="gap-4 flex-auto min-w-0 flex flex-col">
+          <section className="card py-5 px-6 gap-10 flex items-center bg-hover2">
+            <div className="gap-0.5 flex flex-col min-w-0">
+              <span className="text-[12px] text-muted">{tx('Parent customer group')}</span>
+              <span className="text-[16px] font-semibold">{tx(s(v.grp?.name))}</span>
             </div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
-              <span style={{ fontSize: '12px', color: 'var(--muted)' }}>{tx('Legal entity name')}</span>
+            <div className="gap-0.5 flex flex-col">
+              <span className="text-[12px] text-muted">{tx('Legal entity name')}</span>
               <span>{tx(s(v.grp?.legal))}</span>
             </div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
-              <span style={{ fontSize: '12px', color: 'var(--muted)' }}>{tx('Registration / Tax ID')}</span>
+            <div className="gap-0.5 flex flex-col">
+              <span className="text-[12px] text-muted">{tx('Registration / Tax ID')}</span>
               <span className="mono">{tx(s(v.grp?.tax))}</span>
             </div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
-              <span style={{ fontSize: '12px', color: 'var(--muted)' }}>{tx('Customer codes')}</span>
+            <div className="gap-0.5 flex flex-col">
+              <span className="text-[12px] text-muted">{tx('Customer codes')}</span>
               <span className="mono">{tx(s(v.grp?.n))}</span>
             </div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
-              <span style={{ fontSize: '12px', color: 'var(--muted)' }}>{tx('Invoicing arrangement')}</span>
+            <div className="gap-0.5 flex flex-col">
+              <span className="text-[12px] text-muted">{tx('Invoicing arrangement')}</span>
               <span>
                 <span className="chip" style={sx(s(v.grp?.arrChip))}>
                   {tx(s(v.grp?.arr))}
                 </span>
               </span>
             </div>
-            <span style={{ marginInlineStart: 'auto', fontSize: '12px', color: 'var(--muted)', maxWidth: '260px', textAlign: 'end' }}>
+            <span className="ms-auto text-[12px] text-muted max-w-65 text-end">
               {tx('Grouping drives invoicing, reporting and credit management')}
             </span>
           </section>
-          <section
-            className="card"
-            style={{ flex: '1 1 auto', minHeight: '0', display: 'flex', flexDirection: 'column', overflow: 'hidden' }}
-          >
-            <div className="r-wrap" style={{ padding: '20px 28px 18px', display: 'flex', alignItems: 'center', gap: '16px' }}>
+          <section className="card flex-auto min-h-0 flex flex-col overflow-hidden">
+            <div className="r-wrap pt-5 pb-4.5 px-7 gap-4 flex items-center">
               <div
+                className="w-12 h-12 rounded-[10px] bg-tint text-accent2 flex items-center justify-center text-[16px] font-semibold flex-[0_0_auto]"
                 aria-hidden="true"
-                style={{
-                  width: '48px',
-                  height: '48px',
-                  borderRadius: '10px',
-                  background: 'var(--tint)',
-                  color: 'var(--accent2)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  fontSize: '16px',
-                  fontWeight: '600',
-                  flex: '0 0 auto',
-                }}
               >
                 {tx(s(v.c?.ini))}
               </div>
-              <div style={{ flex: '1 1 auto', minWidth: '0' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                  <h2 style={{ margin: '0', fontSize: '20px', fontWeight: '600', lineHeight: '28px' }}>{tx(s(v.c?.name))}</h2>
+              <div className="flex-auto min-w-0">
+                <div className="gap-2.5 flex items-center">
+                  <h2 className="m-0 text-[20px] font-semibold leading-[28px]">{tx(s(v.c?.name))}</h2>
                   <span className="chip" style={sx(s(v.c?.chip))}>
                     {tx(s(v.c?.st))}
                   </span>
                 </div>
-                <div style={{ marginTop: '2px', fontSize: '13px', color: 'var(--muted)' }}>
-                  <span className="mono" style={{ color: 'var(--ink)' }}>
-                    {tx(s(v.c?.code))}
-                  </span>{' '}
-                  {tx(`· ${s(v.c?.ctryName)} · LMS CMD ref`)} <span className="mono">{tx(s(v.c?.ref))}</span>
+                <div className="mt-0.5 text-[13px] text-muted">
+                  <span className="mono text-ink">{tx(s(v.c?.code))}</span> {tx(`· ${s(v.c?.ctryName)} · LMS CMD ref`)}{' '}
+                  <span className="mono">{tx(s(v.c?.ref))}</span>
                 </div>
               </div>
-              <div style={{ display: 'flex', gap: '32px', flex: '0 0 auto' }}>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
-                  <span style={{ fontSize: '12px', color: 'var(--muted)' }}>{tx('Credit terms')}</span>
-                  <span style={{ fontWeight: '500' }}>{tx(s(v.c?.terms))}</span>
+              <div className="gap-8 flex flex-[0_0_auto]">
+                <div className="gap-0.5 flex flex-col">
+                  <span className="text-[12px] text-muted">{tx('Credit terms')}</span>
+                  <span className="font-medium">{tx(s(v.c?.terms))}</span>
                 </div>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
-                  <span style={{ fontSize: '12px', color: 'var(--muted)' }}>{tx('Default billing party')}</span>
-                  <span style={{ fontWeight: '500' }}>{tx(s(v.c?.defParty))}</span>
+                <div className="gap-0.5 flex flex-col">
+                  <span className="text-[12px] text-muted">{tx('Default billing party')}</span>
+                  <span className="font-medium">{tx(s(v.c?.defParty))}</span>
                 </div>
               </div>
               <span className="kbar" role="group" aria-label={t('Record actions')}>
@@ -440,20 +374,8 @@ export function CustomerMasterLayoutCView({ v }: { v: any }) {
             {v.c?.flag ? (
               <>
                 <div
+                  className="py-0 px-3.5 mt-0 mb-4 mx-7 gap-2.5 flex items-center min-h-10 rounded-[8px] bg-badbg border border-badbd text-bad font-medium"
                   role="status"
-                  style={{
-                    margin: '0 28px 16px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '10px',
-                    minHeight: '40px',
-                    padding: '0 14px',
-                    borderRadius: '8px',
-                    background: 'var(--badbg)',
-                    border: '1px solid var(--badbd)',
-                    color: 'var(--bad)',
-                    fontWeight: '500',
-                  }}
                 >
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <circle cx="12" cy="12" r="9" />
@@ -463,12 +385,7 @@ export function CustomerMasterLayoutCView({ v }: { v: any }) {
                 </div>
               </>
             ) : null}
-            <div
-              className="r-wrap"
-              role="tablist"
-              aria-label={t('Customer sections')}
-              style={{ display: 'flex', gap: '28px', padding: '0 28px', borderBottom: '1px solid var(--line)' }}
-            >
+            <div className="r-wrap py-0 px-7 gap-7 flex border-b border-b-line" role="tablist" aria-label={t('Customer sections')}>
               {(v.tabs || []).map((t: any, $index: number) => (
                 <Fragment key={$index}>
                   {' '}
@@ -480,14 +397,12 @@ export function CustomerMasterLayoutCView({ v }: { v: any }) {
                     onClick={clk(t?.pick)}
                   >
                     {tx(s(t?.label))}
-                    <span className="mono" style={{ fontSize: '12px', color: 'var(--muted)' }}>
-                      {tx(s(t?.count))}
-                    </span>
+                    <span className="mono text-[12px] text-muted">{tx(s(t?.count))}</span>
                   </button>{' '}
                 </Fragment>
               ))}
             </div>
-            <div role="tabpanel" style={{ flex: '1 1 auto', overflow: 'auto', padding: '24px 28px' }}>
+            <div className="py-6 px-7 flex-auto overflow-auto" role="tabpanel">
               {v.tab1 ? (
                 <>
                   <div className="cols">
@@ -549,7 +464,7 @@ export function CustomerMasterLayoutCView({ v }: { v: any }) {
               ) : null}
               {v.tab2 ? (
                 <>
-                  <div className="card" style={{ overflow: 'hidden' }}>
+                  <div className="card overflow-hidden">
                     <table>
                       <thead>
                         <tr>
@@ -570,13 +485,11 @@ export function CustomerMasterLayoutCView({ v }: { v: any }) {
                               <td>
                                 {b?.isDef ? (
                                   <>
-                                    <span className="chip" style={{ background: 'var(--tint)', color: 'var(--accent2)' }}>
-                                      {tx('Default')}
-                                    </span>
+                                    <span className="chip bg-tint text-accent2">{tx('Default')}</span>
                                   </>
                                 ) : null}
                               </td>
-                              <td style={{ color: 'var(--muted)' }}>{tx(s(b?.src))}</td>
+                              <td className="text-muted">{tx(s(b?.src))}</td>
                             </tr>
                           </Fragment>
                         ))}
@@ -612,7 +525,7 @@ export function CustomerMasterLayoutCView({ v }: { v: any }) {
                   <div className="g3">
                     <div>
                       <span className="l">{tx('Document / data delivery')}</span>
-                      <span className="v" style={{ display: 'flex', gap: '6px' }}>
+                      <span className="v gap-1.5 flex">
                         <span className="chip" style={sx(s(v.pdfChip))}>
                           {tx('PDF')}
                         </span>

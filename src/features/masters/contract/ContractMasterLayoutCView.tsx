@@ -13,42 +13,17 @@ export function ContractMasterLayoutCView({ v }: { v: any }) {
   return (
     <Page
       header={
-        <div
-          className="ghead"
-          style={{
-            minHeight: '56px',
-            flex: 'none',
-            display: 'flex',
-            flexWrap: 'wrap',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            gap: '8px 24px',
-            padding: '8px 20px',
-            background: 'var(--surface)',
-            borderBottom: '1px solid var(--line)',
-            boxSizing: 'border-box',
-          }}
-        >
-          <div style={{ minWidth: '0' }}>
-            <h1 style={{ margin: '0', fontSize: '17px', fontWeight: '600', lineHeight: '22px' }}>{tx('Contract Master')}</h1>
-            <p style={{ margin: '0', fontSize: '12px', lineHeight: '16px', color: 'var(--muted)' }}>
+        <div className="ghead py-2 px-5 min-h-14 flex-none flex flex-wrap items-center justify-between gap-y-2 gap-x-6 bg-surface border-b border-b-line box-border">
+          <div className="min-w-0">
+            <h1 className="m-0 text-[17px] font-semibold leading-[22px]">{tx('Contract Master')}</h1>
+            <p className="m-0 text-[12px] leading-[16px] text-muted">
               {tx('Customer-specific rates, tax set-up and configurable admin fee per contract')}
             </p>
           </div>
-          <div
-            className="gright"
-            style={{
-              display: 'flex',
-              flexWrap: 'wrap',
-              alignItems: 'center',
-              justifyContent: 'flex-end',
-              gap: '10px',
-              marginInlineStart: 'auto',
-            }}
-          >
-            <nav aria-label={t('Layout options')} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <span style={{ fontSize: '12px', color: 'var(--muted)' }}>{tx('Layout')}</span>
-              <div style={{ display: 'flex', gap: '2px', padding: '2px', borderRadius: '6px', background: 'var(--neutral)' }}>
+          <div className="gright gap-2.5 flex flex-wrap items-center justify-end ms-auto">
+            <nav className="gap-2 flex items-center" aria-label={t('Layout options')}>
+              <span className="text-[12px] text-muted">{tx('Layout')}</span>
+              <div className="p-0.5 gap-0.5 flex rounded-[6px] bg-neutral">
                 <AppLink
                   className="lay rec"
                   href="contract-master-c.html"
@@ -68,9 +43,7 @@ export function ContractMasterLayoutCView({ v }: { v: any }) {
                 </AppLink>
               </div>
             </nav>
-            <span className="chip" style={{ background: 'var(--warnbg)', color: 'var(--warn)', height: '32px', borderRadius: '6px' }}>
-              {tx('Sample values')}
-            </span>
+            <span className="chip bg-warnbg text-warn h-8 rounded-[6px]">{tx('Sample values')}</span>
             <button className="btn btn-primary" onClick={clk(v.kit?.create)}>
               <svg
                 width="16"
@@ -86,17 +59,18 @@ export function ContractMasterLayoutCView({ v }: { v: any }) {
               </svg>
               {tx('New contract')}
             </button>
-            <div style={{ position: 'relative' }}>
+            <div className="relative">
               <label htmlFor="gexp" className="sr">
                 {tx('Export')}
               </label>
-              <select id="gexp" className="select" value="" style={{ width: '112px' }} onChange={v.shell?.exp}>
+              <select id="gexp" className="select w-28" value="" onChange={v.shell?.exp}>
                 <option value="">{tx('Export')}</option>
                 <option value="xlsx">{tx('Excel')}</option>
                 <option value="csv">{tx('CSV')}</option>
                 <option value="pdf">{tx('PDF')}</option>
               </select>
               <svg
+                className="absolute end-2.5 top-1/2 -mt-2 pointer-events-none text-muted"
                 width="16"
                 height="16"
                 viewBox="0 0 24 24"
@@ -106,14 +80,6 @@ export function ContractMasterLayoutCView({ v }: { v: any }) {
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 aria-hidden="true"
-                style={{
-                  position: 'absolute',
-                  insetInlineEnd: '10px',
-                  top: '50%',
-                  marginTop: '-8px',
-                  pointerEvents: 'none',
-                  color: 'var(--muted)',
-                }}
               >
                 <path d="M6 9l6 6 6-6" />
               </svg>
@@ -123,32 +89,17 @@ export function ContractMasterLayoutCView({ v }: { v: any }) {
       }
       overlays={<MasterKitOverlays v={v} />}
     >
-      <div className="r-wrap" style={{ flex: '1 1 auto', minHeight: '0', display: 'flex', gap: '16px', alignItems: 'stretch' }}>
-        <section
-          className="card r-col"
-          style={{ flex: '0 0 380px', minWidth: '0', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}
-        >
-          <div style={{ padding: '16px', display: 'flex', flexDirection: 'column', gap: '12px', borderBottom: '1px solid var(--line)' }}>
+      <div className="r-wrap gap-4 flex-auto min-h-0 flex items-stretch">
+        <section className="card r-col flex-[0_0_380px] min-w-0 overflow-hidden flex flex-col">
+          <div className="p-4 gap-3 flex flex-col border-b border-b-line">
             <input
-              className="input"
-              style={{ width: '100%' }}
+              className="input w-full"
               placeholder={t('Search contract no., customer or trade lane')}
               value={s(v.q)}
               aria-label={t('Search contracts')}
               onChange={v.onQ}
             />
-            <div
-              role="radiogroup"
-              aria-label={t('Approval status')}
-              style={{
-                display: 'flex',
-                gap: '2px',
-                padding: '2px',
-                borderRadius: '6px',
-                background: 'var(--neutral)',
-                alignSelf: 'flex-start',
-              }}
-            >
+            <div className="p-0.5 gap-0.5 flex rounded-[6px] bg-neutral self-start" role="radiogroup" aria-label={t('Approval status')}>
               {(v.segs || []).map((g: any, $index: number) => (
                 <Fragment key={$index}>
                   <button
@@ -164,36 +115,29 @@ export function ContractMasterLayoutCView({ v }: { v: any }) {
               ))}
             </div>
           </div>
-          <div style={{ padding: '12px 16px 4px', fontSize: '12px', color: 'var(--muted)' }}>
-            {tx(`${s(v.cusCount)} customers · ${s(v.countText)}`)}
-          </div>
-          <nav aria-label={t('Contracts by customer')} style={{ flex: '1 1 auto', overflow: 'auto', padding: '0 8px 12px' }}>
+          <div className="pt-3 pb-1 px-4 text-[12px] text-muted">{tx(`${s(v.cusCount)} customers · ${s(v.countText)}`)}</div>
+          <nav className="pt-0 pb-3 px-2 flex-auto overflow-auto" aria-label={t('Contracts by customer')}>
             {(v.groups || []).map((g: any, $index: number) => (
               <Fragment key={$index}>
                 <div>
                   <button className="gbtn" aria-expanded={a(g?.ax)} onClick={clk(g?.tg)}>
                     <svg
+                      className="flex-none [transition:transform_.15s]"
                       width="14"
                       height="14"
                       viewBox="0 0 24 24"
                       fill="none"
                       stroke="currentColor"
                       strokeWidth="2"
-                      style={sx(`flex: none; transform: rotate(${s(g?.rot)}); transition: transform .15s`)}
+                      style={sx(`transform: rotate(${s(g?.rot)})`)}
                     >
                       <path d="M9 6l6 6-6 6" />
                     </svg>
-                    <span style={{ flex: '1 1 auto', minWidth: '0', display: 'flex', flexDirection: 'column' }}>
-                      <span style={{ fontWeight: '600', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                        {tx(s(g?.name))}
-                      </span>
-                      <span className="mono" style={{ fontSize: '12px', color: 'var(--muted)' }}>
-                        {tx(s(g?.code))}
-                      </span>
+                    <span className="flex-auto min-w-0 flex flex-col">
+                      <span className="font-semibold whitespace-nowrap overflow-hidden text-ellipsis">{tx(s(g?.name))}</span>
+                      <span className="mono text-[12px] text-muted">{tx(s(g?.code))}</span>
                     </span>
-                    <span className="mono" style={{ fontSize: '12px', fontWeight: '500', color: 'var(--muted)' }}>
-                      {tx(s(g?.n))}
-                    </span>
+                    <span className="mono text-[12px] font-medium text-muted">{tx(s(g?.n))}</span>
                   </button>
                   {g?.open ? (
                     <>
@@ -201,16 +145,11 @@ export function ContractMasterLayoutCView({ v }: { v: any }) {
                         <Fragment key={$index}>
                           {' '}
                           <button className="cbtn" aria-current={a(r?.on)} style={sx(s(r?.sel))} onClick={clk(r?.pick)}>
-                            <span style={{ flex: '1 1 auto', minWidth: '0', display: 'flex', flexDirection: 'column' }}>
+                            <span className="flex-auto min-w-0 flex flex-col">
                               <span className="mono">{tx(s(r?.no))}</span>
-                              <span style={{ fontSize: '12px', color: 'var(--muted)', fontWeight: '400' }}>
-                                {tx(`${s(r?.lane)} · ${s(r?.ver)}`)}
-                              </span>
+                              <span className="text-[12px] text-muted font-normal">{tx(`${s(r?.lane)} · ${s(r?.ver)}`)}</span>
                             </span>{' '}
-                            <span
-                              title={t(s(r?.st))}
-                              style={sx(`flex: none; width: 8px; height: 8px; border-radius: 50%; background: ${s(r?.dot)}`)}
-                            />
+                            <span className="flex-none w-2 h-2 rounded-full" title={t(s(r?.st))} style={sx(`background: ${s(r?.dot)}`)} />
                           </button>{' '}
                         </Fragment>
                       ))}
@@ -221,18 +160,16 @@ export function ContractMasterLayoutCView({ v }: { v: any }) {
             ))}
             {v.empty ? (
               <>
-                <div style={{ padding: '32px 16px', textAlign: 'center', color: 'var(--muted)' }}>{tx('No contracts match')}</div>
+                <div className="py-8 px-4 text-center text-muted">{tx('No contracts match')}</div>
               </>
             ) : null}
           </nav>
         </section>
-        <section className="card" style={{ flex: '1 1 auto', minWidth: '0', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
-          <div className="r-wrap" style={{ padding: '22px 28px 18px', display: 'flex', alignItems: 'center', gap: '16px' }}>
-            <div style={{ flex: '1 1 auto', minWidth: '0', display: 'flex', flexDirection: 'column', gap: '4px' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                <h2 className="mono" style={{ margin: '0', fontSize: '22px', fontWeight: '600', lineHeight: '28px' }}>
-                  {tx(s(v.h?.no))}
-                </h2>
+        <section className="card flex-auto min-w-0 overflow-hidden flex flex-col">
+          <div className="r-wrap pt-5.5 pb-4.5 px-7 gap-4 flex items-center">
+            <div className="gap-1 flex-auto min-w-0 flex flex-col">
+              <div className="gap-2.5 flex items-center">
+                <h2 className="mono m-0 text-[22px] font-semibold leading-[28px]">{tx(s(v.h?.no))}</h2>
                 <span className="chip" style={sx(s(v.h?.stChip))}>
                   {tx(s(v.h?.st))}
                 </span>
@@ -240,7 +177,7 @@ export function ContractMasterLayoutCView({ v }: { v: any }) {
                   {tx(s(v.h?.vst))}
                 </span>
               </div>
-              <div style={{ fontSize: '13px', color: 'var(--muted)' }}>
+              <div className="text-[13px] text-muted">
                 {tx(`${s(v.h?.cusName)} ·`)} <span className="mono">{tx(s(v.h?.cus))}</span> {tx(`· Version ${s(v.h?.ver)}`)}
               </div>
             </div>
@@ -406,7 +343,7 @@ export function ContractMasterLayoutCView({ v }: { v: any }) {
               ) : null}
             </span>
           </div>
-          <div style={{ display: 'flex', padding: '0 28px 20px' }}>
+          <div className="pt-0 pb-5 px-7 flex">
             <div className="fact">
               <span className="l">{tx('Validity')}</span>
               <span className="v">{tx(s(v.h?.valid))}</span>
@@ -430,12 +367,7 @@ export function ContractMasterLayoutCView({ v }: { v: any }) {
               </span>
             </div>
           </div>
-          <div
-            className="r-wrap"
-            role="tablist"
-            aria-label={t('Contract sections')}
-            style={{ display: 'flex', gap: '28px', padding: '0 28px', borderBottom: '1px solid var(--line)' }}
-          >
+          <div className="r-wrap py-0 px-7 gap-7 flex border-b border-b-line" role="tablist" aria-label={t('Contract sections')}>
             {(v.tabs || []).map((t: any, $index: number) => (
               <Fragment key={$index}>
                 <button
@@ -446,17 +378,15 @@ export function ContractMasterLayoutCView({ v }: { v: any }) {
                   onClick={clk(t?.pick)}
                 >
                   {tx(s(t?.label))}
-                  <span className="mono" style={{ fontSize: '12px', color: 'var(--muted)' }}>
-                    {tx(s(t?.count))}
-                  </span>
+                  <span className="mono text-[12px] text-muted">{tx(s(t?.count))}</span>
                 </button>
               </Fragment>
             ))}
           </div>
-          <div role="tabpanel" style={{ flex: '1 1 auto', overflow: 'auto', padding: '24px 28px' }}>
+          <div className="py-6 px-7 flex-auto overflow-auto" role="tabpanel">
             {v.tRates ? (
               <>
-                <div style={{ maxWidth: '900px' }}>
+                <div className="max-w-225">
                   <h3 className="sech">{tx('Customer-specific rates')}</h3>
                   <table className="rt">
                     <thead>
@@ -471,9 +401,7 @@ export function ContractMasterLayoutCView({ v }: { v: any }) {
                       {(v.rl || []).map((r: any, $index: number) => (
                         <Fragment key={$index}>
                           <tr>
-                            <td className="mono" style={{ fontWeight: '500' }}>
-                              {tx(s(r?.code))}
-                            </td>
+                            <td className="mono font-medium">{tx(s(r?.code))}</td>
                             <td>{tx(s(r?.name))}</td>
                             <td className="mono num">{tx(s(r?.rate))}</td>
                             <td className="mono">{tx(s(r?.ccy))}</td>
@@ -487,7 +415,7 @@ export function ContractMasterLayoutCView({ v }: { v: any }) {
             ) : null}
             {v.tFee ? (
               <>
-                <div className="r-g2" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '48px', maxWidth: '1100px' }}>
+                <div className="r-g2 gap-12 grid grid-cols-[1fr_1fr] max-w-275">
                   <div>
                     <h3 className="sech">{tx('Admin fee')}</h3>
                     <div className="kv2">
@@ -519,24 +447,24 @@ export function ContractMasterLayoutCView({ v }: { v: any }) {
             ) : null}
             {v.tVers ? (
               <>
-                <div style={{ maxWidth: '760px' }}>
+                <div className="max-w-190">
                   <h3 className="sech">{tx('Version history')}</h3>
                   {(v.vl || []).map((v: any, $index: number) => (
                     <Fragment key={$index}>
                       <div className="tl">
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontWeight: '500' }}>
+                        <div className="gap-2 flex items-center font-medium">
                           <span className="mono">{tx(s(v.v))}</span>
                           <span className="chip" style={sx(`${s(v.chip)}; height: 20px; padding: 0 8px`)}>
                             {tx(s(v.st))}
                           </span>
                           {v.cur ? (
                             <>
-                              <span style={{ fontSize: '12px', color: 'var(--accent)' }}>{tx('Current')}</span>
+                              <span className="text-[12px] text-accent">{tx('Current')}</span>
                             </>
                           ) : null}
                         </div>
-                        <div style={{ fontSize: '13px', marginTop: '2px' }}>{tx(s(v.what))}</div>
-                        <div style={{ fontSize: '12px', color: 'var(--muted)' }}>{tx(`${s(v.by)} · ${s(v.at)}`)}</div>
+                        <div className="text-[13px] mt-0.5">{tx(s(v.what))}</div>
+                        <div className="text-[12px] text-muted">{tx(`${s(v.by)} · ${s(v.at)}`)}</div>
                       </div>
                     </Fragment>
                   ))}
@@ -545,7 +473,7 @@ export function ContractMasterLayoutCView({ v }: { v: any }) {
             ) : null}
             {v.tDet ? (
               <>
-                <div style={{ maxWidth: '900px' }}>
+                <div className="max-w-225">
                   <h3 className="sech">{tx('Contract details')}</h3>
                   <div className="kv2">
                     {(v.dkv || []).map((k: any, $index: number) => (

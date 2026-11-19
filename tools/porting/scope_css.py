@@ -2,8 +2,9 @@
 """Small CSS scoper used when porting the prototype styles.
 
 scope(css, '.pg-x') prefixes every selector so page styles only apply under the page root:
-  .foo .bar                   -> .pg-x .foo .bar
-  .theme[data-theme=dark] .a  -> .theme[data-theme=dark].pg-x .a   (the page class sits on the theme root)
+  .foo .bar                   -> :where(.pg-x) .foo .bar
+  .theme[data-theme=dark] .a  -> .theme[data-theme=dark]:where(.pg-x) .a   (the page class sits on the theme root)
+:where() adds no specificity, so the cascade between shared and screen styles is exactly the prototype's.
 @media blocks are scoped recursively; @keyframes / @font-face are left as they are.
 """
 import re
@@ -95,8 +96,8 @@ def scope_sel(sel, P):
     if '.theme' in first or '.groot' in first:
         # insert before pseudo-elements/classes at the end of the compound
         m = re.match(r'^(.*?)((::?[a-z-]+(\([^)]*\))?)*)$', first)
-        return m.group(1) + P + m.group(2) + rest
-    return P + ' ' + sel
+        return m.group(1) + ':where(%s)' % P + m.group(2) + rest
+    return ':where(%s) ' % P + sel
 
 
 def scope(css, P):

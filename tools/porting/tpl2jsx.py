@@ -13,6 +13,7 @@ import re
 import sys
 import json
 import xml.etree.ElementTree as ET
+import css2tw
 
 VOID = re.compile(r'<(input|img|br|hr|meta|link|source|col|wbr)(\s[^<>]*?)?\s*/?>')
 HOLE = re.compile(r'\{\{\s*([^}]+?)\s*\}\}')
@@ -112,11 +113,50 @@ class Conv:
             obj.append('%s: %s' % (json.dumps(key) if key.startswith('--') else camel(key), json.dumps(val.strip())))
         return '{{ ' + ', '.join(obj) + ' }}'
 
+    # ---- Tailwind: static declarations become utility classes, runtime values stay inline
+    def style_split(self, raw):
+        segs = split_decls(raw)
+        static, dyn = [], []
+        for seg in segs:
+            if '{{' in seg:
+                dyn.append(seg)
+            elif ':' in seg:
+                if any(':' not in d.split('{{')[0] for d in dyn):
+                    return [], raw  # a whole-style hole before this declaration could override it
+                static.append(seg)
+        named = {d.split(':', 1)[0].strip() for d in dyn if ':' in d and '{{' not in d.split(':', 1)[0]}
+        decls = [(d.split(':', 1)[0].strip(), d.split(':', 1)[1].strip()) for d in static]
+        if any(k in named for k, _ in decls):
+            return [], raw
+        classes = css2tw.to_classes(decls) if decls else []
+        if classes is None:
+            return [], raw
+        return classes, '; '.join(dyn)
+
+    @staticmethod
+    def merge_class(raw_class, extra, conv):
+        extra_s = ' '.join(extra)
+        if raw_class is None:
+            return 'className=%s' % json.dumps(extra_s)
+        if '{{' not in raw_class:
+            return 'className=%s' % json.dumps((raw_class + ' ' + extra_s).strip())
+        e, whole = conv.interp(raw_class)
+        if whole:
+            return 'className={`${s(%s)} %s`}' % (e, extra_s)
+        return 'className={%s}' % (e[:-1] + ' ' + extra_s + '`')
+
     # ---- attributes
     def attrs(self, tag, el, no_tr, svg):
         out = []
         events = {}
+        extra_cls = []
+        rest_style = None
+        if 'style' in el.attrib:
+            extra_cls, rest_style = self.style_split(el.attrib['style'])
         for name, raw in el.attrib.items():
+            if name == 'class' and extra_cls:
+                out.append(self.merge_class(raw, extra_cls, self))
+                continue
             if name.startswith('hint-') or name == 'xmlns':
                 continue
             if name.startswith('on') and len(name) > 2 and name[2].isupper():
@@ -130,7 +170,8 @@ class Conv:
                 events[ev] = 'clk(%s)' % fn if ev == 'onClick' else fn
                 continue
             if name == 'style':
-                out.append('style=' + self.style(raw))
+                if rest_style:
+                    out.append('style=' + self.style(rest_style))
                 continue
             if not svg and name in ('checked', 'disabled', 'selected'):
                 m = WHOLE.match(raw)
@@ -163,6 +204,8 @@ class Conv:
                     out.append('%s={%s}' % (jname, raw))
                 else:
                     out.append('%s=%s' % (jname, json.dumps(raw)))
+        if extra_cls and 'class' not in el.attrib:
+            out.insert(0, self.merge_class(None, extra_cls, self))
         for k, val in events.items():
             out.append('%s={%s}' % (k, val))
         return out

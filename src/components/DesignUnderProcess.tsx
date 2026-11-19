@@ -7,7 +7,7 @@ export function DesignUnderProcess({ screen }: { screen: Screen }) {
   const { tx } = useI18n();
   return (
     <Page header={<PageHeader title={tx(screen.label)} />}>
-      <section className="card dup" aria-live="polite">
+      <section className="card flex-auto flex flex-col items-center justify-center gap-3 min-h-90 text-muted" aria-live="polite">
         <svg
           width="40"
           height="40"
@@ -23,7 +23,7 @@ export function DesignUnderProcess({ screen }: { screen: Screen }) {
           <path d="M5 21V10l7-5 7 5v11" />
           <path d="M9 21v-6h6v6" />
         </svg>
-        <h2>{tx('Design under process')}</h2>
+        <h2 className="m-0 text-[16px] font-semibold leading-[22px] text-ink">{tx('Design under process')}</h2>
       </section>
     </Page>
   );

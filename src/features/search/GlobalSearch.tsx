@@ -5,7 +5,7 @@ import { useSettings } from '../../app/providers/contexts';
 import { navigateTo } from '../../lib/appBridge';
 import { writeStore } from '../../lib/storage';
 import { clearRecent, highlight, loadIndex, recentItems, remember, search, type IconKey, type SearchItem } from './searchEngine';
-import './GlobalSearch.css';
+import { cx } from '../../lib/cx';
 
 const ICON: Record<IconKey, string[]> = {
   screen: ['M4 5h16v14H4z', 'M4 9h16'],
@@ -21,6 +21,22 @@ const ICON: Record<IconKey, string[]> = {
   enq: ['M20 20l-4-4'],
 };
 const CIRCLE: Partial<Record<IconKey, [number, number, number]>> = { cust: [12, 8, 4], recent: [12, 12, 8], enq: [11, 11, 7] };
+
+const TAG: Record<string, string> = {
+  ready: 'bg-okbg text-ok',
+  paid: 'bg-okbg text-ok',
+  receipted: 'bg-okbg text-ok',
+  reconciled: 'bg-okbg text-ok',
+  unpaid: 'bg-warnbg text-warn',
+  warning: 'bg-warnbg text-warn',
+  cancelled: 'bg-badbg text-bad',
+  blocked: 'bg-badbg text-bad',
+};
+
+const head = 'flex justify-between items-center pt-2.5 px-2.5 pb-1 text-[11px] font-semibold tracking-[0.07em] uppercase text-muted';
+const ellipsis = 'whitespace-nowrap overflow-hidden text-ellipsis';
+const kbd =
+  'inline-block min-w-4 px-1 me-0.75 border border-line rounded-[4px] bg-sub font-mono text-[11px] leading-[16px] text-center text-muted2';
 
 function Icon({ k }: { k: IconKey }) {
   const c = CIRCLE[k];
@@ -169,7 +185,7 @@ export function GlobalSearch({ placeholder }: { placeholder: string }) {
     return (
       <a
         key={'r' + i}
-        className="gs-row"
+        className="flex items-center gap-2.5 min-h-10 py-1.5 px-2.5 rounded-[6px] text-inherit no-underline cursor-pointer aria-selected:bg-hover aria-selected:shadow-[inset_3px_0_0_var(--accent)]"
         role="option"
         id={'gs-o-' + i}
         href={it.href}
@@ -181,14 +197,18 @@ export function GlobalSearch({ placeholder }: { placeholder: string }) {
           go(it);
         }}
       >
-        <span className="gs-ic">
+        <span className="flex-none inline-flex size-7 items-center justify-center rounded-[6px] bg-sub text-muted2">
           <Icon k={it.g === 'enq' ? 'enq' : it.recent ? 'recent' : (it.g as IconKey)} />
         </span>
-        <span className="gs-tx">
-          <span className={'gs-m' + (it.more ? ' gs-more' : '')}>{toks ? parts(it.main) : main}</span>
-          {it.sub ? <span className="gs-s">{toks ? parts(it.sub) : tx(it.sub)}</span> : null}
+        <span className="flex flex-col min-w-0 flex-1">
+          <span className={cx('font-medium', ellipsis, it.more && 'text-accent')}>{toks ? parts(it.main) : main}</span>
+          {it.sub ? <span className={cx('text-[12px] text-muted', ellipsis)}>{toks ? parts(it.sub) : tx(it.sub)}</span> : null}
         </span>
-        {it.tag ? <span className={'gs-tag gs-' + it.tag.toLowerCase()}>{tx(it.tag)}</span> : null}
+        {it.tag ? (
+          <span className={cx('flex-none h-5.5 px-2 rounded-[11px] text-[12px] leading-[22px] font-medium', TAG[it.tag.toLowerCase()])}>
+            {tx(it.tag)}
+          </span>
+        ) : null}
       </a>
     );
   };
@@ -199,7 +219,7 @@ export function GlobalSearch({ placeholder }: { placeholder: string }) {
       ref={panelRef}
       role="listbox"
       aria-label={t('Search results')}
-      className="theme gs-panel"
+      className="theme fixed z-1000 overflow-auto bg-surface text-ink border border-line rounded-[10px] p-1.5 box-border font-sans text-[13px] leading-[18px] shadow-[0_16px_40px_rgba(22,26,33,.18)] dark:shadow-[0_16px_40px_rgba(0,0,0,.6)] [&_mark]:bg-transparent [&_mark]:text-accent [&_mark]:font-bold"
       data-theme={theme}
       style={{ left: pos.left, top: pos.top, width: pos.width, maxHeight: pos.maxHeight }}
       onMouseDown={(e) => e.preventDefault()}
@@ -207,11 +227,11 @@ export function GlobalSearch({ placeholder }: { placeholder: string }) {
       {view.kind === 'recent' ? (
         <>
           {view.items.length ? (
-            <div className="gs-h">
+            <div className={head}>
               {tx('Recent')}
               <button
                 type="button"
-                className="gs-clear"
+                className="unstyled cursor-pointer text-[12px] font-medium tracking-normal normal-case text-accent py-0.5 px-1.5 rounded-[4px] hover:bg-hover hover:underline focus-visible:outline-2 focus-visible:outline-accent"
                 aria-label={t('Clear recent searches')}
                 title={t('Clear recent searches')}
                 onClick={() => {
@@ -224,52 +244,52 @@ export function GlobalSearch({ placeholder }: { placeholder: string }) {
             </div>
           ) : null}
           {view.items.map((r) => row(r))}
-          <div className="gs-tip">
+          <div className="py-3 px-2.5 text-muted">
             {tx(
               'Search invoice no., B/L, booking, container, vessel/voyage, customer, charge code, port, tax code, currency or any screen.',
             )}
           </div>
         </>
       ) : view.kind === 'loading' ? (
-        <div className="gs-tip">{tx('Loading…')}</div>
+        <div className="py-3 px-2.5 text-muted">{tx('Loading…')}</div>
       ) : (
         <>
           {view.groups.map((g) => (
-            <div key={g.head} style={{ display: 'contents' }}>
-              <div className="gs-h">
+            <div key={g.head} className="contents">
+              <div className={head}>
                 {tx(g.head)}
-                <span>{g.n}</span>
+                <span className="font-medium tracking-normal">{g.n}</span>
               </div>
               {g.items.map((it) => row(it, view.toks))}
               {g.more ? row(g.more) : null}
             </div>
           ))}
-          {!view.groups.length ? <div className="gs-empty">{tx('No results for “' + q.trim() + '”')}</div> : null}
-          <div className="gs-sep" />
+          {!view.groups.length ? <div className="py-3 px-2.5 text-muted">{tx('No results for “' + q.trim() + '”')}</div> : null}
+          <div className="h-px bg-line2 my-1.5 mx-1" />
           {row(view.enq)}
         </>
       )}
-      <div className="gs-foot">
+      <div className="flex gap-3.5 items-center pt-2 px-2.5 pb-1 mt-1.5 border-t border-t-line2 text-[12px] text-muted">
         <span>
-          <kbd>↑</kbd>
-          <kbd>↓</kbd> {tx('move')}
+          <kbd className={kbd}>↑</kbd>
+          <kbd className={kbd}>↓</kbd> {tx('move')}
         </span>
         <span>
-          <kbd>Enter</kbd> {tx('open')}
+          <kbd className={kbd}>Enter</kbd> {tx('open')}
         </span>
         <span>
-          <kbd>Esc</kbd> {tx('close')}
+          <kbd className={kbd}>Esc</kbd> {tx('close')}
         </span>
-        <span style={{ marginInlineStart: 'auto' }}>
-          <kbd>Ctrl</kbd>
-          <kbd>K</kbd> {tx('search from anywhere')}
+        <span className="ms-auto">
+          <kbd className={kbd}>Ctrl</kbd>
+          <kbd className={kbd}>K</kbd> {tx('search from anywhere')}
         </span>
       </div>
     </div>
   );
 
   return (
-    <div className="gsearch">
+    <div className="relative flex-[0_1_480px] min-w-55">
       <svg
         width="16"
         height="16"
@@ -280,7 +300,7 @@ export function GlobalSearch({ placeholder }: { placeholder: string }) {
         strokeLinecap="round"
         strokeLinejoin="round"
         aria-hidden="true"
-        style={{ position: 'absolute', insetInlineStart: '12px', top: '10px', color: 'var(--muted)' }}
+        className="absolute start-3 top-2.5 text-muted"
       >
         <circle cx="11" cy="11" r="7" />
         <path d="M20 20l-4-4" />
@@ -291,7 +311,7 @@ export function GlobalSearch({ placeholder }: { placeholder: string }) {
       <input
         id="gq"
         ref={input}
-        className="input"
+        className="input w-full ps-9 pe-3 bg-sub"
         placeholder={t(placeholder)}
         autoComplete="off"
         spellCheck={false}

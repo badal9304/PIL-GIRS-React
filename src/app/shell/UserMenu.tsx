@@ -1,9 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import { useI18n } from '../../i18n/context';
 import { LANGUAGES } from '../../i18n/translator';
-import { useSettings } from '../providers/contexts';
+import { useSettings, useToast } from '../providers/contexts';
 import { LOGINS, USER } from '../session/user';
-import { useToast } from '../providers/contexts';
 
 const ic16 = {
   width: 16,
@@ -16,7 +15,12 @@ const ic16 = {
   strokeLinejoin: 'round',
   'aria-hidden': true,
 } as const;
-const mark = { flex: 'none', width: '16px', color: 'var(--accent)', fontWeight: 700, textAlign: 'center' } as const;
+
+const avatar = 'rounded-full bg-accent text-onaccent inline-flex items-center justify-center font-semibold flex-none';
+const check = 'flex-none w-4 text-accent font-bold text-center';
+const segBtn =
+  'unstyled box-border cursor-pointer h-6.5 px-2.5 rounded-[4px] text-[12px] font-medium text-muted inline-flex items-center gap-1.5 hover:text-ink ' +
+  'aria-checked:bg-surface aria-checked:text-ink aria-checked:shadow-[0_1px_2px_rgba(0,0,0,.18)] focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-1';
 
 /** Profile menu: switch login, language (searchable panel), appearance (light / dark) and sign out. */
 export function UserMenu() {
@@ -44,72 +48,52 @@ export function UserMenu() {
   const langName = (LANGUAGES.find((l) => l.code === lang) || LANGUAGES[0]).label;
 
   return (
-    <div style={{ position: 'relative' }}>
+    <div className="relative">
       <button
-        className="ubtn"
         aria-expanded={open ? 'true' : 'false'}
         aria-haspopup="menu"
         aria-label={t(`User menu: ${USER.name}, ${curRole}`)}
         onClick={() => (open ? close() : (setOpen(true), setLangOpen(false), setLgq('')))}
+        className={
+          'group/u unstyled cursor-pointer flex items-center gap-2 h-9 pr-2.5 pl-1 border border-line rounded-[18px] box-border [transition:background_.12s,border-color_.12s] ' +
+          'hover:bg-hover hover:border-bd active:bg-neutral aria-expanded:border-accent aria-expanded:shadow-[0_0_0_3px_rgba(0,113,183,.2)] ' +
+          'focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2'
+        }
       >
-        <span
-          style={{
-            width: '28px',
-            height: '28px',
-            borderRadius: '50%',
-            background: 'var(--accent)',
-            color: 'var(--onaccent)',
-            display: 'inline-flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            fontSize: '12px',
-            fontWeight: 600,
-            flex: 'none',
-          }}
+        <span className={`${avatar} size-7 text-[12px]`}>{USER.initials}</span>
+        <span className="flex flex-col leading-[14px]">
+          <span className="text-[12px] font-semibold">{tx(USER.name)}</span>
+          <span className="text-[12px] text-muted">{tx(curRole)}</span>
+        </span>
+        <svg
+          {...ic16}
+          width={14}
+          height={14}
+          strokeWidth={2}
+          className="text-muted [transition:transform_.15s_ease] group-aria-expanded/u:[transform:rotate(180deg)]"
         >
-          {USER.initials}
-        </span>
-        <span className="gutxt" style={{ display: 'flex', flexDirection: 'column', lineHeight: '14px' }}>
-          <span style={{ fontSize: '12px', fontWeight: 600 }}>{tx(USER.name)}</span>
-          <span style={{ fontSize: '12px', color: 'var(--muted)' }}>{tx(curRole)}</span>
-        </span>
-        <svg className="gutxt uchev" {...ic16} width={14} height={14} strokeWidth={2} style={{ color: 'var(--muted)' }}>
           <path d="M6 9l6 6 6-6" />
         </svg>
       </button>
       {open ? (
         <>
-          <div aria-hidden="true" onClick={close} style={{ position: 'fixed', inset: 0, zIndex: 29 }} />
-          <div className="menu" role="menu" aria-label={t('User menu')}>
+          <div aria-hidden="true" onClick={close} className="fixed inset-0 z-29" />
+          <div
+            role="menu"
+            aria-label={t('User menu')}
+            className="absolute top-11 end-0 z-30 w-74 max-w-[calc(100vw-24px)] p-1.5 bg-surface border border-line rounded-[10px] box-border shadow-[0_12px_32px_rgba(22,26,33,.16)] dark:shadow-[0_16px_40px_rgba(0,0,0,.6)]"
+          >
             {!langOpen ? (
               <>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', padding: '8px 10px 10px' }}>
-                  <span
-                    style={{
-                      width: '36px',
-                      height: '36px',
-                      borderRadius: '50%',
-                      background: 'var(--accent)',
-                      color: 'var(--onaccent)',
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      fontSize: '13px',
-                      fontWeight: 600,
-                      flex: 'none',
-                    }}
-                  >
-                    {USER.initials}
-                  </span>
+                <div className="flex items-center gap-2.5 pt-2 px-2.5 pb-2.5">
+                  <span className={`${avatar} size-9 text-[13px]`}>{USER.initials}</span>
                   <span className="mi-txt">
-                    <span style={{ fontWeight: 600, lineHeight: '20px' }}>{tx(USER.name)}</span>
+                    <span className="font-semibold leading-[20px]">{tx(USER.name)}</span>
                     <span className="mi-sub">{tx('2 logins · roles from LMS IAM')}</span>
                   </span>
                 </div>
                 <div className="menu-sep" />
-                <div className="k" style={{ padding: '6px 10px 4px' }}>
-                  {tx('Switch login')}
-                </div>
+                <div className="k pt-1.5 px-2.5 pb-1">{tx('Switch login')}</div>
                 {LOGINS.map((g, i) => (
                   <button
                     key={g.code}
@@ -130,7 +114,7 @@ export function UserMenu() {
                       <span className="mi-lbl">{tx(g.role)}</span>
                       <span className="mi-sub">{tx(g.agency)}</span>
                     </span>
-                    <span aria-hidden="true" style={mark}>
+                    <span aria-hidden="true" className={check}>
                       {loginIndex === i ? '✓' : ''}
                     </span>
                   </button>
@@ -147,11 +131,11 @@ export function UserMenu() {
                       {langName}
                     </span>
                   </span>
-                  <svg {...ic16} strokeWidth={2} style={{ flex: 'none', color: 'var(--muted)' }}>
+                  <svg {...ic16} strokeWidth={2} className="flex-none text-muted">
                     <path d="M9 6l6 6-6 6" />
                   </svg>
                 </button>
-                <div className="mi ap-row" role="none">
+                <div className="mi cursor-default hover:bg-transparent" role="none">
                   <svg {...ic16}>
                     <circle cx="12" cy="12" r="9" />
                     <path d="M12 3v18" />
@@ -160,15 +144,29 @@ export function UserMenu() {
                   <span className="mi-txt">
                     <span className="mi-lbl">{tx('Appearance')}</span>
                   </span>
-                  <div className="ap-seg" role="radiogroup" aria-label={t('Theme')}>
-                    <button role="radio" aria-checked={theme === 'dark' ? 'false' : 'true'} onClick={() => setTheme('light')}>
+                  <div
+                    className="inline-flex flex-none ms-auto p-0.5 gap-0.5 rounded-[6px] bg-neutral"
+                    role="radiogroup"
+                    aria-label={t('Theme')}
+                  >
+                    <button
+                      role="radio"
+                      aria-checked={theme === 'dark' ? 'false' : 'true'}
+                      onClick={() => setTheme('light')}
+                      className={segBtn}
+                    >
                       <svg {...ic16} width={14} height={14} strokeWidth={2}>
                         <circle cx="12" cy="12" r="4" />
                         <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" />
                       </svg>
                       <span>{tx('Light')}</span>
                     </button>
-                    <button role="radio" aria-checked={theme === 'dark' ? 'true' : 'false'} onClick={() => setTheme('dark')}>
+                    <button
+                      role="radio"
+                      aria-checked={theme === 'dark' ? 'true' : 'false'}
+                      onClick={() => setTheme('dark')}
+                      className={segBtn}
+                    >
                       <svg {...ic16} width={14} height={14} strokeWidth={2}>
                         <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" />
                       </svg>
@@ -195,24 +193,22 @@ export function UserMenu() {
               </>
             ) : (
               <>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '6px', padding: '2px 4px 8px' }}>
+                <div className="flex items-center gap-1.5 pt-0.5 px-1 pb-2">
                   <button
-                    className="btn btn-icon btn-sm"
+                    className="btn btn-icon btn-sm w-8 p-0 justify-center"
                     aria-label={t('Back to profile menu')}
                     onClick={() => (setLangOpen(false), setLgq(''))}
-                    style={{ width: '32px', padding: 0, justifyContent: 'center' }}
                   >
                     <svg {...ic16} strokeWidth={2}>
                       <path d="M15 6l-6 6 6 6" />
                     </svg>
                   </button>
-                  <span style={{ fontWeight: 600 }}>{tx('Language')}</span>
+                  <span className="font-semibold">{tx('Language')}</span>
                 </div>
-                <div style={{ padding: '0 6px 6px' }}>
+                <div className="pt-0 px-1.5 pb-1.5">
                   <input
                     ref={langInput}
-                    className="input lg-q"
-                    style={{ width: '100%', height: '34px' }}
+                    className="input w-full h-8.5"
                     placeholder={t('Search language')}
                     aria-label={t('Search language')}
                     autoComplete="off"
@@ -220,7 +216,7 @@ export function UserMenu() {
                     onChange={(e) => setLgq(e.target.value)}
                   />
                 </div>
-                <div className="lg-list" role="group" aria-label={t('Languages')} translate="no">
+                <div className="max-h-70 overflow-y-auto overscroll-contain" role="group" aria-label={t('Languages')} translate="no">
                   {langs.map((g) => (
                     <button
                       key={g.code}
@@ -238,12 +234,12 @@ export function UserMenu() {
                         </span>
                         <span className="mi-sub">{g.english}</span>
                       </span>
-                      <span aria-hidden="true" style={mark}>
+                      <span aria-hidden="true" className={check}>
                         {lang === g.code ? '✓' : ''}
                       </span>
                     </button>
                   ))}
-                  {!langs.length ? <div style={{ padding: '12px 10px', color: 'var(--muted)' }}>No language matches “{lgq}”</div> : null}
+                  {!langs.length ? <div className="py-3 px-2.5 text-muted">No language matches “{lgq}”</div> : null}
                 </div>
               </>
             )}

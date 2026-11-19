@@ -15,7 +15,7 @@ export function MasterKitOverlays({ v }: { v: any }) {
           <button className="kback" aria-label={t('Close')} onClick={clk(v.kit?.close)} />
           <div className="kmodal" role="dialog" aria-modal="true" aria-labelledby="khist-t">
             <div className="khead">
-              <div style={{ flex: '1 1 auto', minWidth: '0' }}>
+              <div className="flex-auto min-w-0">
                 <h2 id="khist-t">{tx(s(v.kit?.hist?.title))}</h2>
                 <p>{tx(s(v.kit?.hist?.sub))}</p>
               </div>
@@ -35,7 +35,7 @@ export function MasterKitOverlays({ v }: { v: any }) {
               </button>
             </div>
             <div className="ktool">
-              <span style={{ flex: '1 1 auto' }}>{tx(s(v.kit?.hist?.count))}</span> <span>{tx('Download')}</span>{' '}
+              <span className="flex-auto">{tx(s(v.kit?.hist?.count))}</span> <span>{tx('Download')}</span>{' '}
               <button className="btn btn-sm" onClick={clk(v.kit?.hist?.pdf)}>
                 <svg
                   width="14"
@@ -109,7 +109,7 @@ export function MasterKitOverlays({ v }: { v: any }) {
                 {tx('Print')}
               </button>
             </div>
-            <div className="kbody" style={{ padding: '0' }}>
+            <div className="kbody p-0">
               <table className="ktbl">
                 <thead>
                   <tr>
@@ -144,7 +144,7 @@ export function MasterKitOverlays({ v }: { v: any }) {
           <button className="kback" aria-label={t('Close')} onClick={clk(v.kit?.close)} />
           <aside className="kdrawer" role="dialog" aria-modal="true" aria-labelledby="kform-t">
             <div className="khead">
-              <div style={{ flex: '1 1 auto', minWidth: '0' }}>
+              <div className="flex-auto min-w-0">
                 <h2 id="kform-t">{tx(s(v.kit?.form?.title))}</h2>
                 <p>{tx(s(v.kit?.form?.sub))}</p>
               </div>
@@ -221,7 +221,7 @@ export function MasterKitOverlays({ v }: { v: any }) {
                             ) : null}
                             {f?.isSel ? (
                               <>
-                                <span style={{ position: 'relative', display: 'block' }}>
+                                <span className="relative block">
                                   <select
                                     className="select"
                                     value={s(f?.v)}
@@ -236,6 +236,7 @@ export function MasterKitOverlays({ v }: { v: any }) {
                                     ))}
                                   </select>
                                   <svg
+                                    className="absolute end-2.5 top-1/2 -mt-2 pointer-events-none text-muted"
                                     width="16"
                                     height="16"
                                     viewBox="0 0 24 24"
@@ -245,14 +246,6 @@ export function MasterKitOverlays({ v }: { v: any }) {
                                     strokeLinecap="round"
                                     strokeLinejoin="round"
                                     aria-hidden="true"
-                                    style={{
-                                      position: 'absolute',
-                                      insetInlineEnd: '10px',
-                                      top: '50%',
-                                      marginTop: '-8px',
-                                      pointerEvents: 'none',
-                                      color: 'var(--muted)',
-                                    }}
                                   >
                                     <path d="M6 9l6 6 6-6" />
                                   </svg>
@@ -283,7 +276,7 @@ export function MasterKitOverlays({ v }: { v: any }) {
               ))}
             </div>
             <div className="kfoot">
-              <span style={{ flex: '1 1 auto', fontSize: '12px', color: 'var(--muted)' }}>{tx(s(v.kit?.form?.foot))}</span>{' '}
+              <span className="flex-auto text-[12px] text-muted">{tx(s(v.kit?.form?.foot))}</span>{' '}
               <button className="btn" onClick={clk(v.kit?.close)}>
                 {tx('Cancel')}
               </button>{' '}
@@ -300,13 +293,13 @@ export function MasterKitOverlays({ v }: { v: any }) {
           <button className="kback" aria-label={t('Close')} onClick={clk(v.kit?.close)} />
           <div className="kmodal sm" role="alertdialog" aria-modal="true" aria-labelledby="kconf-t">
             <div className="khead">
-              <div style={{ flex: '1 1 auto', minWidth: '0' }}>
+              <div className="flex-auto min-w-0">
                 <h2 id="kconf-t">{tx(s(v.kit?.conf?.title))}</h2>
                 <p>{tx(s(v.kit?.conf?.sub))}</p>
               </div>
             </div>
             <div className="kbody">
-              <p style={{ margin: '0 0 14px', fontSize: '13px', lineHeight: '20px' }}>{tx(s(v.kit?.conf?.text))}</p>
+              <p className="mt-0 mb-3.5 mx-0 text-[13px] leading-[20px]">{tx(s(v.kit?.conf?.text))}</p>
               <label className="kf">
                 <span className="kl">
                   {tx('Reason')}

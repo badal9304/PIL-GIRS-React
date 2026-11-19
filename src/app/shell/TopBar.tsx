@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom';
 import { useI18n } from '../../i18n/context';
 import { GlobalSearch } from '../../features/search/GlobalSearch';
 import { useSettings } from '../providers/contexts';
-import { useShell } from './ShellContext';
 import { UserMenu } from './UserMenu';
 import { ENTITIES, HUBS, PENDING_APPROVALS } from './context';
 import { routeOf } from '../navigation';
@@ -18,62 +17,27 @@ const chevron = (
     strokeLinecap="round"
     strokeLinejoin="round"
     aria-hidden="true"
-    style={{ position: 'absolute', insetInlineEnd: '10px', top: '50%', marginTop: '-8px', pointerEvents: 'none', color: 'var(--muted)' }}
+    className="absolute end-2.5 top-1/2 -mt-2 pointer-events-none text-muted"
   >
     <path d="M6 9l6 6 6-6" />
   </svg>
 );
 
-/** Top bar: menu (narrow screens), global search, working location, entity, fiscal period, approvals and profile. */
+/** Top bar: global search, working location, entity, fiscal period, approvals and profile. */
 export function TopBar() {
   const { t, tx } = useI18n();
   const { hub, setHub, entity, setEntity } = useSettings();
-  const { drawerOpen, setDrawerOpen } = useShell();
   const pending = `${PENDING_APPROVALS} pending approvals`;
 
   return (
-    <div
-      className="gtop"
-      style={{
-        height: '52px',
-        flex: 'none',
-        display: 'flex',
-        alignItems: 'center',
-        gap: '12px',
-        padding: '0 20px',
-        background: 'var(--surface)',
-        borderBottom: '1px solid var(--line2)',
-        boxSizing: 'border-box',
-      }}
-    >
-      <button
-        className="btn btn-icon gmenu"
-        aria-label={t('Open menu')}
-        aria-controls="gside"
-        aria-expanded={drawerOpen ? 'true' : 'false'}
-        onClick={() => setDrawerOpen(!drawerOpen)}
-      >
-        <svg
-          width="18"
-          height="18"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          aria-hidden="true"
-        >
-          <path d="M4 6h16M4 12h16M4 18h16" />
-        </svg>
-      </button>
+    <div className="h-13 flex-none flex items-center gap-3 px-5 bg-surface border-b border-b-line2 box-border">
       <GlobalSearch placeholder="Search anything: invoice, B/L, customer, container, screen…  (Ctrl K)" />
-      <div className="grow" />
-      <div className="gctx" style={{ position: 'relative' }}>
+      <div className="flex-auto" />
+      <div className="relative">
         <label htmlFor="ghub" className="sr">
           {tx('Hub')}
         </label>
-        <select id="ghub" className="select select-sm" value={hub} onChange={(e) => setHub(e.target.value)} style={{ width: '148px' }}>
+        <select id="ghub" className="select select-sm w-37" value={hub} onChange={(e) => setHub(e.target.value)}>
           {HUBS.map(([v, l]) => (
             <option key={v} value={v}>
               {tx(l)}
@@ -82,17 +46,11 @@ export function TopBar() {
         </select>
         {chevron}
       </div>
-      <div className="gctx" style={{ position: 'relative' }}>
+      <div className="relative">
         <label htmlFor="gent" className="sr">
           {tx('Entity')}
         </label>
-        <select
-          id="gent"
-          className="select select-sm"
-          value={entity}
-          onChange={(e) => setEntity(e.target.value)}
-          style={{ width: '100px' }}
-        >
+        <select id="gent" className="select select-sm w-25" value={entity} onChange={(e) => setEntity(e.target.value)}>
           {ENTITIES.map((v) => (
             <option key={v} value={v}>
               {tx(v)}
@@ -101,17 +59,11 @@ export function TopBar() {
         </select>
         {chevron}
       </div>
-      <span className="chip gperiod" style={{ background: 'var(--okbg)', color: 'var(--ok)', height: '32px', borderRadius: '6px' }}>
-        <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: 'var(--okdot)' }} />
+      <span className="chip bg-okbg text-ok h-8 rounded-[6px]">
+        <span className="size-2 rounded-full bg-okdot" />
         {tx('Period [Fiscal period] · Open')}
       </span>
-      <Link
-        to={routeOf('approvals-inbox.html')}
-        className="btn btn-icon"
-        aria-label={t(pending)}
-        title={t(pending)}
-        style={{ position: 'relative', textDecoration: 'none' }}
-      >
+      <Link to={routeOf('approvals-inbox.html')} className="btn btn-icon relative no-underline" aria-label={t(pending)} title={t(pending)}>
         <svg
           width="18"
           height="18"
@@ -126,24 +78,7 @@ export function TopBar() {
           <path d="M6 8a6 6 0 1 1 12 0c0 7 3 9 3 9H3s3-2 3-9" />
           <path d="M10.3 21a1.9 1.9 0 0 0 3.4 0" />
         </svg>
-        <span
-          className="mono"
-          style={{
-            position: 'absolute',
-            top: '-6px',
-            insetInlineEnd: '-6px',
-            minWidth: '18px',
-            height: '18px',
-            padding: '0 4px',
-            borderRadius: '9px',
-            background: 'var(--brand)',
-            color: 'var(--onaccent)',
-            fontSize: '12px',
-            lineHeight: '18px',
-            textAlign: 'center',
-            boxSizing: 'border-box',
-          }}
-        >
+        <span className="mono absolute -top-1.5 -end-1.5 min-w-4.5 h-4.5 px-1 rounded-[9px] bg-brand text-onaccent text-[12px] leading-[18px] text-center box-border">
           {PENDING_APPROVALS}
         </span>
       </Link>
