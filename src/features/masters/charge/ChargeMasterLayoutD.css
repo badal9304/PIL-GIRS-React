@@ -79,9 +79,6 @@
   :where(.pg-charge-d) .fct .v {
     @apply text-[14px] font-semibold text-ink whitespace-nowrap overflow-hidden text-ellipsis;
   }
-  :where(.pg-charge-d) .ov {
-    @apply gap-4 grid grid-cols-[minmax(0,1fr)_minmax(0,1fr)_340px] [grid-auto-flow:row_dense] items-start;
-  }
   :where(.pg-charge-d) .sc {
     @apply border border-line rounded-[10px] bg-surface min-w-0;
   }
