@@ -107,7 +107,7 @@ export function InvoiceListView({ v }: { v: any }) {
                       <span className="fq-t">{tx(s(x?.text))}</span>
                       {x?.hasN ? (
                         <>
-                          <span className="msel-n">{tx(s(x?.n))}</span>
+                          <span className="count on">{tx(s(x?.n))}</span>
                         </>
                       ) : null}
                       <svg
@@ -225,7 +225,7 @@ export function InvoiceListView({ v }: { v: any }) {
                   <path d="M9.5 4v16M14.5 4v16" />
                 </svg>
                 <span>{tx('Columns')}</span>
-                <span className="msel-n">{tx(s(v.colsN))}</span>
+                <span className="count on">{tx(s(v.colsN))}</span>
               </button>
               {v.colsOpen ? (
                 <>
@@ -478,7 +478,7 @@ export function InvoiceListView({ v }: { v: any }) {
                       {v.cv?.st2 ? (
                         <>
                           <td>
-                            <span className="pill" style={sx(s(i?.st2Pill))}>
+                            <span className="chip" style={sx(s(i?.st2Pill))}>
                               {tx(s(i?.st2))}
                             </span>
                           </td>
@@ -487,7 +487,7 @@ export function InvoiceListView({ v }: { v: any }) {
                       {v.cv?.einv ? (
                         <>
                           <td>
-                            <span className="pill" style={sx(s(i?.einvPill))}>
+                            <span className="chip" style={sx(s(i?.einvPill))}>
                               {tx(s(i?.einv))}
                             </span>
                           </td>
@@ -496,7 +496,7 @@ export function InvoiceListView({ v }: { v: any }) {
                       {v.cv?.gfs ? (
                         <>
                           <td>
-                            <span className="pill" style={sx(s(i?.gfsPill))}>
+                            <span className="chip" style={sx(s(i?.gfsPill))}>
                               {tx(s(i?.gfs))}
                             </span>
                           </td>
@@ -505,7 +505,7 @@ export function InvoiceListView({ v }: { v: any }) {
                       {v.cv?.pay ? (
                         <>
                           <td>
-                            <span className="pill" style={sx(s(i?.payPill))}>
+                            <span className="chip" style={sx(s(i?.payPill))}>
                               {tx(s(i?.pay))}
                             </span>
                           </td>
@@ -839,7 +839,7 @@ export function InvoiceListView({ v }: { v: any }) {
                           <td>{tx(s(r?.type))}</td>
                           <td className="mono num font-semibold">{tx(`${s(r?.amt)} ${s(r?.cur)}`)}</td>
                           <td>
-                            <span className="pill" style={sx(s(r?.pill))}>
+                            <span className="chip" style={sx(s(r?.pill))}>
                               {tx(s(r?.status))}
                             </span>
                           </td>

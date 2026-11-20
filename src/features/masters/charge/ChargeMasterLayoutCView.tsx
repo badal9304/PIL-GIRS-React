@@ -100,16 +100,10 @@ export function ChargeMasterLayoutCView({ v }: { v: any }) {
               onChange={v.onQ}
             />
             <div className="r-wrap flex items-center justify-between">
-              <div className="p-0.5 gap-0.5 flex rounded-[6px] bg-neutral" role="radiogroup" aria-label={t('Active status')}>
+              <div className="seg" role="radiogroup" aria-label={t('Active status')}>
                 {(v.segs || []).map((g: any, $index: number) => (
                   <Fragment key={$index}>
-                    <button
-                      className="seg h-7"
-                      role="radio"
-                      aria-checked={a(g?.on)}
-                      style={sx(`background: ${s(g?.bg)}; color: ${s(g?.fg)}; box-shadow: ${s(g?.sh)}`)}
-                      onClick={clk(g?.pick)}
-                    >
+                    <button role="radio" aria-checked={a(g?.on)} onClick={clk(g?.pick)}>
                       {tx(s(g?.label))}
                     </button>
                   </Fragment>

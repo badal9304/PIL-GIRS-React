@@ -8,6 +8,7 @@ import { ToastProvider } from './providers/ToastProvider';
 import { I18nProvider } from '../i18n/I18nProvider';
 
 const HomePage = lazy(() => import('../features/home/HomePage'));
+const UiKitPage = lazy(() => import('../features/ui-kit/UiKitPage'));
 const InvoiceListPage = lazy(() => import('../features/invoices/InvoiceListPage'));
 const CustomerMasterLayoutC = lazy(() => import('../features/masters/customer/CustomerMasterLayoutC'));
 const CustomerMasterLayoutD = lazy(() => import('../features/masters/customer/CustomerMasterLayoutD'));
@@ -24,6 +25,7 @@ const masterRoutes = (path: string, LayoutC: React.ComponentType, LayoutD: React
 
 const built: RouteObject[] = [
   { path: '/home', element: <HomePage /> },
+  { path: '/ui-kit', element: <UiKitPage /> },
   { path: '/invoicing/invoice-list', element: <InvoiceListPage /> },
   ...masterRoutes('/system-master/customer-master', CustomerMasterLayoutC, CustomerMasterLayoutD),
   ...masterRoutes('/system-master/contract-master', ContractMasterLayoutC, ContractMasterLayoutD),

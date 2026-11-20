@@ -99,16 +99,10 @@ export function ContractMasterLayoutCView({ v }: { v: any }) {
               aria-label={t('Search contracts')}
               onChange={v.onQ}
             />
-            <div className="p-0.5 gap-0.5 flex rounded-[6px] bg-neutral self-start" role="radiogroup" aria-label={t('Approval status')}>
+            <div className="seg" role="radiogroup" aria-label={t('Approval status')}>
               {(v.segs || []).map((g: any, $index: number) => (
                 <Fragment key={$index}>
-                  <button
-                    className="seg"
-                    role="radio"
-                    aria-checked={a(g?.on)}
-                    style={sx(`background: ${s(g?.bg)}; color: ${s(g?.fg)}; box-shadow: ${s(g?.sh)}`)}
-                    onClick={clk(g?.pick)}
-                  >
+                  <button role="radio" aria-checked={a(g?.on)} onClick={clk(g?.pick)}>
                     {tx(s(g?.label))}
                   </button>
                 </Fragment>

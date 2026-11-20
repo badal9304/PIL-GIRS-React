@@ -12,9 +12,9 @@ export function MasterKitOverlays({ v }: { v: any }) {
       {v.kit?.isHist ? (
         <>
           {' '}
-          <button className="kback" aria-label={t('Close')} onClick={clk(v.kit?.close)} />
-          <div className="kmodal" role="dialog" aria-modal="true" aria-labelledby="khist-t">
-            <div className="khead">
+          <button className="ov" aria-label={t('Close')} onClick={clk(v.kit?.close)} />
+          <div className="dlg wide" role="dialog" aria-modal="true" aria-labelledby="khist-t">
+            <div className="dh">
               <div className="flex-auto min-w-0">
                 <h2 id="khist-t">{tx(s(v.kit?.hist?.title))}</h2>
                 <p>{tx(s(v.kit?.hist?.sub))}</p>
@@ -109,7 +109,7 @@ export function MasterKitOverlays({ v }: { v: any }) {
                 {tx('Print')}
               </button>
             </div>
-            <div className="kbody p-0">
+            <div className="db p-0">
               <table className="ktbl">
                 <thead>
                   <tr>
@@ -141,9 +141,9 @@ export function MasterKitOverlays({ v }: { v: any }) {
       {v.kit?.isForm ? (
         <>
           {' '}
-          <button className="kback" aria-label={t('Close')} onClick={clk(v.kit?.close)} />
-          <aside className="kdrawer" role="dialog" aria-modal="true" aria-labelledby="kform-t">
-            <div className="khead">
+          <button className="ov" aria-label={t('Close')} onClick={clk(v.kit?.close)} />
+          <aside className="dlg wide" role="dialog" aria-modal="true" aria-labelledby="kform-t">
+            <div className="dh">
               <div className="flex-auto min-w-0">
                 <h2 id="kform-t">{tx(s(v.kit?.form?.title))}</h2>
                 <p>{tx(s(v.kit?.form?.sub))}</p>
@@ -163,15 +163,15 @@ export function MasterKitOverlays({ v }: { v: any }) {
                 </svg>
               </button>
             </div>
-            <div className="kbody">
+            <div className="db">
               {v.kit?.form?.hasNote ? (
                 <>
-                  <div className="kbanner">{tx(s(v.kit?.form?.note))}</div>
+                  <div className="banner b-info">{tx(s(v.kit?.form?.note))}</div>
                 </>
               ) : null}
               {v.kit?.form?.hasErr ? (
                 <>
-                  <div className="kbanner err" role="alert">
+                  <div className="banner b-block" role="alert">
                     {tx(s(v.kit?.form?.errText))}
                   </div>
                 </>
@@ -275,7 +275,7 @@ export function MasterKitOverlays({ v }: { v: any }) {
                 </Fragment>
               ))}
             </div>
-            <div className="kfoot">
+            <div className="df">
               <span className="flex-auto text-[12px] text-muted">{tx(s(v.kit?.form?.foot))}</span>{' '}
               <button className="btn" onClick={clk(v.kit?.close)}>
                 {tx('Cancel')}
@@ -290,15 +290,15 @@ export function MasterKitOverlays({ v }: { v: any }) {
       {v.kit?.isConfirm ? (
         <>
           {' '}
-          <button className="kback" aria-label={t('Close')} onClick={clk(v.kit?.close)} />
-          <div className="kmodal sm" role="alertdialog" aria-modal="true" aria-labelledby="kconf-t">
-            <div className="khead">
+          <button className="ov" aria-label={t('Close')} onClick={clk(v.kit?.close)} />
+          <div className="dlg" role="alertdialog" aria-modal="true" aria-labelledby="kconf-t">
+            <div className="dh">
               <div className="flex-auto min-w-0">
                 <h2 id="kconf-t">{tx(s(v.kit?.conf?.title))}</h2>
                 <p>{tx(s(v.kit?.conf?.sub))}</p>
               </div>
             </div>
-            <div className="kbody">
+            <div className="db">
               <p className="mt-0 mb-3.5 mx-0 text-[13px] leading-[20px]">{tx(s(v.kit?.conf?.text))}</p>
               <label className="kf">
                 <span className="kl">
@@ -320,7 +320,7 @@ export function MasterKitOverlays({ v }: { v: any }) {
                 ) : null}
               </label>
             </div>
-            <div className="kfoot">
+            <div className="df">
               <button className="btn" onClick={clk(v.kit?.close)}>
                 {tx('Cancel')}
               </button>{' '}

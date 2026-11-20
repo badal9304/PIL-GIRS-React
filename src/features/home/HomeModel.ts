@@ -405,7 +405,7 @@ export class GirsPage extends ViewModel {
         vessel: v.vessel,
         svc: v.svc,
         typeL: v.dir === 'E' ? 'Export' : 'Import',
-        typeC: 'hm-type ' + v.dir,
+        typeC: 'chip t-neutral dot-' + v.dir.toLowerCase(),
         route: v.pol + ' → ' + v.pod,
         date: (v.dir === 'E' ? 'ETD ' : 'ETA ') + hmFmt(v.date, { day: 'numeric', month: 'short' }),
         dueL: due.l,
@@ -761,7 +761,7 @@ export class GirsPage extends ViewModel {
         vessel: dv.vessel,
         svc: dv.svc,
         typeL: dv.dir === 'E' ? 'Export' : 'Import',
-        typeC: 'hm-type ' + dv.dir,
+        typeC: 'chip t-neutral dot-' + dv.dir.toLowerCase(),
         route: dv.pol + ' → ' + dv.pod,
         date: (dv.dir === 'E' ? 'ETD ' : 'ETA ') + hmFmt(dv.date, { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' }),
         stats: [
@@ -820,7 +820,7 @@ export class GirsPage extends ViewModel {
             ctr: String(1 + Math.floor(r() * 3)),
             amt: hmUsd(dv.avg * (0.6 + r() * 0.8)),
             st: HM_BLST[k][0],
-            stC: 'hm-ss ' + HM_BLST[k][1],
+            stC: 'chip t-' + HM_BLST[k][1],
             note:
               k === 'nod'
                 ? 'Missing: ' + HM_MISS[i % HM_MISS.length]
@@ -1217,7 +1217,7 @@ export class GirsPage extends ViewModel {
               ? 'Confirm the declaration to generate.'
               : '',
         stLabel: HM_BLST[k][0],
-        stC: 'hm-ss ' + HM_BLST[k][1],
+        stC: 'chip t-' + HM_BLST[k][1],
         list: 'invoice-list-v2.html?q=' + bl,
         close: () => self.setState({ ri: null, decl: false }),
       };
@@ -1542,7 +1542,7 @@ export class GirsPage extends ViewModel {
           cust: c.cust,
           bl: c.bl,
           typeL: c.dir === 'E' ? 'Export' : 'Import',
-          typeC: 'hm-type ' + c.dir,
+          typeC: 'chip t-neutral dot-' + c.dir.toLowerCase(),
           type: c.type,
           out: hmFmt(c.out, { day: 'numeric', month: 'short' }),
           back: c.back ? hmFmt(c.back, { day: 'numeric', month: 'short' }) : 'Not returned',
@@ -1553,7 +1553,7 @@ export class GirsPage extends ViewModel {
           amt: c.status === 'tariff' ? '—' : c.amt ? hmUsd(c.amt) : '—',
           slab: c.status === 'tariff' ? 'No tariff for ' + c.sz : c.over ? c.slab : 'Within free time',
           stL: HM_DDST[c.status][0],
-          stC: 'hm-ss ' + HM_DDST[c.status][1],
+          stC: 'chip t-' + HM_DDST[c.status][1],
           canGen: c.status === 'ready',
           noGen: c.status !== 'ready',
           noGenL: c.status === 'out' ? 'Bill on return' : c.status === 'invoiced' ? 'Done' : 'Blocked',

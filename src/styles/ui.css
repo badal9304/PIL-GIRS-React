@@ -1,0 +1,308 @@
+/* GIRS UI components — the approved version of each component, shared by every screen.
+   Same rules as the prototype's girs-ui.css (loaded after each screen's own styles there, so they win here too).
+   Reference page: /ui-kit. */
+@reference './tailwind.css';
+
+@layer components {
+  .chip {
+    @apply py-0 px-2.5 gap-1.5 inline-flex items-center h-6 rounded-[12px] text-[12px] font-medium whitespace-nowrap box-border;
+  }
+  .tabs {
+    @apply gap-1 flex border-b border-b-line;
+  }
+  .tabb {
+    all: unset;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    height: 40px;
+    padding: 0 14px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--muted);
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+  }
+  .tabb[aria-selected='true'] {
+    @apply text-accent [border-bottom-color:var(--accent)];
+  }
+  .tabb .cnt {
+    @apply py-px px-1.75 text-[12px] font-semibold rounded-[9px] bg-neutral text-muted2;
+  }
+  .tabb[aria-selected='true'] .cnt {
+    @apply bg-tint text-accent2;
+  }
+  .banner {
+    @apply py-2 px-3.5 gap-2.5 flex items-center min-h-10 rounded-[6px] text-[13px] font-medium box-border;
+  }
+  .b-warn {
+    @apply bg-warnbg border border-warnbd text-warn;
+  }
+  .b-block {
+    @apply bg-badbg border border-badbd text-bad;
+  }
+  .b-ok {
+    @apply bg-okbg border border-[var(--okbd,_#B7DEC8)] text-ok;
+  }
+  .b-info {
+    @apply bg-tint border border-tintbd text-accent2;
+  }
+  .ri-sug {
+    @apply p-1 m-0 absolute z-30 left-0 right-0 top-[calc(100%_+_4px)] list-none bg-surface border border-line rounded-[8px] shadow-[0_10px_28px_rgba(22,26,33,.16)] max-h-70 overflow-auto;
+  }
+  .ri-sug li {
+    @apply py-1.25 px-2.5 gap-2.5 flex items-center min-h-8 rounded-[6px] cursor-pointer font-normal whitespace-nowrap;
+  }
+  .ri-sug li .mono {
+    @apply min-w-11 text-muted text-[12px];
+  }
+  .ri-sug li:hover,
+  .ri-sug li[aria-selected='true'] {
+    @apply bg-hover;
+  }
+  .ri-sug li[aria-selected='true'] {
+    @apply shadow-[inset_0_0_0_2px_var(--accent)];
+  }
+  .ri-sug li.none {
+    @apply text-muted cursor-default [background:none] shadow-none;
+  }
+  .ov {
+    @apply inset-0 fixed z-70 bg-[rgba(14,17,22,.42)];
+  }
+  .dlg {
+    @apply fixed z-71 top-1/2 left-1/2 [transform:translate(-50%,-50%)] w-[min(560px,calc(100vw_-_48px))] max-h-[calc(100vh_-_64px)] flex flex-col bg-surface rounded-[12px] shadow-[0_24px_64px_rgba(0,0,0,.28)] overflow-hidden text-ink;
+  }
+  .dlg.wide {
+    @apply w-[min(880px,calc(100vw_-_48px))];
+  }
+  .dh {
+    @apply pt-4.5 pb-3.5 px-6 gap-4 flex items-start justify-between border-b border-b-line2;
+  }
+  .dh h2 {
+    @apply m-0 text-[18px] leading-[24px] font-semibold;
+  }
+  .dh p {
+    @apply mt-0.5 mb-0 mx-0 text-[13px] text-muted;
+  }
+  .db {
+    @apply py-4.5 px-6 gap-3.5 overflow-auto flex flex-col text-[13px];
+  }
+  .df {
+    @apply py-3.5 px-6 gap-2.5 flex items-center justify-end border-t border-t-line2 bg-sub;
+  }
+  .seg {
+    @apply p-0.5 gap-0.5 inline-flex rounded-[6px] bg-neutral;
+  }
+  .seg button {
+    all: unset;
+    cursor: pointer;
+    height: 30px;
+    padding: 0 14px;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--muted2);
+  }
+  .seg button[aria-pressed='true'],
+  .seg button[aria-checked='true'] {
+    @apply bg-surface text-accent shadow-[0_1px_2px_rgba(22,26,33,.12)];
+  }
+  .pager {
+    @apply pt-1 pb-0 px-1 gap-3 flex items-center min-h-11 text-[13px] text-muted2;
+  }
+  .pbtn {
+    @apply min-w-8 justify-center text-[15px];
+  }
+  .chips {
+    @apply gap-1.5 flex flex-wrap;
+  }
+  .chipb {
+    all: unset;
+    box-sizing: border-box;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    height: 34px;
+    padding: 0 12px;
+    border: 1px solid var(--line);
+    border-radius: 17px;
+    background: var(--surface);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--muted2);
+  }
+  .chipb:hover {
+    @apply border-bdh;
+  }
+  .chipb[aria-pressed='true'] {
+    @apply bg-accent border-accent text-onaccent;
+  }
+  .chipb .cnt {
+    @apply text-[12px] font-semibold opacity-80;
+  }
+  .chipb.w:not([aria-pressed='true']) .cnt {
+    @apply text-bad opacity-100;
+  }
+  .chipb:focus-visible,
+  .ili:focus-visible,
+  .qitem:focus-visible,
+  .icard:focus-visible {
+    @apply [outline:2px_solid_var(--accent)] [outline-offset:2px];
+  }
+  .chip.t-neutral {
+    @apply bg-neutral text-ink;
+  }
+  .chip.t-info {
+    @apply bg-tint text-accent2;
+  }
+  .chip.t-ok {
+    @apply bg-okbg text-ok;
+  }
+  .chip.t-warn {
+    @apply bg-warnbg text-warn;
+  }
+  .chip.t-bad {
+    @apply bg-badbg text-bad;
+  }
+  .chip.dot-e::before,
+  .chip.dot-i::before {
+    content: '';
+    flex: none;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+  }
+  .chip.dot-e::before {
+    @apply bg-accent;
+  }
+  .chip.dot-i::before {
+    @apply bg-ai;
+  }
+  .count {
+    @apply py-0 px-1.5 inline-flex items-center justify-center flex-none min-w-5 h-5 ms-1.5 rounded-[10px] bg-neutral text-muted2 text-[12px] font-semibold leading-[20px] box-border tabular-nums;
+  }
+  .tabb[aria-selected='true'] .count {
+    @apply bg-tint text-accent2;
+  }
+  .count.on {
+    @apply bg-accent text-onaccent;
+  }
+  .chipb .cnt,
+  .chipb > span {
+    @apply text-[12px] font-semibold;
+  }
+  .search {
+    @apply relative min-w-55;
+  }
+  .search > svg {
+    @apply absolute start-2.5 top-1/2 -mt-2 text-muted pointer-events-none;
+  }
+  .search .input {
+    @apply w-full ps-8.5;
+  }
+  .combo {
+    @apply relative;
+  }
+  .combo .input {
+    @apply w-full;
+  }
+  .empty {
+    @apply py-10 px-6 gap-1.5 flex flex-col items-center text-center text-[13px] text-muted;
+  }
+  .empty b {
+    @apply text-[14px] font-semibold text-ink;
+  }
+  .empty .btn {
+    @apply mt-2;
+  }
+  .banner .x {
+    @apply ms-auto;
+  }
+  .banner > svg {
+    @apply flex-none;
+  }
+  .dlg.doc {
+    @apply w-[min(1240px,calc(100vw_-_48px))] h-[calc(100%_-_48px)] max-h-none;
+  }
+  .dlg.full {
+    @apply w-[min(1480px,calc(100vw_-_64px))] max-h-[calc(100%_-_64px)];
+  }
+  .dlg.dim {
+    @apply shadow-[0_0_0_200vmax_rgba(22,26,33,.45),0_24px_64px_rgba(0,0,0,.28)];
+  }
+  .scrim {
+    all: unset;
+    position: fixed;
+    inset: 0;
+    background: transparent;
+  }
+  .panel {
+    @apply fixed z-71 top-0 right-0 w-[min(820px,100vw)] h-full flex flex-col bg-bg text-ink shadow-[0_0_0_200vmax_rgba(22,26,33,.45)];
+  }
+  .panel-h {
+    @apply pt-4 pb-3.5 pr-4 pl-6 gap-3 flex-none flex items-start bg-surface border-b border-b-line;
+  }
+  .panel-b {
+    @apply py-5 px-6 gap-5 flex-auto min-h-0 overflow-auto flex flex-col;
+  }
+  .panel-f {
+    @apply py-3.5 px-6 gap-2.5 flex-none flex items-center justify-end border-t border-t-line2 bg-sub;
+  }
+  .chip[aria-pressed] {
+    @apply cursor-pointer;
+  }
+  .chip:focus-visible {
+    @apply [outline:2px_solid_var(--accent)] [outline-offset:2px];
+  }
+  .seg button:focus-visible {
+    @apply [outline:2px_solid_var(--accent)] [outline-offset:1px];
+  }
+  .seg button:disabled {
+    @apply opacity-50 cursor-not-allowed;
+  }
+
+  /* Pieces every screen defined identically, promoted for the React components.
+     Zero specificity so a screen's own rule always wins. */
+  :where(.lnk) {
+    all: unset;
+    cursor: pointer;
+    color: var(--accent);
+    font-weight: 500;
+  }
+  :where(.lnk):hover {
+    @apply underline;
+  }
+  :where(.lnk):focus-visible {
+    @apply [outline:2px_solid_var(--accent)] [outline-offset:2px];
+  }
+  :where(.lnk)[disabled] {
+    @apply text-muted cursor-default no-underline;
+  }
+  :where(.cbx) {
+    @apply m-0 w-4 h-4 [accent-color:var(--accent)] cursor-pointer align-middle;
+  }
+  :where(.cbx):disabled {
+    @apply cursor-not-allowed opacity-40;
+  }
+  :where(.input.bad, .select.bad) {
+    border-color: var(--bad);
+    box-shadow: 0 0 0 1px var(--bad);
+  }
+  :where(.fld) {
+    @apply flex flex-col gap-1.5 min-w-0;
+  }
+  :where(.fld-err) {
+    @apply text-[12px] text-bad;
+  }
+  :where(.sel) {
+    @apply relative;
+  }
+  :where(.sel) .select {
+    @apply w-full;
+  }
+  :where(.sel) svg {
+    @apply absolute end-2.5 top-1/2 -mt-2 pointer-events-none text-muted;
+  }
+}

@@ -100,20 +100,10 @@ export function CustomerMasterLayoutDView({ v }: { v: any }) {
               onChange={v.onQ}
             />
             <div className="r-wrap gap-2 flex items-center justify-between">
-              <div
-                className="p-0.5 gap-0.5 flex rounded-[6px] bg-neutral min-w-0 overflow-hidden"
-                role="radiogroup"
-                aria-label={t('Status')}
-              >
+              <div className="seg" role="radiogroup" aria-label={t('Status')}>
                 {(v.segs || []).map((g: any, $index: number) => (
                   <Fragment key={$index}>
-                    <button
-                      className="seg"
-                      role="radio"
-                      aria-checked={a(g?.on)}
-                      style={sx(`background: ${s(g?.bg)}; color: ${s(g?.fg)}; box-shadow: ${s(g?.sh)}`)}
-                      onClick={clk(g?.pick)}
-                    >
+                    <button role="radio" aria-checked={a(g?.on)} onClick={clk(g?.pick)}>
                       {tx(s(g?.label))}
                     </button>
                   </Fragment>

@@ -25,9 +25,9 @@ export function HomeView({ v }: { v: any }) {
           {v.drw?.show ? (
             <>
               {' '}
-              <button className="cmc-bd" tabIndex={-1} aria-label={t('Close')} onClick={clk(v.drw?.close)} />
-              <aside className="hm-drw" role="dialog" aria-modal="true" aria-labelledby="hm-dt">
-                <div className="hm-dh">
+              <button className="scrim z-200" tabIndex={-1} aria-label={t('Close')} onClick={clk(v.drw?.close)} />
+              <aside className="panel z-201" role="dialog" aria-modal="true" aria-labelledby="hm-dt">
+                <div className="panel-h">
                   <div className="hm-dhi">
                     <div className="hm-dtl">
                       <span className="cm2-code mono">{tx(s(v.drw?.no))}</span>
@@ -54,7 +54,7 @@ export function HomeView({ v }: { v: any }) {
                     </svg>
                   </button>
                 </div>
-                <div className="hm-db">
+                <div className="panel-b">
                   <div className="hm-ds4">
                     {(v.drw?.stats || []).map((t: any, $index: number) => (
                       <Fragment key={$index}>
@@ -101,7 +101,7 @@ export function HomeView({ v }: { v: any }) {
                   <div className="hm-dsec">
                     <div className="hm-dsh">
                       <h3>{tx('B/Ls')}</h3>
-                      <div className="hm-seg sm" role="group" aria-label={t('Filter B/Ls')}>
+                      <div className="seg sm" role="group" aria-label={t('Filter B/Ls')}>
                         {(v.drw?.filters || []).map((f: any, $index: number) => (
                           <Fragment key={$index}>
                             <button aria-pressed={a(f?.cur)} onClick={clk(f?.pick)}>
@@ -112,7 +112,7 @@ export function HomeView({ v }: { v: any }) {
                         ))}
                       </div>
                     </div>
-                    <div className="hm-srch wide">
+                    <div className="search wide">
                       <svg
                         width="16"
                         height="16"
@@ -173,12 +173,12 @@ export function HomeView({ v }: { v: any }) {
                     </table>
                     {v.drw?.noBls ? (
                       <>
-                        <div className="hm-empty">{tx(s(v.drw?.noBlsL))}</div>
+                        <div className="empty">{tx(s(v.drw?.noBlsL))}</div>
                       </>
                     ) : null}
                     {v.drw?.pg?.show ? (
                       <>
-                        <div className="hm-dpg">
+                        <div className="pager hm-pp">
                           <span>{tx(s(v.drw?.pg?.text))}</span>
                           <button
                             className="btn btn-sm pbtn"
@@ -202,7 +202,7 @@ export function HomeView({ v }: { v: any }) {
                     ) : null}
                   </div>
                 </div>
-                <div className="cmc-mf">
+                <div className="panel-f">
                   <AppLink className="btn me-auto no-underline" href={a(v.drw?.list)}>
                     {tx('Open in Invoice List')}
                   </AppLink>{' '}
@@ -223,9 +223,9 @@ export function HomeView({ v }: { v: any }) {
           {v.ri?.show ? (
             <>
               {' '}
-              <button className="cmc-bd z-215" tabIndex={-1} aria-label={t('Close')} onClick={clk(v.ri?.close)} />
-              <div className="cmc-modal hm-rim" role="dialog" aria-modal="true" aria-labelledby="hm-rit">
-                <div className="cmc-mh">
+              <button className="scrim z-215" tabIndex={-1} aria-label={t('Close')} onClick={clk(v.ri?.close)} />
+              <div className="dlg doc dim hm-rim z-216" role="dialog" aria-modal="true" aria-labelledby="hm-rit">
+                <div className="dh">
                   <span className="cm2-code mono">{tx(s(v.ri?.bl))}</span>
                   <div className="hm-rih">
                     <h2 id="hm-rit">{tx('Ready to invoice')}</h2>
@@ -630,7 +630,7 @@ export function HomeView({ v }: { v: any }) {
                     <div className="ri-words">{tx(s(v.ri?.words))}</div>
                   </section>
                 </div>
-                <div className="cmc-mf hm-rif">
+                <div className="df hm-rif">
                   {v.ri?.notDone ? (
                     <>
                       <label className="hm-decl">
@@ -668,9 +668,9 @@ export function HomeView({ v }: { v: any }) {
           {v.mail?.show ? (
             <>
               {' '}
-              <button className="cmc-bd z-225" tabIndex={-1} aria-label={t('Close')} onClick={clk(v.mail?.cancel)} />
-              <div className="cmc-modal hm-mail" role="dialog" aria-modal="true" aria-labelledby="hm-mt">
-                <div className="cmc-mh">
+              <button className="scrim z-225" tabIndex={-1} aria-label={t('Close')} onClick={clk(v.mail?.cancel)} />
+              <div className="dlg wide dim hm-mail z-226" role="dialog" aria-modal="true" aria-labelledby="hm-mt">
+                <div className="dh">
                   <div className="hm-rih">
                     <h2 id="hm-mt">{tx(s(v.mail?.title))}</h2>
                     <span>{tx(s(v.mail?.reason))}</span>
@@ -771,7 +771,7 @@ export function HomeView({ v }: { v: any }) {
                   </label>
                   <textarea id="hm-mbd" className="input hm-mbd" value={s(v.mail?.body)} onChange={v.mail?.onBody} />
                 </div>
-                <div className="cmc-mf">
+                <div className="df">
                   <span className="hm-rihint">{tx('Sent from GIRS · a copy is kept in the audit trail')}</span>
                   <button className="btn" onClick={clk(v.mail?.cancel)}>
                     {tx('Cancel')}
@@ -799,12 +799,12 @@ export function HomeView({ v }: { v: any }) {
           {v.cf?.show ? (
             <>
               {' '}
-              <button className="cmc-bd z-210" tabIndex={-1} aria-label={t('Close')} onClick={clk(v.cf?.cancel)} />
-              <div className="cmc-modal hm-cfm" role="dialog" aria-modal="true" aria-labelledby="hm-ct">
-                <div className="cmc-mh">
+              <button className="scrim z-210" tabIndex={-1} aria-label={t('Close')} onClick={clk(v.cf?.cancel)} />
+              <div className="dlg dim hm-cfm z-211" role="dialog" aria-modal="true" aria-labelledby="hm-ct">
+                <div className="dh">
                   <h2 id="hm-ct">{tx(s(v.cf?.title))}</h2>
                 </div>
-                <div className="cmc-mb">
+                <div className="db">
                   <dl className="hm-dl">
                     {(v.cf?.rows || []).map((r: any, $index: number) => (
                       <Fragment key={$index}>
@@ -815,7 +815,7 @@ export function HomeView({ v }: { v: any }) {
                   </dl>
                   <p className="hm-cn">{tx(s(v.cf?.note))}</p>
                 </div>
-                <div className="cmc-mf">
+                <div className="df">
                   <button className="btn" onClick={clk(v.cf?.cancel)}>
                     {tx('Cancel')}
                   </button>
@@ -829,12 +829,12 @@ export function HomeView({ v }: { v: any }) {
           {v.rate?.show ? (
             <>
               {' '}
-              <button className="cmc-bd z-210" tabIndex={-1} aria-label={t('Close')} onClick={clk(v.rate?.cancel)} />
-              <div className="cmc-modal hm-cfm" role="dialog" aria-modal="true" aria-labelledby="hm-rt">
-                <div className="cmc-mh">
+              <button className="scrim z-210" tabIndex={-1} aria-label={t('Close')} onClick={clk(v.rate?.cancel)} />
+              <div className="dlg dim hm-cfm z-211" role="dialog" aria-modal="true" aria-labelledby="hm-rt">
+                <div className="dh">
                   <h2 id="hm-rt">{tx('Enter rate of exchange')}</h2>
                 </div>
-                <div className="cmc-mb">
+                <div className="db">
                   <dl className="hm-dl">
                     <dt>{tx('Currency pair')}</dt>
                     <dd>{tx(s(v.rate?.pair))}</dd>
@@ -855,7 +855,7 @@ export function HomeView({ v }: { v: any }) {
                   />
                   <p className="hm-cn">{tx(`${s(v.rate?.info)} Entering a rate manually is recorded in the audit trail.`)}</p>
                 </div>
-                <div className="cmc-mf">
+                <div className="df">
                   <button className="btn" onClick={clk(v.rate?.cancel)}>
                     {tx('Cancel')}
                   </button>
@@ -872,16 +872,16 @@ export function HomeView({ v }: { v: any }) {
       <div className="tabs hm-tabs" role="tablist" aria-label={t('Home')}>
         <button className="tabb" role="tab" id="hm-t1" aria-controls="hm-p1" aria-selected={a(v.tabs?.voyA)} onClick={clk(v.tabs?.toVoy)}>
           {tx('Voyage Invoicing')}
-          <span className="hm-tc">{tx(s(v.tabs?.voyN))}</span>
+          <span className="count">{tx(s(v.tabs?.voyN))}</span>
         </button>{' '}
         <button className="tabb" role="tab" id="hm-t2" aria-controls="hm-p2" aria-selected={a(v.tabs?.ddA)} onClick={clk(v.tabs?.toDd)}>
           {tx('D&D Billing')}
-          <span className="hm-tc">{tx(s(v.tabs?.ddN))}</span>
+          <span className="count">{tx(s(v.tabs?.ddN))}</span>
         </button>
       </div>
       {v.done?.show ? (
         <>
-          <div className="hm-note ok" role="status">
+          <div className="banner b-ok" role="status">
             <svg
               width="18"
               height="18"
@@ -900,7 +900,7 @@ export function HomeView({ v }: { v: any }) {
             <AppLink className="lnk" href={a(v.done?.href)}>
               {tx('View in Invoice List')}
             </AppLink>
-            <button className="btn btn-icon btn-sm hm-nx" aria-label={t('Dismiss')} onClick={clk(v.done?.close)}>
+            <button className="btn btn-icon btn-sm x" aria-label={t('Dismiss')} onClick={clk(v.done?.close)}>
               <svg
                 width="16"
                 height="16"
@@ -922,7 +922,7 @@ export function HomeView({ v }: { v: any }) {
           <div id="hm-p1" role="tabpanel" aria-labelledby="hm-t1" className="hm-panel">
             {v.alert ? (
               <>
-                <div className="hm-note warn" role="status">
+                <div className="banner b-warn" role="status">
                   <svg
                     width="18"
                     height="18"
@@ -940,7 +940,7 @@ export function HomeView({ v }: { v: any }) {
                     <b>{tx('Daily ROE feed not received.')}</b>{' '}
                     {tx('Invoices that need a rate of exchange are blocked. Request the rate from Treasury under “Blocked by reason”.')}
                   </span>
-                  <button className="btn btn-icon btn-sm hm-nx" aria-label={t('Dismiss')} onClick={clk(v.alertOff)}>
+                  <button className="btn btn-icon btn-sm x" aria-label={t('Dismiss')} onClick={clk(v.alertOff)}>
                     <svg
                       width="16"
                       height="16"
@@ -1136,7 +1136,7 @@ export function HomeView({ v }: { v: any }) {
                   <h2 className="card-title" id="hm-vt">
                     {tx('Voyages')}
                   </h2>
-                  <div className="hm-seg" role="group" aria-label={t('Direction')}>
+                  <div className="seg" role="group" aria-label={t('Direction')}>
                     {(v.dirs || []).map((x: any, $index: number) => (
                       <Fragment key={$index}>
                         <button aria-pressed={a(x?.cur)} onClick={clk(x?.pick)}>
@@ -1145,7 +1145,7 @@ export function HomeView({ v }: { v: any }) {
                       </Fragment>
                     ))}
                   </div>
-                  <div className="hm-srch">
+                  <div className="search">
                     <svg
                       width="16"
                       height="16"
@@ -1170,10 +1170,10 @@ export function HomeView({ v }: { v: any }) {
                     />
                   </div>
                 </div>
-                <div className="hm-chips" role="group" aria-label={t('Status')}>
+                <div className="chips" role="group" aria-label={t('Status')}>
                   {(v.stfs || []).map((f: any, $index: number) => (
                     <Fragment key={$index}>
-                      <button className="hm-chip" aria-pressed={a(f?.cur)} onClick={clk(f?.pick)}>
+                      <button className="chipb" aria-pressed={a(f?.cur)} onClick={clk(f?.pick)}>
                         {tx(s(f?.l))}
                         <span>{tx(s(f?.n))}</span>
                       </button>
@@ -1323,7 +1323,7 @@ export function HomeView({ v }: { v: any }) {
                   </table>
                   {v.noRows ? (
                     <>
-                      <div className="hm-empty">{tx(s(v.noRowsL))}</div>
+                      <div className="empty">{tx(s(v.noRowsL))}</div>
                     </>
                   ) : null}
                 </div>
@@ -1456,7 +1456,7 @@ export function HomeView({ v }: { v: any }) {
                   </ul>
                   {v.noReasons ? (
                     <>
-                      <div className="hm-empty">{tx('Nothing blocked in this range.')}</div>
+                      <div className="empty">{tx('Nothing blocked in this range.')}</div>
                     </>
                   ) : null}
                 </section>
@@ -1474,7 +1474,7 @@ export function HomeView({ v }: { v: any }) {
                   <h2 className="card-title" id="hm-dc">
                     {tx('Containers · Detention & Demurrage')}
                   </h2>
-                  <div className="hm-srch">
+                  <div className="search">
                     <svg
                       width="16"
                       height="16"
@@ -1499,10 +1499,10 @@ export function HomeView({ v }: { v: any }) {
                     />
                   </div>
                 </div>
-                <div className="hm-chips" role="group" aria-label={t('Status')}>
+                <div className="chips" role="group" aria-label={t('Status')}>
                   {(v.dd?.fil || []).map((f: any, $index: number) => (
                     <Fragment key={$index}>
-                      <button className="hm-chip" aria-pressed={a(f?.cur)} onClick={clk(f?.pick)}>
+                      <button className="chipb" aria-pressed={a(f?.cur)} onClick={clk(f?.pick)}>
                         {tx(s(f?.l))}
                         <span>{tx(s(f?.n))}</span>
                       </button>
@@ -1580,7 +1580,7 @@ export function HomeView({ v }: { v: any }) {
                   </table>
                   {v.dd?.empty ? (
                     <>
-                      <div className="hm-empty">{tx('No containers match.')}</div>
+                      <div className="empty">{tx('No containers match.')}</div>
                     </>
                   ) : null}
                 </div>

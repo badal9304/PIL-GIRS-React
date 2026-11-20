@@ -94,7 +94,7 @@ export const HM_CUST = [
 export const HM_MISS = ['Charges', 'Billing party', 'Customer tax ID', 'Cargo / EDI message'];
 
 export const HM_BLST = {
-  inv: ['Invoiced', 'done'],
+  inv: ['Invoiced', 'neutral'],
   ready: ['Ready to generate', 'ok'],
   roe: ['ROE not received', 'warn'],
   nod: ['Data not received', 'warn'],
@@ -303,7 +303,7 @@ export const HM_DDST = {
   milestone: ['Milestone conflict', 'warn'],
   waiver: ['Waiver approval pending', 'warn'],
   out: ['With customer', 'info'],
-  invoiced: ['Invoiced', 'done'],
+  invoiced: ['Invoiced', 'neutral'],
 };
 
 export const HM_DDR = {

@@ -14,19 +14,6 @@
   :where(.pg-charge-c) .lay:focus-visible {
     @apply [outline:2px_solid_var(--accent)] [outline-offset:2px];
   }
-  :where(.pg-charge-c) .seg {
-    all: unset;
-    box-sizing: border-box;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 32px;
-    padding: 0 12px;
-    border-radius: 4px;
-    font-size: 12px;
-    font-weight: 500;
-  }
   :where(.pg-charge-c) .seg:focus-visible {
     @apply [outline:2px_solid_var(--accent)] [outline-offset:2px];
   }
@@ -252,33 +239,6 @@
   :where(.pg-charge-c) .kdanger:hover:not(:disabled) {
     @apply bg-badbg border-badbd;
   }
-  :where(.pg-charge-c) .kback {
-    @apply p-0 m-0 inset-0 fixed z-70 bg-[rgba(14,17,22,.45)] border-0 cursor-default;
-  }
-  :where(.pg-charge-c) .kmodal {
-    @apply fixed z-71 top-1/2 left-1/2 [transform:translate(-50%,-50%)] w-[min(860px,calc(100vw_-_48px))] max-h-[calc(100vh_-_80px)] flex flex-col bg-surface rounded-[12px] shadow-[0_24px_64px_rgba(0,0,0,.28)] overflow-hidden text-ink;
-  }
-  :where(.pg-charge-c) .kmodal.sm {
-    @apply w-[min(520px,calc(100vw_-_48px))];
-  }
-  :where(.pg-charge-c) .kdrawer {
-    @apply fixed z-71 top-1/2 left-1/2 [transform:translate(-50%,-50%)] w-[min(760px,calc(100vw_-_48px))] max-h-[calc(100vh_-_64px)] flex flex-col bg-surface rounded-[12px] shadow-[0_24px_64px_rgba(0,0,0,.28)] overflow-hidden text-ink;
-  }
-  :where(.pg-charge-c) .khead {
-    @apply py-4.5 px-6 gap-3 flex items-start border-b border-b-line;
-  }
-  :where(.pg-charge-c) .khead h2 {
-    @apply m-0 text-[18px] font-semibold leading-[26px];
-  }
-  :where(.pg-charge-c) .khead p {
-    @apply mt-0.5 mb-0 mx-0 text-[13px] text-muted;
-  }
-  :where(.pg-charge-c) .kbody {
-    @apply py-5 px-6 flex-auto overflow-auto;
-  }
-  :where(.pg-charge-c) .kfoot {
-    @apply py-3.5 px-6 gap-2.5 flex items-center justify-end border-t border-t-line bg-sub;
-  }
   :where(.pg-charge-c) .ktool {
     @apply py-3 px-6 gap-2 flex items-center border-b border-b-line2 bg-hover2 text-[12px] text-muted;
   }
@@ -334,12 +294,6 @@
   :where(.pg-charge-c) .kf.bad .input,
   :where(.pg-charge-c) .kf.bad .select {
     @apply border-bad shadow-[0_0_0_1px_var(--bad)];
-  }
-  :where(.pg-charge-c) .kbanner {
-    @apply py-2.5 px-3.5 gap-2.5 flex items-start mb-4.5 rounded-[8px] bg-tint text-accent2 text-[13px] leading-[18px];
-  }
-  :where(.pg-charge-c) .kbanner.err {
-    @apply bg-badbg text-bad;
   }
   :where(.pg-charge-c) .kbtn-danger {
     @apply bg-bad border-bad text-onaccent;
