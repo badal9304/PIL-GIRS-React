@@ -42,7 +42,7 @@ export const NAV: NavGroup[] = [
       </svg>
     ),
     screens: [
-      { id: 'cockpit', label: 'Operations Cockpit', path: '/operations/cockpit', legacy: ['index.html'] },
+      { id: 'cockpit', label: 'Operations Cockpit', path: '/operations/cockpit', legacy: ['operations-cockpit.html'] },
       { id: 'charge-processing', label: 'Charge Processing', path: '/operations/charge-processing', legacy: ['charge-processing.html'] },
       { id: 'dd-engine', label: 'D&D Engine', path: '/operations/dd-engine', legacy: ['dd-engine.html'] },
       {
@@ -217,7 +217,10 @@ export const NAV: NavGroup[] = [
   },
 ];
 
-export const SCREENS: Screen[] = NAV.flatMap((g) => g.screens);
+/** Home: the landing screen, shown above the menu groups. */
+export const HOME: Screen = { id: 'home', label: 'Home', path: '/home', legacy: ['index.html'], ready: true };
+
+export const SCREENS: Screen[] = [HOME, ...NAV.flatMap((g) => g.screens)];
 export const DEFAULT_PATH = '/invoicing/invoice-list';
 
 /** Resolves a link written for the prototype ("customer-master-d.html?q=x") to an app route. */

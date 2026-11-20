@@ -1,6 +1,6 @@
 import { useEffect, useState, type MouseEvent } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
-import { NAV, groupOf } from '../navigation';
+import { HOME, NAV, groupOf } from '../navigation';
 import { useSettings } from '../providers/contexts';
 import { useI18n } from '../../i18n/context';
 import { cx } from '../../lib/cx';
@@ -85,6 +85,43 @@ export function SideNav() {
         className="flex-auto min-h-0 overflow-y-auto overflow-x-hidden flex flex-col gap-1 pt-2.5 px-2.5 pb-4"
       >
         {fly ? <div className="fixed top-0 right-0 bottom-0 left-16 z-60" aria-hidden="true" onClick={() => setFly(null)} /> : null}
+        <NavLink
+          to={HOME.path}
+          title={t(HOME.label)}
+          className={({ isActive }) =>
+            cx(
+              'group/grp box-border flex items-center gap-3 w-full rounded-[6px] text-[13px] font-semibold leading-[18px] no-underline',
+              c ? 'justify-center p-0 h-11' : 'py-0 pr-2 pl-3 h-9',
+              isActive ? cx('text-ink', c ? 'bg-tint' : '') : 'text-muted2 hover:bg-hover hover:text-ink',
+              focusRing,
+            )
+          }
+        >
+          {({ isActive }) => (
+            <>
+              <span className={cx('flex-none flex group-hover/grp:text-accent', isActive ? 'text-accent' : 'text-muted')}>
+                <svg
+                  className="size-5.5"
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.75"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M3 10.5L12 3l9 7.5" />
+                  <path d="M5 9.5V20a1 1 0 001 1h4v-6h4v6h4a1 1 0 001-1V9.5" />
+                </svg>
+              </span>
+              {c ? null : (
+                <span className="flex-auto min-w-0 overflow-hidden text-ellipsis whitespace-nowrap text-start">{tx(HOME.label)}</span>
+              )}
+            </>
+          )}
+        </NavLink>
         {NAV.map((g) => {
           const open = c ? fly?.id === g.id : acc === g.id;
           const on = g.id === activeGroup;

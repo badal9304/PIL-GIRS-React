@@ -8,11 +8,13 @@ interface PageProps {
   header?: ReactNode;
   /** Dialogs / drawers rendered at the end of the app root (above the shell). */
   overlays?: ReactNode;
+  /** Spacing of the main area, when a screen needs its own (e.g. tabs flush under the header). */
+  mainClassName?: string;
   children: ReactNode;
 }
 
 /** Content column of a screen: sticky top bar + header, then the scrolling main area. */
-export function Page({ header, overlays, children }: PageProps) {
+export function Page({ header, overlays, mainClassName = 'pt-4 px-5 pb-5', children }: PageProps) {
   const { overlayRoot } = useShell();
   return (
     <>
@@ -20,7 +22,7 @@ export function Page({ header, overlays, children }: PageProps) {
         <TopBar />
         {header}
       </div>
-      <main className="gmain flex-[1_0_auto] pt-4 px-5 pb-5 flex flex-col gap-4 box-border">{children}</main>
+      <main className={`gmain flex-[1_0_auto] ${mainClassName} flex flex-col gap-4 box-border`}>{children}</main>
       {overlays && overlayRoot ? createPortal(overlays, overlayRoot) : null}
     </>
   );

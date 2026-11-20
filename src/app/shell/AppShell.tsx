@@ -11,6 +11,7 @@ import { registerNavigate } from '../../lib/appBridge';
 
 /** Style scope of the screen that is open (screen stylesheets are scoped under these classes). */
 function pageClass(pathname: string) {
+  if (pathname.startsWith('/home')) return 'pg-home';
   if (pathname.startsWith('/invoicing/invoice-list')) return 'pg-invoices';
   const m = /^\/system-master\/(customer|contract|charge)-master\/(layout-c|layout-d)/.exec(pathname);
   if (m) return `pg-${m[1]}-${m[2] === 'layout-d' ? 'd' : 'c'}`;

@@ -7,6 +7,7 @@ import { SettingsProvider } from './providers/SettingsProvider';
 import { ToastProvider } from './providers/ToastProvider';
 import { I18nProvider } from '../i18n/I18nProvider';
 
+const HomePage = lazy(() => import('../features/home/HomePage'));
 const InvoiceListPage = lazy(() => import('../features/invoices/InvoiceListPage'));
 const CustomerMasterLayoutC = lazy(() => import('../features/masters/customer/CustomerMasterLayoutC'));
 const CustomerMasterLayoutD = lazy(() => import('../features/masters/customer/CustomerMasterLayoutD'));
@@ -22,6 +23,7 @@ const masterRoutes = (path: string, LayoutC: React.ComponentType, LayoutD: React
 ];
 
 const built: RouteObject[] = [
+  { path: '/home', element: <HomePage /> },
   { path: '/invoicing/invoice-list', element: <InvoiceListPage /> },
   ...masterRoutes('/system-master/customer-master', CustomerMasterLayoutC, CustomerMasterLayoutD),
   ...masterRoutes('/system-master/contract-master', ContractMasterLayoutC, ContractMasterLayoutD),
@@ -42,7 +44,7 @@ const router = createBrowserRouter(
         </Suspense>
       ),
       children: [
-        { index: true, element: <Navigate to={DEFAULT_PATH} replace /> },
+        { index: true, element: <Navigate to="/home" replace /> },
         ...built,
         ...placeholders,
         { path: '*', element: <Navigate to={DEFAULT_PATH} replace /> },
