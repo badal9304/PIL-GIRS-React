@@ -82,6 +82,7 @@ export class GirsPage extends ViewModel {
       drwF: '',
       drwQ: '',
       drwPg: 1,
+      blSel: {},
       confirm: null,
       rateFor: '',
       rateVal: '',
@@ -427,7 +428,7 @@ export class GirsPage extends ViewModel {
         genL: 'Generate ' + hmN(v.ready),
         noGen: !v.ready,
         noGenL: v.notDue ? 'Awaiting LMS' : v.open ? 'Blocked' : 'Done',
-        open: () => self.setState({ drw: v.id, drwF: v.blocked && !v.ready ? 'blocked' : '', drwQ: '', drwPg: 1 }),
+        open: () => self.setState({ drw: v.id, drwF: v.blocked && !v.ready ? 'blocked' : '', drwQ: '', drwPg: 1, blSel: {} }),
         openL: 'Open voyage ' + v.no,
         gen: () => self.setState({ confirm: { kind: 'voy', ids: [v.id] } }),
       };
@@ -549,7 +550,7 @@ export class GirsPage extends ViewModel {
       const out = [];
       vs.forEach((v) =>
         blSeq(v).forEach((k, i) => {
-          if (k !== m.reason || (m.pair && v.pair !== m.pair)) return;
+          if (k !== m.reason || (m.pair && v.pair !== m.pair) || (m.idx && !m.idx.includes(i))) return;
           const b = blRow(v, i),
             d = hmFmt(v.date, { day: '2-digit', month: 'short', year: 'numeric' });
           out.push(
@@ -568,7 +569,7 @@ export class GirsPage extends ViewModel {
     const openMail = (reason, vs, opt) => {
       const o = opt || {},
         R = MAILR[reason],
-        m0 = { reason, ids: vs.map((v) => v.id), pair: o.pair || '' },
+        m0 = { reason, ids: vs.map((v) => v.id), pair: o.pair || '', idx: o.idx || null },
         mr = mailRows(m0);
       const n = mr.rows.length,
         amt = mr.rows.reduce((a, r) => a + r[9], 0),
@@ -754,6 +755,43 @@ export class GirsPage extends ViewModel {
       const dps = 50,
         dpages = Math.max(1, Math.ceil(idx.length / dps)),
         dpn = Math.min(s.drwPg, dpages);
+      // B/L selection (invoiced B/Ls cannot be selected)
+      const blSel = s.blSel || {};
+      const pageSel = idx.slice((dpn - 1) * dps, dpn * dps).filter((i) => seq[i] !== 'inv');
+      const selI = Object.keys(blSel)
+        .map(Number)
+        .filter((i) => seq[i] && seq[i] !== 'inv');
+      const selReady = selI.filter((i) => seq[i] === 'ready'),
+        selBlk = selI.filter((i) => ['roe', 'nod', 'hold'].includes(seq[i]));
+      const blkKinds = Array.from(new Set(selBlk.map((i) => seq[i])));
+      const fk = blkKinds.length === 1 ? blkKinds[0] : '';
+      const fuSent = fk === 'roe' && s.roeReq[dv.pair];
+      const sel = {
+        show: selI.length > 0,
+        n: hmN(selI.length) + (selI.length === 1 ? ' B/L selected' : ' B/Ls selected'),
+        genL: 'Generate ' + hmN(selReady.length) + ' ready',
+        genDis: !selReady.length,
+        gen: () => self.setState({ confirm: { kind: 'bls', vid: dv.id, idx: selReady.slice() } }),
+        fuL: fk === 'roe' ? (fuSent ? 'Enter rate' : 'Request ROE') : 'Send follow-up',
+        fuDis: !fk,
+        fuWhy: !selBlk.length
+          ? 'No blocked B/Ls selected'
+          : !fk
+            ? 'Selected B/Ls are blocked for different reasons — select one reason at a time'
+            : '',
+        fu: () =>
+          fk === 'roe' && fuSent
+            ? self.setState({ rateFor: dv.pair, rateVal: '' })
+            : openMail(fk, [dv], {
+                pair: fk === 'roe' ? dv.pair : '',
+                idx: selBlk.slice(),
+                scope: 'voyage ' + dv.no + ' · ' + selBlk.length + ' selected B/Ls',
+                keys: fk === 'roe' ? [['roeReq', dv.pair]] : [['fu', 'v:' + dv.id + ':' + fk]],
+              }),
+        exp: () => self.setState({ __toast: 'Export to Excel prepared — ' + hmN(selI.length) + ' B/Ls of voyage ' + dv.no + '.' }),
+        clear: () => self.setState({ blSel: {} }),
+      };
+      const allOn = pageSel.length > 0 && pageSel.every((i) => blSel[i]);
       const dgo = (v) => () => self.setState({ drwPg: v });
       drw = {
         show: true,
@@ -813,6 +851,16 @@ export class GirsPage extends ViewModel {
             r = hmRnd(dv.id + i);
           r();
           return {
+            on: blSel[i] ? 'true' : 'false',
+            chkDis: k === 'inv',
+            chkL: (k === 'inv' ? 'Already invoiced — ' : 'Select B/L ') + blno(i),
+            chk: () => {
+              const n2 = Object.assign({}, blSel);
+              if (n2[i]) delete n2[i];
+              else n2[i] = 1;
+              self.setState({ blSel: n2 });
+            },
+            stop: (e) => e && e.stopPropagation && e.stopPropagation(),
             open: () => self.setState({ ri: { vid: dv.id, list: pageIdx.slice(), i: n }, decl: false }),
             openL: 'Open B/L ' + blno(i) + ' — ' + HM_BLST[k][0],
             bl: blno(i),
@@ -844,11 +892,22 @@ export class GirsPage extends ViewModel {
           next: dgo(dpn + 1),
           show: dpages > 1,
         },
+        sel,
+        allOn: allOn ? 'true' : 'false',
+        allDis: !pageSel.length,
+        allT: () => {
+          const n2 = Object.assign({}, blSel);
+          pageSel.forEach((i) => {
+            if (allOn) delete n2[i];
+            else n2[i] = 1;
+          });
+          self.setState({ blSel: n2 });
+        },
         canGen: dv.ready > 0,
         genL: 'Generate ' + hmN(dv.ready) + ' ready',
         gen: () => self.setState({ confirm: { kind: 'voy', ids: [dv.id] } }),
         list: 'invoice-list-v2.html?q=' + dv.no,
-        close: () => self.setState({ drw: '' }),
+        close: () => self.setState({ drw: '', blSel: {} }),
       };
     }
 
@@ -920,14 +979,16 @@ export class GirsPage extends ViewModel {
         !!a.cur &&
         String(a.unit).trim() !== '' &&
         parseFloat(String(a.unit).replace(/,/g, '')) >= 0;
-      const addLines = ed.add.filter(okAdd).map((a) => ({
-        code: a.code,
-        name: HM_CHG[a.code],
-        amt: parseFloat(a.qty) * parseFloat(String(a.unit).replace(/,/g, '')),
-        cur: a.cur,
-        roe: a.cur === 'USD' ? '—' : roeTxt,
-        tax: a.cur === 'USD' ? loc[3] : loc[2],
-      }));
+      const addLines = ed.add
+        .filter(okAdd)
+        .map((a) => ({
+          code: a.code,
+          name: HM_CHG[a.code],
+          amt: parseFloat(a.qty) * parseFloat(String(a.unit).replace(/,/g, '')),
+          cur: a.cur,
+          roe: a.cur === 'USD' ? '—' : roeTxt,
+          tax: a.cur === 'USD' ? loc[3] : loc[2],
+        }));
       const due = hmAdd(HM_TODAY, 14);
       const m =
         window.GirsDocs && GirsDocs.model
@@ -1175,20 +1236,22 @@ export class GirsPage extends ViewModel {
           ['Containers', ctr + ' × 40HC'],
         ]),
         lines: (m
-          ? m.rows.slice(0, lines.length).map((l) => ({
-              edit: false,
-              ro: true,
-              cls: '',
-              head: l.head,
-              qty: l.qty,
-              uom: l.uom,
-              unit: l.unit,
-              cur: l.cur,
-              ex: l.ex,
-              ta: l.ta,
-              tax: l.tax,
-              inc: l.incl,
-            }))
+          ? m.rows
+              .slice(0, lines.length)
+              .map((l) => ({
+                edit: false,
+                ro: true,
+                cls: '',
+                head: l.head,
+                qty: l.qty,
+                uom: l.uom,
+                unit: l.unit,
+                cur: l.cur,
+                ex: l.ex,
+                ta: l.ta,
+                tax: l.tax,
+                inc: l.incl,
+              }))
           : []
         ).concat(done ? [] : addRows),
         to: toBox,
@@ -1261,6 +1324,47 @@ export class GirsPage extends ViewModel {
             confirm: null,
             sel: {},
             done: { n: hmN(n), q: vs.length === 1 ? vs[0].no : '', nos: vs.length === 1 ? 'voyage ' + vs[0].no : vs.length + ' voyages' },
+          });
+        },
+      };
+    }
+    if (s.confirm && s.confirm.kind === 'bls') {
+      const v = pool.find((x) => x.id === s.confirm.vid),
+        ix = s.confirm.idx;
+      const amt = v ? ix.reduce((a, i) => a + blRow(v, i).amt, 0) : 0;
+      cf = {
+        show: !!v,
+        title: 'Generate ' + hmN(ix.length) + (ix.length === 1 ? ' invoice?' : ' invoices?'),
+        rows: [
+          ['Voyage', v ? v.no + ' · ' + v.vessel : ''],
+          [
+            'B/Ls',
+            ix.length > 4
+              ? ix
+                  .slice(0, 4)
+                  .map((i) => blRow(v, i).bl)
+                  .join(', ') +
+                ' and ' +
+                (ix.length - 4) +
+                ' more'
+              : ix.map((i) => blRow(v, i).bl).join(', '),
+          ],
+          ['Invoice date', v && v.dir === 'E' ? 'ETD' : 'ETA'],
+          ['Total amount', hmUsd(amt)],
+        ].map(([l, val]) => ({ l, v: val })),
+        note: 'Only the selected B/Ls that are ready are included.',
+        cancel: () => self.setState({ confirm: null }),
+        ok: () => {
+          const bg = JSON.parse(JSON.stringify(s.blGen || {}));
+          bg[v.id] = Object.assign({}, bg[v.id] || {});
+          ix.forEach((i) => {
+            bg[v.id][i] = 1;
+          });
+          self.save({
+            blGen: bg,
+            confirm: null,
+            blSel: {},
+            __toast: hmN(ix.length) + (ix.length === 1 ? ' invoice' : ' invoices') + ' generated for voyage ' + v.no + '.',
           });
         },
       };
@@ -1469,14 +1573,16 @@ export class GirsPage extends ViewModel {
           prevL: s.mailPrev ? 'Hide preview' : 'Preview',
           togglePrev: () => self.setState({ mailPrev: !s.mailPrev }),
           heads: heads.map((h) => ({ h })),
-          prev: mr.rows.slice(0, 8).map((r) => ({
-            cells: r.map((v) => ({
-              v:
-                typeof v === 'number' && v % 1
-                  ? v.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
-                  : String(v),
+          prev: mr.rows
+            .slice(0, 8)
+            .map((r) => ({
+              cells: r.map((v) => ({
+                v:
+                  typeof v === 'number' && v % 1
+                    ? v.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+                    : String(v),
+              })),
             })),
-          })),
           more: mr.rows.length > 8 ? '+ ' + hmN(mr.rows.length - 8) + ' more rows in the file' : '',
           download: () => hmDownload(hmXlsx(R.l, heads, mr.rows), m.file),
           cancel: () => self.setState({ mail: null }),
