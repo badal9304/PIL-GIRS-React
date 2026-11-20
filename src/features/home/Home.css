@@ -2139,12 +2139,6 @@
   :where(.pg-home) .hm-blr {
     @apply cursor-pointer;
   }
-  :where(.pg-home) .hm-hello {
-    background: linear-gradient(100deg, var(--tint) 0%, var(--tint2) 28%, var(--surface) 62%) !important;
-  }
-  :where(.pg-home) .hm-tabs {
-    @apply [background:linear-gradient(100deg,var(--tint)_0%,var(--tint2)_28%,var(--surface)_62%)];
-  }
   :where(.pg-home) .hm-rd.today:not(.on) {
     @apply bg-tint2;
   }
@@ -2153,12 +2147,6 @@
   }
   :where(.pg-home) .hm-rd.late:not(.on):hover {
     @apply bg-warnbg;
-  }
-  :where(.pg-home) .hm-gl .hm-rh {
-    @apply [background:linear-gradient(180deg,var(--tint2),transparent)] [border-radius:8px_8px_0_0];
-  }
-  :where(.pg-home) .hm-rail > .card:not(.hm-gl) .hm-rh {
-    @apply [background:linear-gradient(180deg,color-mix(in_srgb,var(--warnbg)_70%,transparent),transparent)] [border-radius:8px_8px_0_0];
   }
   :where(.pg-home) .hm-rsn li {
     @apply shadow-[inset_3px_0_0_var(--warnbd)];
@@ -2175,9 +2163,6 @@
   }
   :where(.pg-home) .hm-vtab tbody tr:has(input.cbx:checked) td {
     @apply bg-tint2;
-  }
-  :where(.pg-home) aside.panel > .panel-h {
-    @apply [background:linear-gradient(100deg,var(--tint)_0%,var(--tint2)_35%,var(--surface)_75%)];
   }
   :where(.pg-home) .hm-ds4 div {
     @apply shadow-[inset_0_3px_0_var(--bdh)];

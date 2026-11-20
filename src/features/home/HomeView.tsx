@@ -13,7 +13,7 @@ export function HomeView({ v }: { v: any }) {
     <Page
       mainClassName="pt-0 px-5 pb-6"
       header={
-        <div className="ghead hm-hello py-2 px-5 min-h-14 flex-none flex flex-wrap items-center justify-between gap-y-2 gap-x-6 bg-surface border-b border-b-line box-border">
+        <div className="ghead py-2 px-5 min-h-14 flex-none flex flex-wrap items-center justify-between gap-y-2 gap-x-6 bg-surface border-b border-b-line box-border">
           <div className="min-w-0">
             <h1 className="m-0 text-[17px] font-semibold leading-[22px]">{tx(s(v.greet))}</h1>
             <p className="mt-0.5 mb-0 mx-0 text-[13px] leading-[18px] text-muted">{tx(s(v.ctx))}</p>
