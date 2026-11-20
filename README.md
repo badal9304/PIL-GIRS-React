@@ -93,3 +93,15 @@ All data is sample data generated in the browser, and user changes are kept in `
 - `src/lib/legacy/girsDocs.js` renders the invoice and receipt documents and their PDFs (with QR code), and `girsCtx.js` hands context between screens. Both are kept as plain JS modules from the prototype.
 - Master screens keep only layouts C and D. Layouts A and B were dropped.
 - Some rules stay as plain CSS inside `@layer components` because they have no exact utility equivalent (CSS variables, `!important`, vendor prefixes, `content` strings).
+
+## Preview builds
+
+Screens waiting for approval are built from the `preview` branch and published next to the main site:
+
+| Branch | URL |
+| --- | --- |
+| `main` | https://badal9304.github.io/PIL-GIRS-React/ |
+| `preview` | https://badal9304.github.io/PIL-GIRS-React/preview/ |
+
+A push to either branch rebuilds both (`.github/workflows/deploy.yml`). Once a preview is approved, merge `preview` into `main`.
+

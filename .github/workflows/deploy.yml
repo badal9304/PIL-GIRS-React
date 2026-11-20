@@ -1,8 +1,12 @@
 name: Deploy to GitHub Pages
 
+# The site serves two builds:
+#   /<repo>/          ← main (approved screens)
+#   /<repo>/preview/  ← the "preview" branch (screens waiting for approval), when that branch exists
+# A push to either branch rebuilds both.
 on:
   push:
-    branches: [main]
+    branches: [main, preview]
   workflow_dispatch:
 
 permissions:
@@ -17,21 +21,63 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      BASE: /${{ github.event.repository.name }}/
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: main
+          path: main
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-          cache: npm
-      - run: npm ci
-      - run: npm run lint
-      - run: npm test
-      - run: npm run build
+      - name: Build main
+        working-directory: main
+        run: |
+          npm ci
+          npm run lint
+          npm test
+          npm run build
         env:
-          BASE_PATH: /${{ github.event.repository.name }}/
+          BASE_PATH: ${{ env.BASE }}
+
+      - name: Check for a preview branch
+        id: preview
+        working-directory: main
+        run: |
+          if git ls-remote --exit-code --heads origin preview >/dev/null; then echo "exists=true" >> "$GITHUB_OUTPUT"; else echo "exists=false" >> "$GITHUB_OUTPUT"; fi
+      - uses: actions/checkout@v4
+        if: steps.preview.outputs.exists == 'true'
+        with:
+          ref: preview
+          path: preview
+      - name: Build preview
+        if: steps.preview.outputs.exists == 'true'
+        working-directory: preview
+        run: |
+          npm ci
+          npm run lint
+          npm test
+          npm run build
+          rm -f dist/404.html
+          cp -r dist ../main/dist/preview
+        env:
+          BASE_PATH: ${{ env.BASE }}preview/
+
+      # Deep links (e.g. /<repo>/preview/home) reach 404.html; it loads the matching app.
+      - name: SPA fallback for both builds
+        run: |
+          cat > main/dist/404.html <<HTML
+          <!doctype html><html><head><meta charset="utf-8"><title>GIRS</title></head><body><script>
+          var base = '${BASE}', p = location.pathname;
+          var app = p.indexOf(base + 'preview/') === 0 ? base + 'preview/index.html' : base + 'index.html';
+          fetch(app).then(function (r) { return r.text(); }).then(function (h) { document.open(); document.write(h); document.close(); });
+          </script></body></html>
+          HTML
+
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: dist
+          path: main/dist
 
   deploy:
     needs: build
