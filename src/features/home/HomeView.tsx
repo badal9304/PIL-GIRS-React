@@ -1126,7 +1126,7 @@ export function HomeView({ v }: { v: any }) {
                       <button className="btn btn-sm" onClick={clk(v.bulk?.exp)}>
                         {tx('Export to Excel')}
                       </button>{' '}
-                      <button className="btn btn-sm hm-nx" onClick={clk(v.bulk?.clear)}>
+                      <button className="btn btn-sm hm-clr" onClick={clk(v.bulk?.clear)}>
                         {tx('Clear selection')}
                       </button>
                     </div>
@@ -1170,7 +1170,7 @@ export function HomeView({ v }: { v: any }) {
                     />
                   </div>
                 </div>
-                <div className="chips" role="group" aria-label={t('Status')}>
+                <div className="chips hm-fbar" role="group" aria-label={t('Status')}>
                   {(v.stfs || []).map((f: any, $index: number) => (
                     <Fragment key={$index}>
                       <button className="chipb" aria-pressed={a(f?.cur)} onClick={clk(f?.pick)}>
@@ -1497,7 +1497,7 @@ export function HomeView({ v }: { v: any }) {
                     />
                   </div>
                 </div>
-                <div className="chips" role="group" aria-label={t('Status')}>
+                <div className="chips hm-fbar" role="group" aria-label={t('Status')}>
                   {(v.dd?.fil || []).map((f: any, $index: number) => (
                     <Fragment key={$index}>
                       <button className="chipb" aria-pressed={a(f?.cur)} onClick={clk(f?.pick)}>
