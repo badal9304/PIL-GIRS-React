@@ -68,7 +68,7 @@ jobs:
       - name: SPA fallback for both builds
         run: |
           cat > main/dist/404.html <<HTML
-          <!doctype html><html><head><meta charset="utf-8"><title>GIRS</title></head><body><script>
+          <!doctype html><html><head><meta charset="utf-8"><title>GIRS · PIL</title><link rel="icon" type="image/png" href="${BASE}favicon.png"><link rel="apple-touch-icon" href="${BASE}apple-touch-icon.png"></head><body><script>
           var base = '${BASE}', p = location.pathname;
           var app = p.indexOf(base + 'preview/') === 0 ? base + 'preview/index.html' : base + 'index.html';
           fetch(app).then(function (r) { return r.text(); }).then(function (h) { document.open(); document.write(h); document.close(); });
