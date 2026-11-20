@@ -1213,7 +1213,6 @@ export function HomeView({ v }: { v: any }) {
                             <span aria-hidden="true">{tx(s(v.cols?.vessel?.ic))}</span>
                           </button>
                         </th>
-                        <th scope="col">{tx('Route')}</th>
                         <th scope="col" className={a(v.cols?.date?.cls)} aria-sort={a(v.cols?.date?.aria)}>
                           <button className="hm-sb" onClick={clk(v.cols?.date?.on)}>
                             {tx(s(v.cols?.date?.l))}
@@ -1255,7 +1254,7 @@ export function HomeView({ v }: { v: any }) {
                           {g?.show ? (
                             <>
                               <tr className="hm-gh">
-                                <th colSpan={10} scope="rowgroup">
+                                <th colSpan={9} scope="rowgroup">
                                   <b>{tx(s(g?.l))}</b>
                                   <span>{tx(s(g?.m))}</span>
                                 </th>
@@ -1280,7 +1279,6 @@ export function HomeView({ v }: { v: any }) {
                                   {tx(s(r?.vessel))}
                                   <small className="hm-sub">{tx(s(r?.svc))}</small>
                                 </td>
-                                <td className="mono">{tx(s(r?.route))}</td>
                                 <td>{tx(s(r?.date))}</td>
                                 <td>
                                   <span className={a(r?.dueC)}>{tx(s(r?.dueL))}</span>
