@@ -18,8 +18,8 @@ export interface Settings {
   setLoginIndex: (i: number) => void;
 }
 
+/** Toast actions. Stable for the app's lifetime, so screens that only show toasts don't re-render when one appears. */
 export interface ToastApi {
-  message: string;
   show: (message: string) => void;
   /** Hides the message after 5 s if it is still showing. */
   fade: (message: string) => void;
@@ -28,6 +28,8 @@ export interface ToastApi {
 
 export const SettingsContext = createContext<Settings | null>(null);
 export const ToastContext = createContext<ToastApi | null>(null);
+/** The message on screen. Kept apart from the actions; only the toast itself reads it. */
+export const ToastMessageContext = createContext('');
 
 /** User preferences (theme, side panel, language, hub, entity, login). */
 export function useSettings() {
@@ -36,9 +38,14 @@ export function useSettings() {
   return ctx;
 }
 
-/** App toast (bottom-right status message). */
+/** App toast actions (bottom-right status message). */
 export function useToast() {
   const ctx = useContext(ToastContext);
   if (!ctx) throw new Error('useToast must be used inside ToastProvider');
   return ctx;
+}
+
+/** The toast message currently on screen ('' when none). */
+export function useToastMessage() {
+  return useContext(ToastMessageContext);
 }

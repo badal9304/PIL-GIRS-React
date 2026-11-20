@@ -8,8 +8,8 @@ import './Home.css';
 /** Feeds the top-bar location and entity into the screen state before each render. */
 class HomeScreenModel extends HomeModel {
   valsFor(hub: string, entity: string) {
-    this.state = { ...this.state, __hub: hub, __ent: entity };
-    return this.renderVals();
+    if (this.state.__hub !== hub || this.state.__ent !== entity) this.state = { ...this.state, __hub: hub, __ent: entity };
+    return this.vals(hub + '|' + entity);
   }
 }
 

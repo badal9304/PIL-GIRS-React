@@ -21,6 +21,7 @@ export class ViewModel<S extends AnyState = AnyState, P = AnyState> {
   protected services: ViewModelServices = noop;
   private listeners = new Set<() => void>();
   private version = 0;
+  private memo: { version: number; key: string; vals: AnyState } | null = null;
 
   constructor(props?: P) {
     this.props = (props || {}) as P;
@@ -67,6 +68,18 @@ export class ViewModel<S extends AnyState = AnyState, P = AnyState> {
   componentWillUnmount?(): void;
   renderVals(): AnyState {
     return {};
+  }
+
+  /**
+   * renderVals(), cached until the state changes (or `key` does, for inputs kept outside the state).
+   * Renders caused by the shell (theme, language, side panel) then reuse the values instead of rebuilding them.
+   */
+  vals(key = ''): AnyState {
+    const m = this.memo;
+    if (m && m.version === this.version && m.key === key) return m.vals;
+    const vals = this.renderVals();
+    this.memo = { version: this.version, key, vals };
+    return vals;
   }
 }
 

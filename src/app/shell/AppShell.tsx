@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { SideNav } from './SideNav';
 import { ShellContext } from './ShellContext';
-import { useSettings, useToast } from '../providers/contexts';
+import { useSettings, useToast, useToastMessage } from '../providers/contexts';
 import { useI18n } from '../../i18n/context';
 import { useViewportFit } from '../../hooks/useViewportFit';
 import { useTruncationTooltip } from '../../hooks/useTruncationTooltip';
@@ -21,8 +21,6 @@ function pageClass(pathname: string) {
 /** App frame: brand bar, side navigation, content column and toast. Desktop layout (1920px canvas fitted to the window). */
 export function AppShell() {
   const { theme } = useSettings();
-  const { tx } = useI18n();
-  const toast = useToast();
   const { zoom, height } = useViewportFit();
   const { pathname } = useLocation();
   const navigate = useNavigate();
@@ -49,18 +47,27 @@ export function AppShell() {
           </div>
         </div>
         <div ref={setOverlayRoot} className="contents" />
-        {toast.message ? (
-          <div
-            role="status"
-            className="fixed bottom-5 end-5 z-60 flex items-center gap-3 max-w-130 min-h-11 pr-2 pl-4 rounded-[8px] bg-ink text-bg shadow-[0_8px_24px_rgba(0,0,0,.25)] box-border"
-          >
-            {tx(toast.message)}
-            <button className="btn btn-sm" onClick={toast.close}>
-              {tx('Close')}
-            </button>
-          </div>
-        ) : null}
+        <Toast />
       </div>
     </ShellContext.Provider>
+  );
+}
+
+/** Bottom-right status message. Its own component so a toast re-renders only itself, not the shell and screen. */
+function Toast() {
+  const { tx } = useI18n();
+  const { close } = useToast();
+  const message = useToastMessage();
+  if (!message) return null;
+  return (
+    <div
+      role="status"
+      className="fixed bottom-5 end-5 z-60 flex items-center gap-3 max-w-130 min-h-11 pr-2 pl-4 rounded-[8px] bg-ink text-bg shadow-[0_8px_24px_rgba(0,0,0,.25)] box-border"
+    >
+      {tx(message)}
+      <button className="btn btn-sm" onClick={close}>
+        {tx('Close')}
+      </button>
+    </div>
   );
 }

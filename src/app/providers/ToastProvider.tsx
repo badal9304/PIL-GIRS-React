@@ -1,5 +1,5 @@
 import { useCallback, useMemo, useRef, useState, type ReactNode } from 'react';
-import { ToastContext } from './contexts';
+import { ToastContext, ToastMessageContext } from './contexts';
 
 export function ToastProvider({ children }: { children: ReactNode }) {
   const [message, setMessage] = useState('');
@@ -21,6 +21,10 @@ export function ToastProvider({ children }: { children: ReactNode }) {
     [show],
   );
 
-  const api = useMemo(() => ({ message, show, fade, close }), [message, show, fade, close]);
-  return <ToastContext.Provider value={api}>{children}</ToastContext.Provider>;
+  const api = useMemo(() => ({ show, fade, close }), [show, fade, close]);
+  return (
+    <ToastContext.Provider value={api}>
+      <ToastMessageContext.Provider value={message}>{children}</ToastMessageContext.Provider>
+    </ToastContext.Provider>
+  );
 }

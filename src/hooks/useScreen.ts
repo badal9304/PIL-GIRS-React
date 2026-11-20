@@ -23,5 +23,6 @@ export function useScreen<M extends ViewModel>(create: () => M) {
     }),
     [toast],
   );
-  return { ...vm.renderVals(), shell };
+  const vals = vm.vals();
+  return useMemo(() => ({ ...vals, shell }), [vals, shell]);
 }
