@@ -61,7 +61,7 @@ def split_template(tpl, kit=False):
         # only layouts C and D are built
         tpl = re.sub(r'<a class="lay"[^>]*href="[a-z-]+-master(-b)?\.html"[^>]*>[^<]*</a>', '', tpl)
     root = tpl2jsx.parse(tpl)[0]
-    ghead = [e for e in root.iter() if e.attrib.get('class', '') == 'ghead'][0]
+    ghead = [e for e in root.iter() if 'ghead' in e.attrib.get('class', '').split()][0]
     main = root.find('.//' + NS + 'main')
     extras = [c for c in root if not (c.tag == NS + 'sc-if' and 'hasToast' in c.attrib.get('value', ''))][2:]
     return ghead, main, extras
