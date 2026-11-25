@@ -37,6 +37,8 @@
   "Remove added charge": "إزالة الرسم المضاف",
   "Rows per page": "صفوف لكل صفحة",
   "Select": "اختر",
+  "Select all B/Ls on this page": "تحديد كل بوالص الشحن في هذه الصفحة",
+  "Selected B/Ls": "بوالص الشحن المحددة",
   "Status": "الحالة",
   "Tax Amount": "مبلغ الضريبة",
   "Tax applicability": "انطباق الضريبة",

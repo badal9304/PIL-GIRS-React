@@ -1,7 +1,7 @@
 /* Home view-model: Voyage Invoicing (date navigation, workload ribbon, voyages table, voyage panel,
    Ready-to-invoice popup, follow-up mail with Excel attachment) and D&D Billing.
    The working location and entity come from the top bar (state.__hub, state.__ent). */
-import type { ChangeEvent, KeyboardEvent, MouseEvent } from 'react';
+import type { ChangeEvent, KeyboardEvent, MouseEvent, SyntheticEvent } from 'react';
 import { invoiceModel } from '@/entities/invoice';
 import { FALLBACK_SESSION } from '@/entities/user';
 import {
@@ -47,6 +47,8 @@ export interface FollowUpMail {
   reason: 'nod' | 'roe' | 'hold';
   ids: string[];
   pair: string;
+  /** Only these B/L indexes (B/Ls ticked in the side panel); null for every B/L of the reason. */
+  idx: number[] | null;
   to: string;
   cc: string;
   sub: string;
@@ -58,7 +60,10 @@ export interface FollowUpMail {
   keys: (readonly ['fu' | 'roeReq', string])[];
 }
 
-export type VoyageConfirm = { kind: 'voy'; ids: string[] } | { kind: 'dd'; cns: string[]; bls: number; amt: string };
+export type VoyageConfirm =
+  | { kind: 'voy'; ids: string[] }
+  | { kind: 'bls'; vid: string; idx: number[] }
+  | { kind: 'dd'; cns: string[]; bls: number; amt: string };
 
 /** Screen state of Home (the actions taken in GIRS are server data: see VoyageChanges). */
 export interface VoyageState {
@@ -90,6 +95,8 @@ export interface VoyageState {
   drwF: string;
   drwQ: string;
   drwPg: number;
+  /** B/Ls ticked in the side panel, by index (invoiced B/Ls cannot be ticked). */
+  blSel: Readonly<Record<number, true>>;
   confirm: VoyageConfirm | null;
   rateFor: string;
   rateVal: string;
@@ -142,6 +149,7 @@ export class VoyageInvoicingModel extends ScreenModel<VoyageState, VoyageVals, V
       drwF: '',
       drwQ: '',
       drwPg: 1,
+      blSel: {},
       confirm: null,
       rateFor: '',
       rateVal: '',
@@ -160,7 +168,7 @@ export class VoyageInvoicingModel extends ScreenModel<VoyageState, VoyageVals, V
     if (this.state.mail) return this.setState({ mail: null });
     if (this.state.riCu || this.state.riSug) return this.setState({ riCu: null, riSug: null });
     if (this.state.ri) return this.setState({ ri: null, decl: false });
-    this.setState({ drw: '', confirm: null, rateFor: '', cal: false });
+    this.setState({ drw: '', blSel: {}, confirm: null, rateFor: '', cal: false });
   };
 
   override mount(): void {
@@ -623,7 +631,7 @@ export function voyageVals(self: VoyageHost) {
       genL: 'Generate ' + fmtN(v.ready),
       noGen: !v.ready,
       noGenL: v.notDue ? 'Awaiting LMS' : v.open ? 'Blocked' : 'Done',
-      open: () => self.setState({ drw: v.id, drwF: v.blocked && !v.ready ? 'blocked' : '', drwQ: '', drwPg: 1 }),
+      open: () => self.setState({ drw: v.id, drwF: v.blocked && !v.ready ? 'blocked' : '', drwQ: '', drwPg: 1, blSel: {} }),
       openL: 'Open voyage ' + v.no,
       gen: () => self.setState({ confirm: { kind: 'voy', ids: [v.id] } }),
     };
@@ -738,12 +746,12 @@ export function voyageVals(self: VoyageHost) {
       extra: ['Issue'],
     },
   };
-  const mailRows = (m: Pick<FollowUpMail, 'reason' | 'ids' | 'pair'>) => {
+  const mailRows = (m: Pick<FollowUpMail, 'reason' | 'ids' | 'pair' | 'idx'>) => {
     const vs = m.ids.map((id) => pool0.find((v) => v.id === id)).filter((v): v is LiveVoyage => !!v);
     const out: XlsxCell[][] = [];
     vs.forEach((v) =>
       blSeq(v).forEach((k, i) => {
-        if (k !== m.reason || (m.pair && v.pair !== m.pair)) return;
+        if (k !== m.reason || (m.pair && v.pair !== m.pair) || (m.idx && !m.idx.includes(i))) return;
         const b = blRow(v, i),
           d = formatDate(v.date, { day: '2-digit', month: 'short', year: 'numeric' });
         out.push(
@@ -762,11 +770,11 @@ export function voyageVals(self: VoyageHost) {
   const openMail = (
     reason: FollowUpMail['reason'],
     vs: readonly LiveVoyage[],
-    opt?: { pair?: string; keys?: FollowUpMail['keys']; scope?: string },
+    opt?: { pair?: string; idx?: number[]; keys?: FollowUpMail['keys']; scope?: string },
   ) => {
     const o = opt ?? {},
       R = MAILR[reason],
-      m0 = { reason, ids: vs.map((v) => v.id), pair: o.pair || '' },
+      m0 = { reason, ids: vs.map((v) => v.id), pair: o.pair || '', idx: o.idx ?? null },
       mr = mailRows(m0);
     const n = mr.rows.length,
       amt = mr.rows.reduce((a: number, r) => a + Number(r[9] ?? 0), 0),
@@ -952,6 +960,44 @@ export function voyageVals(self: VoyageHost) {
         const dps = 50,
           dpages = Math.max(1, Math.ceil(idx.length / dps)),
           dpn = Math.min(s.drwPg, dpages);
+        // B/L selection (invoiced B/Ls cannot be selected)
+        const blSel = s.blSel;
+        const pageSel = idx.slice((dpn - 1) * dps, dpn * dps).filter((i) => seq[i] !== 'inv');
+        const selI = Object.keys(blSel)
+          .map(Number)
+          .filter((i) => seq[i] && seq[i] !== 'inv');
+        const selReady = selI.filter((i) => seq[i] === 'ready'),
+          selBlk = selI.filter((i) => ['roe', 'nod', 'hold'].includes(seq[i] ?? ''));
+        const blkKinds = Array.from(new Set(selBlk.map((i) => seq[i])));
+        const fk = blkKinds.length === 1 && (blkKinds[0] === 'roe' || blkKinds[0] === 'nod' || blkKinds[0] === 'hold') ? blkKinds[0] : '';
+        const fuSent = fk === 'roe' && !!s.roeReq[dv.pair];
+        const sel = {
+          show: selI.length > 0,
+          n: fmtN(selI.length) + (selI.length === 1 ? ' B/L selected' : ' B/Ls selected'),
+          genL: 'Generate ' + fmtN(selReady.length) + ' ready',
+          genDis: !selReady.length,
+          gen: () => self.setState({ confirm: { kind: 'bls', vid: dv.id, idx: selReady.slice() } }),
+          fuL: fk === 'roe' ? (fuSent ? 'Enter rate' : 'Request ROE') : 'Send follow-up',
+          fuDis: !fk,
+          fuWhy: !selBlk.length
+            ? 'No blocked B/Ls selected'
+            : !fk
+              ? 'Selected B/Ls are blocked for different reasons — select one reason at a time'
+              : '',
+          fu: () => {
+            if (!fk) return;
+            if (fk === 'roe' && fuSent) return self.setState({ rateFor: dv.pair, rateVal: '' });
+            openMail(fk, [dv], {
+              pair: fk === 'roe' ? dv.pair : '',
+              idx: selBlk.slice(),
+              scope: 'voyage ' + dv.no + ' · ' + selBlk.length + ' selected B/Ls',
+              keys: fk === 'roe' ? [['roeReq', dv.pair]] : [['fu', 'v:' + dv.id + ':' + fk]],
+            });
+          },
+          exp: () => self.setState({ __toast: 'Export to Excel prepared — ' + fmtN(selI.length) + ' B/Ls of voyage ' + dv.no + '.' }),
+          clear: () => self.setState({ blSel: {} }),
+        };
+        const allOn = pageSel.length > 0 && pageSel.every((i) => blSel[i]);
         const dgo = (v: number) => () => self.setState({ drwPg: v });
         return {
           show: true,
@@ -1018,6 +1064,16 @@ export function voyageVals(self: VoyageHost) {
               r = seededRandom(dv.id + i);
             r();
             return {
+              on: blSel[i] ? ('true' as const) : ('false' as const),
+              chkDis: k === 'inv',
+              chkL: (k === 'inv' ? 'Already invoiced — ' : 'Select B/L ') + blno(i),
+              chk: () => {
+                const n2: Record<number, true> = { ...blSel };
+                if (n2[i]) delete n2[i];
+                else n2[i] = true;
+                self.setState({ blSel: n2 });
+              },
+              stop: (e: SyntheticEvent) => e.stopPropagation(),
               open: () => self.setState({ ri: { vid: dv.id, list: pageIdx.slice(), i: n }, decl: false }),
               openL: 'Open B/L ' + blno(i) + ' — ' + (BL_STATUS[k]?.[0] ?? ''),
               bl: blno(i),
@@ -1049,11 +1105,22 @@ export function voyageVals(self: VoyageHost) {
             next: dgo(dpn + 1),
             show: dpages > 1,
           },
+          sel,
+          allOn: allOn ? ('true' as const) : ('false' as const),
+          allDis: !pageSel.length,
+          allT: () => {
+            const n2: Record<number, true> = { ...blSel };
+            pageSel.forEach((i) => {
+              if (allOn) delete n2[i];
+              else n2[i] = true;
+            });
+            self.setState({ blSel: n2 });
+          },
           canGen: dv.ready > 0,
           genL: 'Generate ' + fmtN(dv.ready) + ' ready',
           gen: () => self.setState({ confirm: { kind: 'voy', ids: [dv.id] } }),
           list: 'invoice-list-v2.html?q=' + dv.no,
-          close: () => self.setState({ drw: '' }),
+          close: () => self.setState({ drw: '', blSel: {} }),
         };
       })();
 
@@ -1479,6 +1546,41 @@ export function voyageVals(self: VoyageHost) {
         });
       },
     };
+  }
+  if (s.confirm && s.confirm.kind === 'bls') {
+    const vid = s.confirm.vid,
+      ix = s.confirm.idx;
+    const v = pool.find((x) => x.id === vid);
+    if (v) {
+      const bls = ix.map((i) => blRow(v, i).bl);
+      const amt = ix.reduce((a, i) => a + blRow(v, i).amt, 0);
+      cf = {
+        show: true,
+        title: 'Generate ' + fmtN(ix.length) + (ix.length === 1 ? ' invoice?' : ' invoices?'),
+        rows: [
+          ['Voyage', v.no + ' · ' + v.vessel],
+          ['B/Ls', bls.length > 4 ? bls.slice(0, 4).join(', ') + ' and ' + (bls.length - 4) + ' more' : bls.join(', ')],
+          ['Invoice date', v.dir === 'E' ? 'ETD' : 'ETA'],
+          ['Total amount', fmtUsd(amt)],
+        ].map(([l, val]) => ({ l: l ?? '', v: val ?? '' })),
+        note: 'Only the selected B/Ls that are ready are included.',
+        cancel: () => self.setState({ confirm: null }),
+        ok: () => {
+          const bg = structuredClone(s.blGen);
+          const cur: Record<string, number> = { ...bg[v.id] };
+          ix.forEach((i) => {
+            cur[i] = 1;
+          });
+          bg[v.id] = cur;
+          self.save({
+            blGen: bg,
+            confirm: null,
+            blSel: {},
+            __toast: fmtN(ix.length) + (ix.length === 1 ? ' invoice' : ' invoices') + ' generated for voyage ' + v.no + '.',
+          });
+        },
+      };
+    }
   }
   if (s.confirm && s.confirm.kind === 'dd') {
     const cs = s.confirm.cns;

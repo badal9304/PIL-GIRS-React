@@ -25,5 +25,12 @@
   "User menu": "Menú de usuario",
   "User menu: {{name}}, {{role}}": "Menú de usuario: {{name}}, {{role}}",
   "Search is unavailable right now. Try again in a moment.": "La búsqueda no está disponible ahora. Inténtelo de nuevo en un momento.",
-  "Search results": "Resultados de búsqueda"
+  "Search results": "Resultados de búsqueda",
+  "Selected B/Ls": "B/L seleccionados",
+  "Select all B/Ls on this page": "Seleccionar todos los B/L de esta página",
+  "# B/L selected": "# B/L seleccionado",
+  "# B/Ls selected": "# B/L seleccionados",
+  "No blocked B/Ls selected": "No hay B/L bloqueados seleccionados",
+  "Selected B/Ls are blocked for different reasons — select one reason at a time": "Los B/L seleccionados están bloqueados por motivos distintos — seleccione un motivo a la vez",
+  "Only the selected B/Ls that are ready are included.": "Solo se incluyen los B/L seleccionados que están listos."
 }

@@ -1323,8 +1323,14 @@
   :where(.pg-home) .hm-tabs {
     @apply py-0 px-5 my-0 -mx-5 bg-surface border-b border-b-line;
   }
-  :where(.pg-home) .tabb[aria-selected='true'] .hm-panel {
+  :where(.pg-home) .hm-panel {
     @apply gap-4 flex flex-col;
+  }
+  :where(.pg-home) .hm-fbar {
+    @apply pt-0 pb-3 px-4 items-center;
+  }
+  :where(.pg-home) .hm-clr {
+    @apply ms-auto;
   }
   :where(.pg-home) .hm-days {
     @apply gap-1.5 flex items-stretch;
@@ -2130,6 +2136,67 @@
   :where(.pg-home) .hm-blr {
     @apply cursor-pointer;
   }
+  :where(.pg-home) .hm-rd.today:not(.on) {
+    @apply bg-tint2;
+  }
+  :where(.pg-home) .hm-rd.late:not(.on) {
+    @apply [background:color-mix(in_srgb,var(--warnbg)_55%,transparent)];
+  }
+  :where(.pg-home) .hm-rd.late:not(.on):hover {
+    @apply bg-warnbg;
+  }
+  :where(.pg-home) .hm-rsn li {
+    @apply shadow-[inset_3px_0_0_var(--warnbd)];
+  }
+  :where(.pg-home) .hm-rsn li:hover {
+    @apply [background:color-mix(in_srgb,var(--warnbg)_35%,transparent)];
+  }
+  :where(.pg-home) .hm-gh th {
+    background: var(--tint2) !important;
+    border-top-color: var(--tintbd) !important;
+  }
+  :where(.pg-home) .hm-gh b {
+    @apply text-accent2;
+  }
+  :where(.pg-home) .hm-vtab tbody tr:has(input.cbx:checked) td {
+    @apply bg-tint2;
+  }
+  :where(.pg-home) .hm-ds4 div {
+    @apply shadow-[inset_0_3px_0_var(--bdh)];
+  }
+  :where(.pg-home) .hm-ds4 div:nth-child(2) {
+    @apply shadow-[inset_0_3px_0_var(--okbar)];
+  }
+  :where(.pg-home) .hm-ds4 div:nth-child(3) {
+    @apply shadow-[inset_0_3px_0_var(--accent)];
+  }
+  :where(.pg-home) .hm-ds4 div:nth-child(4) {
+    @apply shadow-[inset_0_3px_0_var(--warnbar)] [background:color-mix(in_srgb,var(--warnbg)_45%,var(--surface))];
+  }
+  :where(.pg-home) .hm-rl li {
+    @apply shadow-[inset_3px_0_0_var(--warnbd)];
+  }
+  :where(.pg-home) .hm-blt tbody tr:has(input.cbx:checked) td {
+    @apply bg-tint2;
+  }
+  :where(.pg-home) .panel-b .hm-blt thead th {
+    @apply -top-5;
+  }
+  :where(.pg-home) .hm-blt .hm-cb {
+    @apply w-10 ps-3 pe-0;
+  }
+  :where(.pg-home) .hm-blsel {
+    @apply py-2 px-3 gap-2 flex items-center min-h-12 border border-tintbd rounded-[6px] bg-tint2 box-border;
+  }
+  :where(.pg-home) .hm-blsel b {
+    @apply text-[13px] me-2;
+  }
+  :where(.pg-home) .hm-blsel .hm-clr {
+    @apply ms-auto;
+  }
+  :where(.pg-home) .hm-blsel .hm-why {
+    @apply text-[12px] text-muted;
+  }
   :where(.pg-home) .hm-blr:hover td {
     @apply bg-hover2;
   }
@@ -2469,7 +2536,7 @@
     @apply py-0 px-2.5 h-6 text-[12px];
   }
   :where(.pg-home) .seg button span {
-    @apply ms-1.5 text-[12px] text-muted;
+    @apply text-[12px] text-muted;
   }
   :where(.pg-home) .chipb > span {
     @apply opacity-80;

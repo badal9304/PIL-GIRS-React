@@ -141,9 +141,41 @@ export function HomeScreen({ v }: { v: VoyageVals }): ReactNode {
                         onChange={v.drw?.onQ}
                       />
                     </div>
+                    {v.drw?.sel?.show ? (
+                      <div className="hm-blsel" role="region" aria-label={t('Selected B/Ls')}>
+                        <b>{tx(s(v.drw.sel.n))}</b>{' '}
+                        <button className="btn btn-sm btn-primary" disabled={v.drw.sel.genDis} onClick={clk(v.drw.sel.gen)}>
+                          {tx(s(v.drw.sel.genL))}
+                        </button>{' '}
+                        <button
+                          className="btn btn-sm"
+                          disabled={v.drw.sel.fuDis}
+                          title={tp(s(v.drw.sel.fuWhy))}
+                          onClick={clk(v.drw.sel.fu)}
+                        >
+                          {tx(s(v.drw.sel.fuL))}
+                        </button>{' '}
+                        <button className="btn btn-sm" onClick={clk(v.drw.sel.exp)}>
+                          {t('Export to Excel')}
+                        </button>{' '}
+                        <button className="btn btn-sm hm-clr" onClick={clk(v.drw.sel.clear)}>
+                          {t('Clear selection')}
+                        </button>
+                      </div>
+                    ) : null}
                     <table className="lst hm-blt">
                       <thead>
                         <tr>
+                          <th scope="col" className="hm-cb">
+                            <input
+                              type="checkbox"
+                              className="cbx"
+                              aria-label={t('Select all B/Ls on this page')}
+                              checked={b(v.drw?.allOn)}
+                              disabled={v.drw?.allDis}
+                              onChange={v.drw?.allT}
+                            />
+                          </th>
                           <th scope="col">{t('B/L No.')}</th>
                           <th scope="col">{t('Billing party')}</th>
                           <th scope="col" className="r">
@@ -156,20 +188,30 @@ export function HomeScreen({ v }: { v: VoyageVals }): ReactNode {
                         </tr>
                       </thead>
                       <tbody>
-                        {(v.drw?.bls || []).map((b, $index) => (
+                        {(v.drw?.bls || []).map((bl, $index) => (
                           <Fragment key={$index}>
-                            <tr className="hm-blr" onClick={clk(b?.open)}>
+                            <tr className="hm-blr" onClick={clk(bl?.open)}>
+                              <td className="hm-cb" onClick={bl?.stop}>
+                                <input
+                                  type="checkbox"
+                                  className="cbx"
+                                  aria-label={tp(s(bl?.chkL))}
+                                  checked={b(bl?.on)}
+                                  disabled={bl?.chkDis}
+                                  onChange={bl?.chk}
+                                />
+                              </td>
                               <td>
-                                <button className="lnk mono" aria-label={tp(s(b?.openL))} onClick={clk(b?.open)}>
-                                  {tx(s(b?.bl))}
+                                <button className="lnk mono" aria-label={tp(s(bl?.openL))} onClick={clk(bl?.open)}>
+                                  {tx(s(bl?.bl))}
                                 </button>
                               </td>
-                              <td>{tx(s(b?.cust))}</td>
-                              <td className="r">{tx(s(b?.ctr))}</td>
-                              <td className="r">{tx(s(b?.amt))}</td>
+                              <td>{tx(s(bl?.cust))}</td>
+                              <td className="r">{tx(s(bl?.ctr))}</td>
+                              <td className="r">{tx(s(bl?.amt))}</td>
                               <td>
-                                <span className={a(b?.stC)}>{tx(s(b?.st))}</span>
-                                <small className="hm-sub">{tx(s(b?.note))}</small>
+                                <span className={a(bl?.stC)}>{tx(s(bl?.st))}</span>
+                                <small className="hm-sub">{tx(s(bl?.note))}</small>
                               </td>
                             </tr>
                           </Fragment>
@@ -1138,7 +1180,7 @@ export function HomeScreen({ v }: { v: VoyageVals }): ReactNode {
                       <button className="btn btn-sm" onClick={clk(v.bulk?.exp)}>
                         {t('Export to Excel')}
                       </button>{' '}
-                      <button className="btn btn-sm hm-nx" onClick={clk(v.bulk?.clear)}>
+                      <button className="btn btn-sm hm-clr" onClick={clk(v.bulk?.clear)}>
                         {t('Clear selection')}
                       </button>
                     </div>
@@ -1182,7 +1224,7 @@ export function HomeScreen({ v }: { v: VoyageVals }): ReactNode {
                     />
                   </div>
                 </div>
-                <div className="chips" role="group" aria-label={t('Status')}>
+                <div className="chips hm-fbar" role="group" aria-label={t('Status')}>
                   {(v.stfs || []).map((f, $index) => (
                     <Fragment key={$index}>
                       <button className="chipb" aria-pressed={aria(f?.cur)} onClick={clk(f?.pick)}>
@@ -1509,7 +1551,7 @@ export function HomeScreen({ v }: { v: VoyageVals }): ReactNode {
                     />
                   </div>
                 </div>
-                <div className="chips" role="group" aria-label={t('Status')}>
+                <div className="chips hm-fbar" role="group" aria-label={t('Status')}>
                   {(v.dd?.fil || []).map((f, $index) => (
                     <Fragment key={$index}>
                       <button className="chipb" aria-pressed={aria(f?.cur)} onClick={clk(f?.pick)}>

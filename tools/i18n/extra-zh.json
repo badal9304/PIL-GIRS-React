@@ -25,5 +25,12 @@
   "User menu": "用户菜单",
   "User menu: {{name}}, {{role}}": "用户菜单：{{name}}，{{role}}",
   "Search is unavailable right now. Try again in a moment.": "搜索暂时不可用，请稍后重试。",
-  "Search results": "搜索结果"
+  "Search results": "搜索结果",
+  "Selected B/Ls": "已选提单",
+  "Select all B/Ls on this page": "选择本页所有提单",
+  "# B/L selected": "已选 # 份提单",
+  "# B/Ls selected": "已选 # 份提单",
+  "No blocked B/Ls selected": "未选择受阻提单",
+  "Selected B/Ls are blocked for different reasons — select one reason at a time": "所选提单的受阻原因不同 — 请每次选择一种原因",
+  "Only the selected B/Ls that are ready are included.": "仅包含所选的已就绪提单。"
 }

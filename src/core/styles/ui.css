@@ -70,6 +70,14 @@
   .ov {
     @apply inset-0 fixed z-70 bg-[rgba(14,17,22,.42)];
   }
+  button.ov {
+    display: block;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    cursor: default;
+    appearance: none;
+  }
   .dlg {
     @apply fixed z-71 top-1/2 left-1/2 [transform:translate(-50%,-50%)] w-[min(560px,calc(100vw_-_48px))] max-h-[calc(100vh_-_64px)] flex flex-col bg-surface rounded-[12px] shadow-[0_24px_64px_rgba(0,0,0,.28)] overflow-hidden text-ink;
   }
@@ -103,6 +111,11 @@
     font-size: 13px;
     font-weight: 500;
     color: var(--muted2);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    box-sizing: border-box;
   }
   .seg button[aria-pressed='true'],
   .seg button[aria-checked='true'] {
