@@ -1,0 +1,17 @@
+{
+  "Actions for {x}": "Acciones de {x}",
+  "All actions for {x}": "Todas las acciones de {x}",
+  "Credit note {x}": "Nota de crédito {x}",
+  "Due {x}": "Vence {x}",
+  "Include {x}": "Incluir {x}",
+  "Invoice {x}": "Factura {x}",
+  "Language set to {x}": "Idioma cambiado a {x}",
+  "No results for “{x}”": "Sin resultados para «{x}»",
+  "Receipt {x}": "Recibo {x}",
+  "Search “{x}” in Enquiry & Monitoring": "Buscar «{x}» en Consulta y monitoreo",
+  "Select {x}": "Seleccionar {x}",
+  "Show all {x} invoices in Invoice List": "Mostrar las {x} facturas en Lista de facturas",
+  "Show charge lines of {x}": "Mostrar líneas de cargo de {x}",
+  "STP validation gates {x}": "Controles de validación STP {x}",
+  "Validation of {x}": "Validación de {x}"
+}

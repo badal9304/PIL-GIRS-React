@@ -1,5 +1,5 @@
 dist
+.next
 node_modules
-src/lib/legacy
-src/i18n/locales
-src/features/search/searchIndex.json
+public/locales
+src/features/global-search/api/searchIndex.json

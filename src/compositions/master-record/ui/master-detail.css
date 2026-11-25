@@ -1,0 +1,416 @@
+/* Ported from the GIRS prototype. Overview layout (D) of the master screens, scoped to .pg-customer-d, .pg-contract-d and .pg-charge-d. */
+@reference '../../../core/styles/tailwind.css';
+
+@layer components {
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .ro {
+    @apply py-0 px-3 gap-1.5 inline-flex items-center h-8 rounded-[6px] bg-neutral text-muted2 text-[12px] font-medium;
+  }
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .lay {
+    @apply py-0 px-2.5 inline-flex items-center h-7 rounded-[4px] text-[12px] font-medium text-muted no-underline whitespace-nowrap;
+  }
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .lay:hover {
+    @apply text-ink;
+  }
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .lay:focus-visible {
+    @apply [outline:2px_solid_var(--accent)] [outline-offset:2px];
+  }
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .seg {
+    all: unset;
+    box-sizing: border-box;
+    cursor: pointer;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 28px;
+    padding: 0 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 500;
+  }
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .gbtn {
+    all: unset;
+    box-sizing: border-box;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    height: 38px;
+    padding: 0 10px;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 13px;
+  }
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .cbtn {
+    all: unset;
+    box-sizing: border-box;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    min-height: 44px;
+    padding: 4px 10px 4px 32px;
+    border-radius: 6px;
+    font-size: 13px;
+  }
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .gbtn:hover,
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .cbtn:hover {
+    @apply bg-hover;
+  }
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .seg:focus-visible,
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .gbtn:focus-visible,
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .cbtn:focus-visible {
+    @apply [outline:2px_solid_var(--accent)] [outline-offset:-2px];
+  }
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .facts {
+    @apply grid grid-cols-[repeat(auto-fit,minmax(150px,1fr))] border-y border-y-line2 bg-hover2;
+  }
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .fct {
+    @apply py-3 px-5 gap-0.75 border-e border-e-line2 flex flex-col min-w-0;
+  }
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .fct:last-child {
+    @apply border-e-0;
+  }
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .fct .l {
+    @apply text-[12px] font-semibold text-muted uppercase tracking-[.05em];
+  }
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .fct .v {
+    @apply text-[14px] font-semibold text-ink whitespace-nowrap overflow-hidden text-ellipsis;
+  }
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .ov {
+    @apply gap-4 grid grid-cols-[minmax(0,1fr)_minmax(0,1fr)_340px] [grid-auto-flow:row_dense] items-start;
+  }
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .sc {
+    @apply border border-line rounded-[10px] bg-surface min-w-0;
+  }
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .sc h3 {
+    @apply py-3 px-4 m-0 gap-2 flex items-center text-[13px] font-semibold border-b border-b-line2;
+  }
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .sc h3 .dot {
+    @apply w-1.5 h-1.5 rounded-full bg-accent;
+  }
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .kg {
+    @apply pt-3.5 pb-4 px-4 grid grid-cols-[1fr_1fr] gap-y-3 gap-x-5;
+  }
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .kg .w {
+    @apply col-[1_/_-1];
+  }
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .kg .l {
+    @apply block text-[12px] text-muted mb-0.5;
+  }
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .kg .v {
+    @apply block text-[13px] leading-[18px] text-ink [overflow-wrap:anywhere];
+  }
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .ot {
+    @apply w-full;
+  }
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .ot th {
+    @apply h-8.5 text-[12px] bg-hover2;
+  }
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .ot td {
+    @apply h-9 text-[13px];
+  }
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .ot th,
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .ot td {
+    @apply ps-4 pe-2;
+  }
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .cb {
+    @apply grid;
+  }
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .cbk {
+    @apply min-w-0 border-e border-e-line2;
+  }
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .cbk:last-child {
+    @apply border-e-0;
+  }
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .cbk h4 {
+    @apply pt-3 pb-0 px-4 m-0 gap-2 flex items-center text-[13px] font-semibold;
+  }
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .cbk h4 .dot,
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .sc h3 .dot {
+    @apply w-1.5 h-1.5 rounded-full bg-accent;
+  }
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .kg1 {
+    @apply grid-cols-[1fr_1fr];
+  }
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .ac {
+    @apply border border-line rounded-[10px] bg-surface overflow-hidden;
+  }
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .ach {
+    all: unset;
+    box-sizing: border-box;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    min-height: 50px;
+    padding: 0 20px;
+  }
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .ach:hover {
+    @apply bg-hover2;
+  }
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .ach:focus-visible,
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .lnk:focus-visible {
+    @apply [outline:2px_solid_var(--accent)] [outline-offset:-2px];
+  }
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .act {
+    @apply text-[14px] font-semibold text-ink whitespace-nowrap;
+  }
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .acn {
+    @apply py-px px-2 text-[12px] font-medium text-muted bg-neutral rounded-[10px];
+  }
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .acs {
+    @apply flex-auto min-w-0 text-end text-[12px] font-normal text-muted whitespace-nowrap overflow-hidden text-ellipsis;
+  }
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .ach[aria-expanded='true'] .acs {
+    @apply [visibility:hidden];
+  }
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .acb {
+    @apply border-t border-t-line2;
+  }
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .kg4 {
+    @apply pt-4 pb-4.5 px-5 grid grid-cols-[repeat(3,minmax(0,1fr))] gap-y-3.5 gap-x-6;
+  }
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .kg4 .w {
+    @apply col-[auto];
+  }
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .sc h3 {
+    @apply py-3 px-4 m-0 gap-2 flex items-center text-[13px] font-semibold border-b border-b-line2;
+  }
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .kg4 .l {
+    @apply block text-[12px] text-muted mb-0.5;
+  }
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .kg4 .v {
+    @apply block text-[14px] leading-[20px] text-ink [overflow-wrap:anywhere];
+  }
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .lnk {
+    all: unset;
+    cursor: pointer;
+    color: var(--accent);
+    font-weight: 500;
+    font-size: 13px;
+  }
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .lnk:hover {
+    @apply underline;
+  }
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .ot th,
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .ot td {
+    @apply ps-5 pe-2;
+  }
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .rel {
+    @apply [table-layout:fixed] w-full;
+  }
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .rel th,
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .rel td {
+    @apply ps-5 pe-4 whitespace-normal [overflow-wrap:anywhere];
+  }
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .rel td {
+    @apply h-auto pt-2.5 pb-2.5 leading-[20px];
+  }
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .rlink {
+    @apply text-accent no-underline font-medium;
+  }
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .rlink:hover {
+    @apply underline;
+  }
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .rlink:focus-visible {
+    @apply [outline:2px_solid_var(--accent)] [outline-offset:2px];
+  }
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .rail {
+    @apply col-[3] [grid-row:1_/_span_40] sticky top-0;
+  }
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .tl {
+    @apply pt-0 pb-3.5 pr-0 pl-5.5 relative;
+  }
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .tl:before {
+    content: '';
+    position: absolute;
+    inset-inline-start: 5px;
+    top: 5px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--bd);
+  }
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .tl.cur:before {
+    @apply bg-accent shadow-[0_0_0_3px_var(--tint)];
+  }
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .tl:after {
+    content: '';
+    position: absolute;
+    inset-inline-start: 8.5px;
+    top: 17px;
+    bottom: 0;
+    width: 1px;
+    background: var(--line);
+  }
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .tl:last-child:after {
+    @apply hidden;
+  }
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .tl:last-child {
+    @apply pb-0;
+  }
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .kbar {
+    @apply gap-1.5 inline-flex items-center flex-none ms-auto;
+  }
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .kbar .btn {
+    @apply gap-1.5;
+  }
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .kmore {
+    @apply relative inline-flex;
+  }
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .kmorebtn[aria-expanded='true'] {
+    @apply bg-hover border-bdh;
+  }
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .kmback {
+    @apply p-0 m-0 inset-0 fixed z-58 bg-transparent border-0 cursor-default;
+  }
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .kmenu {
+    @apply p-1.5 absolute top-[calc(100%_+_6px)] end-0 z-59 w-70 bg-surface border border-line rounded-[8px] shadow-[0_12px_32px_rgba(14,17,22,.16)] text-start;
+  }
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .kmi {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    width: 100%;
+    padding: 8px 10px;
+    border: 0;
+    border-radius: 6px;
+    background: transparent;
+    color: var(--ink);
+    font: inherit;
+    font-size: 13px;
+    line-height: 18px;
+    text-align: start;
+    cursor: pointer;
+  }
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .kmi svg {
+    @apply flex-none mt-0.5;
+  }
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .kmi:hover:not(:disabled),
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .kmi:focus-visible {
+    @apply bg-hover outline-none;
+  }
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .kmt {
+    @apply gap-0.5 flex flex-col min-w-0;
+  }
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .kmt > span {
+    @apply font-medium;
+  }
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .kmt small {
+    @apply text-[12px] leading-[16px] text-muted font-normal;
+  }
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .kmi-d {
+    @apply text-bad;
+  }
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .kmi-d:hover:not(:disabled) {
+    @apply bg-badbg;
+  }
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .kmi:disabled {
+    @apply cursor-not-allowed text-bad opacity-55;
+  }
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .kmenu.up {
+    @apply top-auto bottom-[calc(100%_+_6px)];
+  }
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) section:has(.kmenu.up),
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .card:has(.kmenu.up) {
+    overflow: visible !important;
+    position: relative;
+    z-index: 6;
+  }
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .ksep {
+    @apply my-1 mx-0 h-px bg-line2;
+  }
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .fct .v {
+    white-space: normal;
+    text-overflow: clip;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    line-height: 20px;
+  }
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .dcol .kvs {
+    @apply grid grid-cols-[repeat(auto-fill,minmax(150px,1fr))] gap-y-2.5 gap-x-5;
+  }
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) table:not(.ktbl):not(.rt) tr:has(> td > div[style*='flex-direction: column']) > td {
+    @apply h-auto pt-2 pb-2;
+  }
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .kib {
+    @apply p-0 w-8;
+  }
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .kdanger {
+    @apply text-bad;
+  }
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .kdanger:hover:not(:disabled) {
+    @apply bg-badbg border-badbd;
+  }
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .ktool {
+    @apply py-3 px-6 gap-2 flex items-center border-b border-b-line2 bg-hover2 text-[12px] text-muted;
+  }
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .ktbl {
+    @apply w-full [border-collapse:collapse] [table-layout:fixed];
+  }
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .ktbl th {
+    @apply py-0 px-3 h-9 text-start text-[12px] font-semibold text-muted bg-sub border-b border-b-line;
+  }
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .ktbl td {
+    @apply py-2.5 px-3 whitespace-normal border-b border-b-line2 text-[13px] leading-[18px] [overflow-wrap:anywhere] align-top;
+  }
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .ktbl tr:first-child td {
+    @apply font-medium;
+  }
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .kfs {
+    @apply p-0 mt-0 mb-5.5 mx-0 border-0;
+  }
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .kfs legend {
+    @apply p-0 mb-3 text-[12px] font-semibold tracking-[.05em] uppercase text-muted;
+  }
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .kgrid {
+    @apply grid grid-cols-[1fr_1fr] gap-y-3.5 gap-x-5;
+  }
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .kf {
+    @apply gap-1.25 flex flex-col min-w-0;
+  }
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .kf.w {
+    @apply col-[span_2];
+  }
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .kf .kl {
+    @apply text-[12px] font-medium text-muted2;
+  }
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .kf .kl b {
+    @apply text-bad font-semibold ms-0.5;
+  }
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .kf .input,
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .kf .select {
+    @apply w-full ps-3 bg-surface;
+  }
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .kf textarea.input {
+    @apply py-2 px-3 h-auto min-h-18 resize-y leading-[20px];
+  }
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .kf .kro {
+    @apply py-0 px-3 min-h-9 flex items-center rounded-[6px] bg-sub border border-dashed border-bd text-muted2 text-[13px] box-border;
+  }
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .kf .kh {
+    @apply text-[12px] text-muted;
+  }
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .kf .ke {
+    @apply text-[12px] text-bad font-medium;
+  }
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .kf.bad .input,
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .kf.bad .select {
+    @apply border-bad shadow-[0_0_0_1px_var(--bad)];
+  }
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .kbtn-danger {
+    @apply bg-bad border-bad text-onaccent;
+  }
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .kbtn-danger:hover:not(:disabled) {
+    @apply bg-[#8A1F23] border-[#8A1F23] text-onaccent;
+  }
+  :where(.pg-customer-d, .pg-contract-d, .pg-charge-d) .kbtn-danger:focus-visible {
+    @apply [outline:2px_solid_var(--bad)] [outline-offset:2px];
+  }
+}

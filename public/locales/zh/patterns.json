@@ -1,0 +1,17 @@
+{
+  "Actions for {x}": "{x} 的操作",
+  "All actions for {x}": "{x} 的全部操作",
+  "Credit note {x}": "贷项通知单 {x}",
+  "Due {x}": "到期 {x}",
+  "Include {x}": "包含 {x}",
+  "Invoice {x}": "发票 {x}",
+  "Language set to {x}": "语言已设为 {x}",
+  "No results for “{x}”": "没有“{x}”的结果",
+  "Receipt {x}": "收据 {x}",
+  "Search “{x}” in Enquiry & Monitoring": "在查询与监控中搜索“{x}”",
+  "Select {x}": "选择 {x}",
+  "Show all {x} invoices in Invoice List": "在发票列表中显示全部 {x} 张发票",
+  "Show charge lines of {x}": "显示 {x} 的费用明细",
+  "STP validation gates {x}": "STP 校验关卡 {x}",
+  "Validation of {x}": "{x} 的校验"
+}

@@ -1,0 +1,1605 @@
+{
+ "key": "ChargeMaster",
+ "noun": "charge",
+ "newLabel": "New charge",
+ "copyLabel": "Copy as new charge",
+ "danger": "toggle",
+ "readonly": false,
+ "def_": "h4",
+ "opts": {
+  "Charge category": [
+   "Ancillary (MISC)",
+   "Demurrage & Detention",
+   "Destination local charges",
+   "Freight",
+   "Origin local charges",
+   "Surcharge"
+  ],
+  "Active status": [
+   "Active",
+   "Inactive"
+  ],
+  "Origin / Destination": [
+   "Both",
+   "Destination",
+   "Origin"
+  ],
+  "Country": [
+   "All countries",
+   "China",
+   "India",
+   "Malaysia",
+   "Singapore",
+   "Thailand"
+  ],
+  "Port": [
+   "All ports",
+   "CNSHA · Shanghai",
+   "INNSA · Nhava Sheva",
+   "MYPKG · Port Klang",
+   "SGSIN · Singapore",
+   "THLCH · Laem Chabang"
+  ],
+  "Currency": [
+   "CNY",
+   "INR",
+   "MYR",
+   "SGD",
+   "THB",
+   "USD"
+  ],
+  "Mapping": [
+   "Aligned with LMS charge code",
+   "Maintained in GIRS only"
+  ]
+ },
+ "recs": [
+  {
+   "id": "h1",
+   "code": "OFT",
+   "title": "Ocean Freight",
+   "st": "Active",
+   "secs": [
+    [
+     "Charge details",
+     [
+      [
+       "Charge code",
+       "OFT"
+      ],
+      [
+       "Charge name",
+       "Ocean Freight"
+      ],
+      [
+       "Charge category",
+       "Freight"
+      ],
+      [
+       "Active status",
+       "Active"
+      ],
+      [
+       "Effective from",
+       "1 Jan 2026"
+      ],
+      [
+       "Effective to",
+       "Open-ended"
+      ]
+     ]
+    ],
+    [
+     "Applicability",
+     [
+      [
+       "Origin / Destination",
+       "Both"
+      ],
+      [
+       "Country",
+       "All countries"
+      ],
+      [
+       "Port",
+       "All ports"
+      ]
+     ]
+    ],
+    [
+     "Country / Tax / Currency set-up",
+     [
+      [
+       "Tax code",
+       "ZR-INTL"
+      ],
+      [
+       "Currency",
+       "USD"
+      ],
+      [
+       "Tax description",
+       "Zero-rated · international transport"
+      ]
+     ]
+    ],
+    [
+     "LMS mapping",
+     [
+      [
+       "LMS charge code",
+       "LMS-OFT"
+      ],
+      [
+       "Mapping",
+       "Aligned with LMS charge code"
+      ]
+     ]
+    ],
+    [
+     "Business rules",
+     [
+      [
+       "Rules using this charge",
+       "[Business rules using this charge]"
+      ]
+     ]
+    ]
+   ],
+   "hist": {
+    "title": "Audit trail",
+    "cols": [
+     "Change",
+     "By",
+     "Date & time"
+    ],
+    "rows": [
+     [
+      "Created from LMS charge-code sync",
+      "System · LMS",
+      "02 Jan 2026 06:00"
+     ]
+    ]
+   },
+   "nContracts": 0
+  },
+  {
+   "id": "h2",
+   "code": "BAF",
+   "title": "Bunker Adjustment Factor",
+   "st": "Active",
+   "secs": [
+    [
+     "Charge details",
+     [
+      [
+       "Charge code",
+       "BAF"
+      ],
+      [
+       "Charge name",
+       "Bunker Adjustment Factor"
+      ],
+      [
+       "Charge category",
+       "Surcharge"
+      ],
+      [
+       "Active status",
+       "Active"
+      ],
+      [
+       "Effective from",
+       "1 Jan 2026"
+      ],
+      [
+       "Effective to",
+       "Open-ended"
+      ]
+     ]
+    ],
+    [
+     "Applicability",
+     [
+      [
+       "Origin / Destination",
+       "Both"
+      ],
+      [
+       "Country",
+       "All countries"
+      ],
+      [
+       "Port",
+       "All ports"
+      ]
+     ]
+    ],
+    [
+     "Country / Tax / Currency set-up",
+     [
+      [
+       "Tax code",
+       "ZR-INTL"
+      ],
+      [
+       "Currency",
+       "USD"
+      ],
+      [
+       "Tax description",
+       "Zero-rated · international transport"
+      ]
+     ]
+    ],
+    [
+     "LMS mapping",
+     [
+      [
+       "LMS charge code",
+       "LMS-BAF"
+      ],
+      [
+       "Mapping",
+       "Aligned with LMS charge code"
+      ]
+     ]
+    ],
+    [
+     "Business rules",
+     [
+      [
+       "Rules using this charge",
+       "[Business rules using this charge]"
+      ]
+     ]
+    ]
+   ],
+   "hist": {
+    "title": "Audit trail",
+    "cols": [
+     "Change",
+     "By",
+     "Date & time"
+    ],
+    "rows": [
+     [
+      "Effective from changed 1 Oct 2025 → 1 Jan 2026",
+      "Wei Ling Tan",
+      "15 Dec 2025 10:12"
+     ],
+     [
+      "Created from LMS charge-code sync",
+      "System · LMS",
+      "02 Jan 2026 06:00"
+     ]
+    ]
+   },
+   "nContracts": 0
+  },
+  {
+   "id": "h3",
+   "code": "LSS",
+   "title": "Low Sulphur Surcharge",
+   "st": "Active",
+   "secs": [
+    [
+     "Charge details",
+     [
+      [
+       "Charge code",
+       "LSS"
+      ],
+      [
+       "Charge name",
+       "Low Sulphur Surcharge"
+      ],
+      [
+       "Charge category",
+       "Surcharge"
+      ],
+      [
+       "Active status",
+       "Active"
+      ],
+      [
+       "Effective from",
+       "1 Jan 2026"
+      ],
+      [
+       "Effective to",
+       "Open-ended"
+      ]
+     ]
+    ],
+    [
+     "Applicability",
+     [
+      [
+       "Origin / Destination",
+       "Both"
+      ],
+      [
+       "Country",
+       "All countries"
+      ],
+      [
+       "Port",
+       "All ports"
+      ]
+     ]
+    ],
+    [
+     "Country / Tax / Currency set-up",
+     [
+      [
+       "Tax code",
+       "ZR-INTL"
+      ],
+      [
+       "Currency",
+       "USD"
+      ],
+      [
+       "Tax description",
+       "Zero-rated · international transport"
+      ]
+     ]
+    ],
+    [
+     "LMS mapping",
+     [
+      [
+       "LMS charge code",
+       "LMS-LSS"
+      ],
+      [
+       "Mapping",
+       "Aligned with LMS charge code"
+      ]
+     ]
+    ],
+    [
+     "Business rules",
+     [
+      [
+       "Rules using this charge",
+       "[Business rules using this charge]"
+      ]
+     ]
+    ]
+   ],
+   "hist": {
+    "title": "Audit trail",
+    "cols": [
+     "Change",
+     "By",
+     "Date & time"
+    ],
+    "rows": [
+     [
+      "Created from LMS charge-code sync",
+      "System · LMS",
+      "02 Jan 2026 06:00"
+     ]
+    ]
+   },
+   "nContracts": 0
+  },
+  {
+   "id": "h4",
+   "code": "THC-O",
+   "title": "Terminal Handling · Origin",
+   "st": "Active",
+   "secs": [
+    [
+     "Charge details",
+     [
+      [
+       "Charge code",
+       "THC-O"
+      ],
+      [
+       "Charge name",
+       "Terminal Handling · Origin"
+      ],
+      [
+       "Charge category",
+       "Origin local charges"
+      ],
+      [
+       "Active status",
+       "Active"
+      ],
+      [
+       "Effective from",
+       "1 Jan 2026"
+      ],
+      [
+       "Effective to",
+       "Open-ended"
+      ]
+     ]
+    ],
+    [
+     "Applicability",
+     [
+      [
+       "Origin / Destination",
+       "Origin"
+      ],
+      [
+       "Country",
+       "Singapore"
+      ],
+      [
+       "Port",
+       "SGSIN · Singapore"
+      ]
+     ]
+    ],
+    [
+     "Country / Tax / Currency set-up",
+     [
+      [
+       "Tax code",
+       "SG-SR-9"
+      ],
+      [
+       "Currency",
+       "SGD"
+      ],
+      [
+       "Tax description",
+       "Singapore GST 9%"
+      ]
+     ]
+    ],
+    [
+     "LMS mapping",
+     [
+      [
+       "LMS charge code",
+       "LMS-THO"
+      ],
+      [
+       "Mapping",
+       "Aligned with LMS charge code"
+      ]
+     ]
+    ],
+    [
+     "Business rules",
+     [
+      [
+       "Rules using this charge",
+       "[Business rules using this charge]"
+      ]
+     ]
+    ]
+   ],
+   "hist": {
+    "title": "Audit trail",
+    "cols": [
+     "Change",
+     "By",
+     "Date & time"
+    ],
+    "rows": [
+     [
+      "Tax code changed SG-SR-8 → SG-SR-9",
+      "Wei Ling Tan",
+      "20 Dec 2025 09:30"
+     ],
+     [
+      "Created from LMS charge-code sync",
+      "System · LMS",
+      "02 Jan 2026 06:00"
+     ]
+    ]
+   },
+   "nContracts": 0
+  },
+  {
+   "id": "h5",
+   "code": "THC-D",
+   "title": "Terminal Handling · Destination",
+   "st": "Active",
+   "secs": [
+    [
+     "Charge details",
+     [
+      [
+       "Charge code",
+       "THC-D"
+      ],
+      [
+       "Charge name",
+       "Terminal Handling · Destination"
+      ],
+      [
+       "Charge category",
+       "Destination local charges"
+      ],
+      [
+       "Active status",
+       "Active"
+      ],
+      [
+       "Effective from",
+       "1 Jan 2026"
+      ],
+      [
+       "Effective to",
+       "Open-ended"
+      ]
+     ]
+    ],
+    [
+     "Applicability",
+     [
+      [
+       "Origin / Destination",
+       "Destination"
+      ],
+      [
+       "Country",
+       "India"
+      ],
+      [
+       "Port",
+       "INNSA · Nhava Sheva"
+      ]
+     ]
+    ],
+    [
+     "Country / Tax / Currency set-up",
+     [
+      [
+       "Tax code",
+       "IN-GST-18"
+      ],
+      [
+       "Currency",
+       "INR"
+      ],
+      [
+       "Tax description",
+       "India GST 18%"
+      ]
+     ]
+    ],
+    [
+     "LMS mapping",
+     [
+      [
+       "LMS charge code",
+       "LMS-THD"
+      ],
+      [
+       "Mapping",
+       "Aligned with LMS charge code"
+      ]
+     ]
+    ],
+    [
+     "Business rules",
+     [
+      [
+       "Rules using this charge",
+       "[Business rules using this charge]"
+      ]
+     ]
+    ]
+   ],
+   "hist": {
+    "title": "Audit trail",
+    "cols": [
+     "Change",
+     "By",
+     "Date & time"
+    ],
+    "rows": [
+     [
+      "Created from LMS charge-code sync",
+      "System · LMS",
+      "02 Jan 2026 06:00"
+     ]
+    ]
+   },
+   "nContracts": 0
+  },
+  {
+   "id": "h6",
+   "code": "DOC",
+   "title": "Documentation Fee",
+   "st": "Active",
+   "secs": [
+    [
+     "Charge details",
+     [
+      [
+       "Charge code",
+       "DOC"
+      ],
+      [
+       "Charge name",
+       "Documentation Fee"
+      ],
+      [
+       "Charge category",
+       "Origin local charges"
+      ],
+      [
+       "Active status",
+       "Active"
+      ],
+      [
+       "Effective from",
+       "1 Jan 2026"
+      ],
+      [
+       "Effective to",
+       "Open-ended"
+      ]
+     ]
+    ],
+    [
+     "Applicability",
+     [
+      [
+       "Origin / Destination",
+       "Origin"
+      ],
+      [
+       "Country",
+       "Malaysia"
+      ],
+      [
+       "Port",
+       "MYPKG · Port Klang"
+      ]
+     ]
+    ],
+    [
+     "Country / Tax / Currency set-up",
+     [
+      [
+       "Tax code",
+       "MY-SST-8"
+      ],
+      [
+       "Currency",
+       "MYR"
+      ],
+      [
+       "Tax description",
+       "Malaysia SST 8%"
+      ]
+     ]
+    ],
+    [
+     "LMS mapping",
+     [
+      [
+       "LMS charge code",
+       "LMS-DOC"
+      ],
+      [
+       "Mapping",
+       "Aligned with LMS charge code"
+      ]
+     ]
+    ],
+    [
+     "Business rules",
+     [
+      [
+       "Rules using this charge",
+       "[Business rules using this charge]"
+      ]
+     ]
+    ]
+   ],
+   "hist": {
+    "title": "Audit trail",
+    "cols": [
+     "Change",
+     "By",
+     "Date & time"
+    ],
+    "rows": [
+     [
+      "Created from LMS charge-code sync",
+      "System · LMS",
+      "02 Jan 2026 06:00"
+     ]
+    ]
+   },
+   "nContracts": 0
+  },
+  {
+   "id": "h7",
+   "code": "BLF",
+   "title": "Bill of Lading Fee",
+   "st": "Active",
+   "secs": [
+    [
+     "Charge details",
+     [
+      [
+       "Charge code",
+       "BLF"
+      ],
+      [
+       "Charge name",
+       "Bill of Lading Fee"
+      ],
+      [
+       "Charge category",
+       "Origin local charges"
+      ],
+      [
+       "Active status",
+       "Active"
+      ],
+      [
+       "Effective from",
+       "1 Jan 2026"
+      ],
+      [
+       "Effective to",
+       "Open-ended"
+      ]
+     ]
+    ],
+    [
+     "Applicability",
+     [
+      [
+       "Origin / Destination",
+       "Origin"
+      ],
+      [
+       "Country",
+       "China"
+      ],
+      [
+       "Port",
+       "CNSHA · Shanghai"
+      ]
+     ]
+    ],
+    [
+     "Country / Tax / Currency set-up",
+     [
+      [
+       "Tax code",
+       "CN-VAT-6"
+      ],
+      [
+       "Currency",
+       "CNY"
+      ],
+      [
+       "Tax description",
+       "China VAT 6%"
+      ]
+     ]
+    ],
+    [
+     "LMS mapping",
+     [
+      [
+       "LMS charge code",
+       "LMS-BLF"
+      ],
+      [
+       "Mapping",
+       "Aligned with LMS charge code"
+      ]
+     ]
+    ],
+    [
+     "Business rules",
+     [
+      [
+       "Rules using this charge",
+       "[Business rules using this charge]"
+      ]
+     ]
+    ]
+   ],
+   "hist": {
+    "title": "Audit trail",
+    "cols": [
+     "Change",
+     "By",
+     "Date & time"
+    ],
+    "rows": [
+     [
+      "Created from LMS charge-code sync",
+      "System · LMS",
+      "02 Jan 2026 06:00"
+     ]
+    ]
+   },
+   "nContracts": 0
+  },
+  {
+   "id": "h8",
+   "code": "SEAL",
+   "title": "Seal Fee",
+   "st": "Active",
+   "secs": [
+    [
+     "Charge details",
+     [
+      [
+       "Charge code",
+       "SEAL"
+      ],
+      [
+       "Charge name",
+       "Seal Fee"
+      ],
+      [
+       "Charge category",
+       "Origin local charges"
+      ],
+      [
+       "Active status",
+       "Active"
+      ],
+      [
+       "Effective from",
+       "1 Jan 2026"
+      ],
+      [
+       "Effective to",
+       "Open-ended"
+      ]
+     ]
+    ],
+    [
+     "Applicability",
+     [
+      [
+       "Origin / Destination",
+       "Origin"
+      ],
+      [
+       "Country",
+       "Thailand"
+      ],
+      [
+       "Port",
+       "THLCH · Laem Chabang"
+      ]
+     ]
+    ],
+    [
+     "Country / Tax / Currency set-up",
+     [
+      [
+       "Tax code",
+       "TH-VAT-7"
+      ],
+      [
+       "Currency",
+       "THB"
+      ],
+      [
+       "Tax description",
+       "Thailand VAT 7%"
+      ]
+     ]
+    ],
+    [
+     "LMS mapping",
+     [
+      [
+       "LMS charge code",
+       "LMS-SEL"
+      ],
+      [
+       "Mapping",
+       "Aligned with LMS charge code"
+      ]
+     ]
+    ],
+    [
+     "Business rules",
+     [
+      [
+       "Rules using this charge",
+       "[Business rules using this charge]"
+      ]
+     ]
+    ]
+   ],
+   "hist": {
+    "title": "Audit trail",
+    "cols": [
+     "Change",
+     "By",
+     "Date & time"
+    ],
+    "rows": [
+     [
+      "Created from LMS charge-code sync",
+      "System · LMS",
+      "02 Jan 2026 06:00"
+     ]
+    ]
+   },
+   "nContracts": 0
+  },
+  {
+   "id": "h9",
+   "code": "DEM",
+   "title": "Demurrage",
+   "st": "Active",
+   "secs": [
+    [
+     "Charge details",
+     [
+      [
+       "Charge code",
+       "DEM"
+      ],
+      [
+       "Charge name",
+       "Demurrage"
+      ],
+      [
+       "Charge category",
+       "Demurrage & Detention"
+      ],
+      [
+       "Active status",
+       "Active"
+      ],
+      [
+       "Effective from",
+       "1 Jan 2026"
+      ],
+      [
+       "Effective to",
+       "Open-ended"
+      ]
+     ]
+    ],
+    [
+     "Applicability",
+     [
+      [
+       "Origin / Destination",
+       "Destination"
+      ],
+      [
+       "Country",
+       "Singapore"
+      ],
+      [
+       "Port",
+       "SGSIN · Singapore"
+      ]
+     ]
+    ],
+    [
+     "Country / Tax / Currency set-up",
+     [
+      [
+       "Tax code",
+       "SG-SR-9"
+      ],
+      [
+       "Currency",
+       "SGD"
+      ],
+      [
+       "Tax description",
+       "Singapore GST 9%"
+      ]
+     ]
+    ],
+    [
+     "LMS mapping",
+     [
+      [
+       "LMS charge code",
+       "LMS-DEM"
+      ],
+      [
+       "Mapping",
+       "Aligned with LMS charge code"
+      ]
+     ]
+    ],
+    [
+     "Business rules",
+     [
+      [
+       "Rules using this charge",
+       "[Business rules using this charge]"
+      ]
+     ]
+    ]
+   ],
+   "hist": {
+    "title": "Audit trail",
+    "cols": [
+     "Change",
+     "By",
+     "Date & time"
+    ],
+    "rows": [
+     [
+      "Created from LMS charge-code sync",
+      "System · LMS",
+      "02 Jan 2026 06:00"
+     ]
+    ]
+   },
+   "nContracts": 0
+  },
+  {
+   "id": "h10",
+   "code": "DET",
+   "title": "Detention",
+   "st": "Active",
+   "secs": [
+    [
+     "Charge details",
+     [
+      [
+       "Charge code",
+       "DET"
+      ],
+      [
+       "Charge name",
+       "Detention"
+      ],
+      [
+       "Charge category",
+       "Demurrage & Detention"
+      ],
+      [
+       "Active status",
+       "Active"
+      ],
+      [
+       "Effective from",
+       "1 Jan 2026"
+      ],
+      [
+       "Effective to",
+       "Open-ended"
+      ]
+     ]
+    ],
+    [
+     "Applicability",
+     [
+      [
+       "Origin / Destination",
+       "Both"
+      ],
+      [
+       "Country",
+       "India"
+      ],
+      [
+       "Port",
+       "INNSA · Nhava Sheva"
+      ]
+     ]
+    ],
+    [
+     "Country / Tax / Currency set-up",
+     [
+      [
+       "Tax code",
+       "IN-GST-18"
+      ],
+      [
+       "Currency",
+       "INR"
+      ],
+      [
+       "Tax description",
+       "India GST 18%"
+      ]
+     ]
+    ],
+    [
+     "LMS mapping",
+     [
+      [
+       "LMS charge code",
+       "LMS-DET"
+      ],
+      [
+       "Mapping",
+       "Aligned with LMS charge code"
+      ]
+     ]
+    ],
+    [
+     "Business rules",
+     [
+      [
+       "Rules using this charge",
+       "[Business rules using this charge]"
+      ]
+     ]
+    ]
+   ],
+   "hist": {
+    "title": "Audit trail",
+    "cols": [
+     "Change",
+     "By",
+     "Date & time"
+    ],
+    "rows": [
+     [
+      "Created from LMS charge-code sync",
+      "System · LMS",
+      "02 Jan 2026 06:00"
+     ]
+    ]
+   },
+   "nContracts": 0
+  },
+  {
+   "id": "h11",
+   "code": "CLN",
+   "title": "Container Cleaning Fee",
+   "st": "Active",
+   "secs": [
+    [
+     "Charge details",
+     [
+      [
+       "Charge code",
+       "CLN"
+      ],
+      [
+       "Charge name",
+       "Container Cleaning Fee"
+      ],
+      [
+       "Charge category",
+       "Ancillary (MISC)"
+      ],
+      [
+       "Active status",
+       "Active"
+      ],
+      [
+       "Effective from",
+       "1 Mar 2026"
+      ],
+      [
+       "Effective to",
+       "Open-ended"
+      ]
+     ]
+    ],
+    [
+     "Applicability",
+     [
+      [
+       "Origin / Destination",
+       "Destination"
+      ],
+      [
+       "Country",
+       "Singapore"
+      ],
+      [
+       "Port",
+       "SGSIN · Singapore"
+      ]
+     ]
+    ],
+    [
+     "Country / Tax / Currency set-up",
+     [
+      [
+       "Tax code",
+       "SG-SR-9"
+      ],
+      [
+       "Currency",
+       "SGD"
+      ],
+      [
+       "Tax description",
+       "Singapore GST 9%"
+      ]
+     ]
+    ],
+    [
+     "LMS mapping",
+     [
+      [
+       "LMS charge code",
+       "Not mapped"
+      ],
+      [
+       "Mapping",
+       "Maintained in GIRS only"
+      ]
+     ]
+    ],
+    [
+     "Business rules",
+     [
+      [
+       "Rules using this charge",
+       "[Business rules using this charge]"
+      ]
+     ]
+    ]
+   ],
+   "hist": {
+    "title": "Audit trail",
+    "cols": [
+     "Change",
+     "By",
+     "Date & time"
+    ],
+    "rows": [
+     [
+      "Created in GIRS",
+      "Wei Ling Tan",
+      "24 Feb 2026 14:20"
+     ]
+    ]
+   },
+   "nContracts": 0
+  },
+  {
+   "id": "h12",
+   "code": "AMD",
+   "title": "B/L Amendment Fee",
+   "st": "Active",
+   "secs": [
+    [
+     "Charge details",
+     [
+      [
+       "Charge code",
+       "AMD"
+      ],
+      [
+       "Charge name",
+       "B/L Amendment Fee"
+      ],
+      [
+       "Charge category",
+       "Ancillary (MISC)"
+      ],
+      [
+       "Active status",
+       "Active"
+      ],
+      [
+       "Effective from",
+       "1 Mar 2026"
+      ],
+      [
+       "Effective to",
+       "Open-ended"
+      ]
+     ]
+    ],
+    [
+     "Applicability",
+     [
+      [
+       "Origin / Destination",
+       "Both"
+      ],
+      [
+       "Country",
+       "Singapore"
+      ],
+      [
+       "Port",
+       "All ports"
+      ]
+     ]
+    ],
+    [
+     "Country / Tax / Currency set-up",
+     [
+      [
+       "Tax code",
+       "SG-SR-9"
+      ],
+      [
+       "Currency",
+       "SGD"
+      ],
+      [
+       "Tax description",
+       "Singapore GST 9%"
+      ]
+     ]
+    ],
+    [
+     "LMS mapping",
+     [
+      [
+       "LMS charge code",
+       "Not mapped"
+      ],
+      [
+       "Mapping",
+       "Maintained in GIRS only"
+      ]
+     ]
+    ],
+    [
+     "Business rules",
+     [
+      [
+       "Rules using this charge",
+       "[Business rules using this charge]"
+      ]
+     ]
+    ]
+   ],
+   "hist": {
+    "title": "Audit trail",
+    "cols": [
+     "Change",
+     "By",
+     "Date & time"
+    ],
+    "rows": [
+     [
+      "Created in GIRS",
+      "Wei Ling Tan",
+      "24 Feb 2026 14:26"
+     ]
+    ]
+   },
+   "nContracts": 0
+  },
+  {
+   "id": "h13",
+   "code": "PSS",
+   "title": "Peak Season Surcharge",
+   "st": "Inactive",
+   "secs": [
+    [
+     "Charge details",
+     [
+      [
+       "Charge code",
+       "PSS"
+      ],
+      [
+       "Charge name",
+       "Peak Season Surcharge"
+      ],
+      [
+       "Charge category",
+       "Surcharge"
+      ],
+      [
+       "Active status",
+       "Inactive"
+      ],
+      [
+       "Effective from",
+       "1 Jun 2026"
+      ],
+      [
+       "Effective to",
+       "30 Sep 2026"
+      ]
+     ]
+    ],
+    [
+     "Applicability",
+     [
+      [
+       "Origin / Destination",
+       "Origin"
+      ],
+      [
+       "Country",
+       "China"
+      ],
+      [
+       "Port",
+       "CNSHA · Shanghai"
+      ]
+     ]
+    ],
+    [
+     "Country / Tax / Currency set-up",
+     [
+      [
+       "Tax code",
+       "ZR-INTL"
+      ],
+      [
+       "Currency",
+       "USD"
+      ],
+      [
+       "Tax description",
+       "Zero-rated · international transport"
+      ]
+     ]
+    ],
+    [
+     "LMS mapping",
+     [
+      [
+       "LMS charge code",
+       "LMS-PSS"
+      ],
+      [
+       "Mapping",
+       "Aligned with LMS charge code"
+      ]
+     ]
+    ],
+    [
+     "Business rules",
+     [
+      [
+       "Rules using this charge",
+       "[Business rules using this charge]"
+      ]
+     ]
+    ]
+   ],
+   "hist": {
+    "title": "Audit trail",
+    "cols": [
+     "Change",
+     "By",
+     "Date & time"
+    ],
+    "rows": [
+     [
+      "Deactivated · season ended",
+      "Wei Ling Tan",
+      "1 Oct 2026 08:05"
+     ],
+     [
+      "Created from LMS charge-code sync",
+      "System · LMS",
+      "02 Jan 2026 06:00"
+     ]
+    ]
+   },
+   "nContracts": 0
+  },
+  {
+   "id": "h14",
+   "code": "EBS",
+   "title": "Emergency Bunker Surcharge",
+   "st": "Inactive",
+   "secs": [
+    [
+     "Charge details",
+     [
+      [
+       "Charge code",
+       "EBS"
+      ],
+      [
+       "Charge name",
+       "Emergency Bunker Surcharge"
+      ],
+      [
+       "Charge category",
+       "Surcharge"
+      ],
+      [
+       "Active status",
+       "Inactive"
+      ],
+      [
+       "Effective from",
+       "1 Apr 2025"
+      ],
+      [
+       "Effective to",
+       "31 Dec 2025"
+      ]
+     ]
+    ],
+    [
+     "Applicability",
+     [
+      [
+       "Origin / Destination",
+       "Both"
+      ],
+      [
+       "Country",
+       "All countries"
+      ],
+      [
+       "Port",
+       "All ports"
+      ]
+     ]
+    ],
+    [
+     "Country / Tax / Currency set-up",
+     [
+      [
+       "Tax code",
+       "ZR-INTL"
+      ],
+      [
+       "Currency",
+       "USD"
+      ],
+      [
+       "Tax description",
+       "Zero-rated · international transport"
+      ]
+     ]
+    ],
+    [
+     "LMS mapping",
+     [
+      [
+       "LMS charge code",
+       "LMS-EBS"
+      ],
+      [
+       "Mapping",
+       "Aligned with LMS charge code"
+      ]
+     ]
+    ],
+    [
+     "Business rules",
+     [
+      [
+       "Rules using this charge",
+       "[Business rules using this charge]"
+      ]
+     ]
+    ]
+   ],
+   "hist": {
+    "title": "Audit trail",
+    "cols": [
+     "Change",
+     "By",
+     "Date & time"
+    ],
+    "rows": [
+     [
+      "Deactivated",
+      "Wei Ling Tan",
+      "2 Jan 2026 09:00"
+     ],
+     [
+      "Created from LMS charge-code sync",
+      "System · LMS",
+      "02 Jan 2026 06:00"
+     ]
+    ]
+   },
+   "nContracts": 0
+  }
+ ],
+ "contracts": {}
+}

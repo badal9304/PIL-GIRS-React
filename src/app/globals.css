@@ -1,0 +1,12 @@
+/* Global styles, in cascade order: Tailwind theme + utilities, GIRS base styles, screen styles (scoped under
+   .pg-* classes), then the approved UI kit so it wins ties, as in the prototype. */
+@import '../core/styles/tailwind.css';
+@import '../core/styles/base.css';
+@import '../views/home/ui/home.css';
+@import '../views/invoice-list/ui/invoice-list.css';
+@import '../views/charge-master/ui/layout-c.css';
+@import '../views/contract-master/ui/layout-c.css';
+@import '../views/customer-master/ui/layout-c.css';
+@import '../compositions/master-record/ui/master-detail.css';
+@import '../core/styles/ui.css';
+@import '../core/styles/app.css';

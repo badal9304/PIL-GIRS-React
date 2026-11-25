@@ -1,0 +1,17 @@
+{
+  "Actions for {x}": "إجراءات {x}",
+  "All actions for {x}": "كل إجراءات {x}",
+  "Credit note {x}": "الإشعار الدائن {x}",
+  "Due {x}": "الاستحقاق {x}",
+  "Include {x}": "تضمين {x}",
+  "Invoice {x}": "الفاتورة {x}",
+  "Language set to {x}": "تم ضبط اللغة على {x}",
+  "No results for “{x}”": "لا توجد نتائج لـ \"{x}\"",
+  "Receipt {x}": "الإيصال {x}",
+  "Search “{x}” in Enquiry & Monitoring": "ابحث عن \"{x}\" في الاستعلام والمراقبة",
+  "Select {x}": "تحديد {x}",
+  "Show all {x} invoices in Invoice List": "عرض كل الفواتير ({x}) في قائمة الفواتير",
+  "Show charge lines of {x}": "عرض بنود رسوم {x}",
+  "STP validation gates {x}": "بوابات التحقق STP {x}",
+  "Validation of {x}": "التحقق من {x}"
+}

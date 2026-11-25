@@ -1,11 +1,9 @@
 {
   "$schema": "./node_modules/oxlint/configuration_schema.json",
   "plugins": ["react", "typescript"],
-  "ignorePatterns": ["dist", "src/lib/legacy"],
-  "overrides": [
-    {
-      "files": ["src/features/**/*Model.ts", "src/features/**/*Data.ts", "src/features/invoices/invoiceData.ts", "src/features/masters/kit.ts"],
-      "rules": { "no-unused-vars": "off", "no-useless-escape": "off", "no-empty": "off", "typescript/no-this-alias": "off" }
-    }
-  ]
+  "ignorePatterns": ["dist", ".next"],
+  "rules": {
+    "typescript/no-explicit-any": "error",
+    "typescript/ban-ts-comment": "error"
+  }
 }
